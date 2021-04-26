@@ -1,0 +1,38 @@
+\input settings.tex
+\input macros.tex
+
+\begin{document}
+\title{论文题目}
+\author{作者}
+\date{}
+
+\renewcommand{\thepage}{\roman{page}}
+%\maketitle
+\tableofcontents
+\cleardoublepage
+
+\input abstract.tex
+
+\cleardoublepage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+
+% 根据情况调整, 建议每章单独建一个文件
+\input introduction.tex
+\input theory.tex
+\input algorithm.tex
+\input experiment.tex
+\input conclusion.tex
+
+
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{参考文献}
+\bibliographystyle{gbt-7714-2015}
+\bibliography{ref}
+
+\input acknowledgment.tex
+
+\end{document}
+
