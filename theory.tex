@@ -17,7 +17,7 @@
     \caption[minimax]{%
       极小化极大算法搜索树例子\cite{wikiMinimax}%
       }
-    \label{fig:superQueenRules}
+    \label{fig:minimax}
   \end{figure}
 
 如图2.1所示，假设圆形代表当前选手，方形代表对手。当前选手需要将自己所得分数最大化，而对手则需要反其道行之。考虑第三层（Min层）对手在最左侧节点的决策，当前选手在第四层有得分为10或正无穷的行动选择，作为对手要做的是最小化这个分数，于是对手根据结果可以反推出应选择得分为10的行动。其余同理。
@@ -31,11 +31,11 @@ Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。其在生成�
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.6\textwidth]{ab1.gif}
+    \includegraphics[width=0.6\textwidth]{abp1.PNG}
     \caption[abp]{%
     Alpha-beta剪枝\cite{russell2010artificial}%
       }
-    \label{fig:superQueenRules}
+    \label{fig:abp}
   \end{figure}
 
 
