@@ -29,16 +29,13 @@ Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为
 我们用以下Minimax树（图2.1）作为例子，方块为Max节点，圆形为Min节点\cite{russell2010artificial}。
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=1\textwidth]{abp1.PNG}
+    \includegraphics[width=0.7\textwidth]{abp1.PNG}
     \caption[abp]{%
     Alpha-beta剪枝初始状态\cite{russell2010artificial}%
       }
     \label{fig:abp}
   \end{figure}
-
-其剪枝过程如图2.3所示。从左节点开始，
-
-\begin{figure}[htb]
+  \begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{abp2.PNG}
     \caption[abp2]{%
@@ -46,6 +43,8 @@ Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为
       }
     \label{fig:abp2}
   \end{figure}
+
+其剪枝过程如图2.3所示。从左节点开始，
 
 （1）当到达深度为4层处的第一个子节点时，在该状态上进行评估并获得值为3。将此节点值传递回上面的父Min节点。由于这是一个Min节点，因此该节点的Minimax值必须小于或等于3。换句话说，我们将该Min节点$\beta$值更改为3；
 
