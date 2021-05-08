@@ -26,18 +26,27 @@
 在上一个小节中我们介绍了经典的极小化极大算法，对于一个具有复杂状态空间的游戏（象棋或围棋）来说，Minimax算法需要非常多层才能够完成。如果这个游戏每一步都有$n$个选择，那么在$x$步以后，将会有$n^x$个选择，也就是说具有指数级复杂度。在这种情况下，使用经典的极小化极大算法进行树搜索是不现实的。因此我们就需要采取剪枝来减少运算量，剪掉上述树状图的一些分支，从而减少运算量。
 
 
-Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。其在生成博弈树的同时计算评估各节点的$\alpha$值与$\beta$值, 并且根据评估出的值范围, 及时停止扩展那些已无必要再扩展的子节点，以提高运算速度。该算法和极小化极大算法所得结论相同，但剪去了不影响最终决定的分枝\cite{russell2010artificial}。
-剪枝过程遵循如下规则：（1）当一个 Min 节点的 $\beta$值小于等于任何一个父节点的$\alpha$值时 ，剪掉该节点的所有子节点;（2）当一个 Max 节点的 $\alpha$值大于等于任何一个父节点的$\beta$值时 ，剪掉该节点的所有子节点。
-
+Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为可行解的最小上界（Min层通向root的路径上最好的选择），$\alpha$值为可行策略（解）的最大下界（Max层通向root的路径上最好的选择）。其在生成博弈树的同时计算评估各节点的$\alpha$值与$\beta$值, 并且根据评估出的值范围, 及时停止扩展那些已无必要再扩展的子节点，以提高运算速度。该算法和极小化极大算法所得结论相同，但剪去了不影响最终决定的分枝\cite{russell2010artificial}。
+剪枝过程遵循$\alpha \le N \le \beta$，N为当前节点评估值。即：（1）当一个 Min 节点的 $\beta$值小于等于任何一个父节点的$\alpha$值时 ，剪掉该节点的所有子节点;（2）当一个 Max 节点的 $\alpha$值大于等于任何一个父节点的$\beta$值时 ，剪掉该节点的所有子节点。
+我们用以下Minimax树作为例子：
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.6\textwidth]{abp1.PNG}
     \caption[abp]{%
-    Alpha-beta剪枝\cite{russell2010artificial}%
+    Alpha-beta剪枝初始状态:\cite{russell2010artificial}%
       }
     \label{fig:abp}
   \end{figure}
 
+其剪枝过程如下所示：
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\textwidth]{abp2.PNG}
+    \caption[abp2]{%
+    Alpha-beta剪枝:\cite{russell2010artificial}%
+      }
+    \label{fig:abp2}
+  \end{figure}
 
 \subsection{蒙特卡洛树搜索}
 
