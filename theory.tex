@@ -35,14 +35,6 @@ Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为
       }
     \label{fig:abp}
   \end{figure}
-  \begin{figure}[htb]
-    \centering
-    \includegraphics[width=1\textwidth]{abp2.PNG}
-    \caption[abp2]{%
-    Alpha-beta剪枝\cite{russell2010artificial}%
-      }
-    \label{fig:abp2}
-  \end{figure}
 
 其剪枝过程如图2.3所示。从左节点开始，
 
@@ -59,6 +51,15 @@ Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为
 （6）父节点的值将小于或等于2，因此将其$\beta$值改为2；我们发现在此节点上找到解决方案路径的唯一方法是找到一个值大于3且小于2的子节点。由于这是不可能的，我们可以停止评估此节点的子节点，然后返回$\beta$值（也就是2）作为该节点的值。
 回到父Max节点，其$\alpha$值已经是3，比2更具限制性，因此不要更改它。我们已经看到了此max节点的所有子节点，因此可以将其值设置为最终的$\alpha$值即为3。
 
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\textwidth]{abp2.PNG}
+    \caption[abp2]{%
+    Alpha-beta剪枝\cite{russell2010artificial}%
+      }
+    \label{fig:abp2}
+  \end{figure}
+\newpage
 Alpha-beta剪枝是在极小化极大算法上的改进，减少搜索树的分枝，从而提升搜索深度。
 若节点搜索顺序达到最优化或近似最优化（将最佳选择排在各节点首位），则同样时间内搜索深度可达极小化极大算法的两倍多\cite{KNUTH1975293abp}。但是对于较复杂的棋类游戏，若对AI的每一步有时间限制，Alpha-beta剪枝的搜索深度依然受到较大限制，在实际应用中往往采取3-4层，也有可能导致只能获得局部最优解。
 除此之外，对手玩家一定会选择使自己最差的思路的先验假设，在真实情况下并不正确，因为无法确定对方的博弈策略是否和自己一致。如果对方做的策略不是最优，那么我方策略是最优的假设也不复存在。
