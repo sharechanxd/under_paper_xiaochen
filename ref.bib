@@ -209,4 +209,50 @@ author = {Donald E. Knuth and Ronald W. Moore},
 abstract = {The alpha-beta technique for searching game trees is analyzed, in an attempt to provide some insight into its behavior. The first portion of this paper is an expository presentation of the method together with a proof of its correctness and a historical discussion. The alpha-beta procedure is shown to be optimal in a certain sense, and bounds are obtained for its running time with various kinds of random data.}
 }
 
+@Article{RePEc:wsi:nmncxx:v:04:y:2008:i:03:n:s1793005708001094,
+  author={Guillaume M. J-B. Chaslot and Mark H. M. Winands and H. Jaap Van Den Herik and Jos W. H. M. Uiterwijk and Bruno Bouzy},
+  title={{Progressive Strategies For Monte-Carlo Tree Search}},
+  journal={New Mathematics and Natural Computation (NMNC)},
+  year=2008,
+  volume={4},
+  number={03},
+  pages={343-357},
+  month={},
+  keywords={Monte-Carlo Tree Search; heuristic search; Computer Go},
+  doi={10.1142/S1793005708001094},
+  abstract={Monte-Carlo Tree Search (MCTS) is a new best-first search guided by the results of Monte-Carlo simulations. In this article, we introduce twoprogressive strategiesfor MCTS, called progressive bias and progressive unpruning. They enable the use of relatively time-expensive heuristic knowledge without speed reduction. Progressive bias directs the search according to heuristic knowledge. Progressive unpruning first reduces the branching factor, and then increases it gradually again. Experiments assess that the two progressive strategies significantly improve the level of our Go programMango. Moreover, we see that the combination of both strategies performs even better on larger board sizes.},
+  url={https://ideas.repec.org/a/wsi/nmncxx/v04y2008i03ns1793005708001094.html}
+}
+@InProceedings{10.1007/978-3-540-75538-8_7,
+author="Coulom, R{\'e}mi",
+editor="van den Herik, H. Jaap
+and Ciancarini, Paolo
+and Donkers, H. H. L. M. (Jeroen)",
+title="Efficient Selectivity and Backup Operators in Monte-Carlo Tree Search",
+booktitle="Computers and Games",
+year="2007",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="72--83",
+abstract="A Monte-Carlo evaluation consists in estimating a position by averaging the outcome of several random continuations. The method can serve as an evaluation function at the leaves of a min-max tree. This paper presents a new framework to combine tree search with Monte-Carlo evaluation, that does not separate between a min-max phase and a Monte-Carlo phase. Instead of backing-up the min-max value close to the root, and the average value at some depth, a more general backup operator is defined that progressively changes from averaging to min-max as the number of simulations grows. This approach provides a fine-grained control of the tree growth, at the level of individual simulations, and allows efficient selectivity. The resulting algorithm was implemented in a 9{\texttimes}9 Go-playing program, Crazy Stone, that won the 10th KGS computer-Go tournament.",
+isbn="978-3-540-75538-8"
+}
+@InProceedings{10.1007/11871842_29,
+author="Kocsis, Levente
+and Szepesv{\'a}ri, Csaba",
+editor="F{\"u}rnkranz, Johannes
+and Scheffer, Tobias
+and Spiliopoulou, Myra",
+title="Bandit Based Monte-Carlo Planning",
+booktitle="Machine Learning: ECML 2006",
+year="2006",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="282--293",
+abstract="For large state-space Markovian Decision Problems Monte-Carlo planning is one of the few viable approaches to find near-optimal solutions. In this paper we introduce a new algorithm, UCT, that applies bandit ideas to guide Monte-Carlo planning. In finite-horizon or discounted MDPs the algorithm is shown to be consistent and finite sample bounds are derived on the estimation error due to sampling. Experimental results show that in several domains, UCT is significantly more efficient than its alternatives.",
+isbn="978-3-540-46056-5"
+}
+
+
+
 
