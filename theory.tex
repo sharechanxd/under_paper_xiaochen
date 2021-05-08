@@ -28,7 +28,7 @@
 
 Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为可行解的最小上界（Min层通向root的路径上最好的选择），$\alpha$值为可行策略（解）的最大下界（Max层通向root的路径上最好的选择）。其在生成博弈树的同时计算评估各节点的$\alpha$值与$\beta$值, 并且根据评估出的值范围, 及时停止扩展那些已无必要再扩展的子节点，以提高运算速度。该算法和极小化极大算法所得结论相同，但剪去了不影响最终决定的分枝\cite{russell2010artificial}。
 剪枝过程遵循$\alpha \le N \le \beta$，N为当前节点评估值。即：（1）当一个 Min 节点的 $\beta$值小于等于任何一个父节点的$\alpha$值时 ，剪掉该节点的所有子节点;（2）当一个 Max 节点的 $\alpha$值大于等于任何一个父节点的$\beta$值时 ，剪掉该节点的所有子节点。
-我们用以下Minimax树作为例子：
+我们用以下Minimax树（图2.1）作为例子：
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.6\textwidth]{abp1.PNG}
@@ -38,7 +38,7 @@ Alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为
     \label{fig:abp}
   \end{figure}
 
-其剪枝过程如下所示：
+其剪枝过程如图2.3所示：
 \begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{abp2.PNG}
