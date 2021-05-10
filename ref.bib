@@ -365,5 +365,60 @@ author = {M.V. Valueva and N.N. Nagornov and P.A. Lyakhov and G.V. Valuev and N.
 keywords = {Image processing, Convolutional neural networks, Residue number system, Quantization noise, Field-programmable gate array (FPGA).},
 abstract = {Convolutional neural networks are a promising tool for solving the problem of pattern recognition. Most well-known convolutional neural networks implementations require a significant amount of memory to store weights in the process of learning and working. We propose a convolutional neural network architecture in which the neural network is divided into hardware and software parts to increase performance and reduce the cost of implementation resources. We also propose to use the residue number system (RNS) in the hardware part to implement the convolutional layer of the neural network. Software simulations using Matlab 2018b showed that convolutional neural network with a minimum number of layers can be quickly and successfully trained. The hardware implementation of the convolution layer shows that the use of RNS allows to reduce the hardware costs on 7.86%–37.78% compared to the two’s complement implementation. The use of the proposed heterogeneous implementation reduces the average time of image recognition by 41.17%.}
 }
-@INPROCEEDINGS{resnet,  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},  booktitle={2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},   title={Deep Residual Learning for Image Recognition},   year={2016},  volume={},  number={},  pages={770-778},  doi={10.1109/CVPR.2016.90}}
+
+@book{Sutton1998,
+  added-at = {2019-07-13T10:11:53.000+0200},
+  author = {Sutton, Richard S. and Barto, Andrew G.},
+  biburl = {https://www.bibsonomy.org/bibtex/2f46601cf8b13d39d1378af0d79438b12/lanteunis},
+  edition = {Second},
+  interhash = {ac6b144aaec1819919a2fba9f705c852},
+  intrahash = {f46601cf8b13d39d1378af0d79438b12},
+  keywords = {},
+  publisher = {The MIT Press},
+  timestamp = {2019-07-13T10:11:53.000+0200},
+  title = {Reinforcement Learning: An Introduction},
+  url = {http://incompleteideas.net/book/the-book-2nd.html},
+  year = {2018 }
+}
+
+@INPROCEEDINGS{resnet,  
+author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},  
+booktitle={2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},   
+title={Deep Residual Learning for Image Recognition},   
+year={2016},  
+volume={},  
+number={},  
+pages={770-778},  
+doi={10.1109/CVPR.2016.90}
+}
+
+@ARTICLE{Bel,
+    author = "Richard Bellman",
+     title = "A Markovian Decision Process",
+   journal = "Indiana Univ. Math. J.",
+  fjournal = "Indiana University Mathematics Journal",
+    volume = 6,
+      year = 1957,
+     issue = 4,
+     pages = "679--684",
+      issn = "0022-2518",
+     coden = "IUMJAB",
+   mrclass = "",
+}
+@article{rlbase,
+author = {Kaelbling, Leslie Pack and Littman, Michael L. and Moore, Andrew W.},
+title = {Reinforcement Learning: A Survey},
+year = {1996},
+issue_date = {Jnauary 1996},
+publisher = {AI Access Foundation},
+address = {El Segundo, CA, USA},
+volume = {4},
+number = {1},
+issn = {1076-9757},
+abstract = {This paper surveys the field of reinforcement learning from a computer-science perspective. It is written to be accessible to researchers familiar with machine learning. Both the historical basis of the field and a broad selection of current work are summarized. Reinforcement learning is the problem faced by an agent that learns behavior through trial-and-error interactions with a dynamic environment. The work described here has a resemblance to work in psychology, but differs considerably in the details and in the use of the word "reinforcement." The paper discusses central issues of reinforcement learning, including trading off exploration and exploitation, establishing the foundations of the field via Markov decision theory, learning from delayed reinforcement, constructing empirical models to accelerate learning, making use of generalization and hierarchy, and coping with hidden state. It concludes with a survey of some implemented systems and an assessment of the practical utility of current methods for reinforcement learning.},
+journal = {J. Artif. Int. Res.},
+month = may,
+pages = {237–285},
+numpages = {49}
+}
 
