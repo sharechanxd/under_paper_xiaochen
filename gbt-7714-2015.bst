@@ -6,6 +6,8 @@
 %  版本：    v2.1.1  2015年6月15日
 %  项目主页: http://haixing-hu.github.io/nju-thesis/
 %
+%  修改: 邵美悦, 2021-05-10
+%
 %  参考资料:
 %  [1] 中国国家标准化管理委员会. GB/T 7714-2005 文后参考文献着录规则[S]. 2005.
 %  [2] PATASHNIK O. BiBTeXing[R/OL]. 1988[2013-08-27].
@@ -718,7 +720,7 @@ FUNCTION {format.booktitle} {                     % String Emtry::format_booktit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {format.mark} {                          % String Emtry::format_mark(String mark) {
-  "[" swap$ * "]" *                               %   mark = "[" + mark + "]";
+  "~[" swap$ * "]" *                               %   mark = "[" + mark + "]";
   "mark" format.bibinfo                           %   return format_bibinfo(mark, "mark");
 }                                                 % }
                                                   %
