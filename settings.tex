@@ -1,23 +1,20 @@
 \documentclass[zihao=-4,punct]{ctexbook}
 
-\usepackage[utf8]{inputenc}
-
 \usepackage[a4paper,hmargin={2.54cm,2.54cm},vmargin={3.17cm,3.17cm}]{geometry}
 \usepackage{fancyhdr}
-\usepackage{graphicx}
+\usepackage{graphicx,subfigure}
 \usepackage{titlesec}
+\usepackage[subfigure]{tocloft}
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage{indentfirst}
 
 \graphicspath{{fig/}}
 
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{algorithm,algorithmicx,algpseudocode}
-\usepackage{graphicx}
-\usepackage{mathdots}
-\usepackage{tabularx}
-\usepackage{arydshln}
-\usepackage{url}
+\usepackage{bm}
+\usepackage{algorithm,algorithmic}
+
+
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[RO]{\it\rightmark}
@@ -30,6 +27,12 @@
 {\fontsize{15pt}{15pt}\selectfont\sf}{\thesection}{1em}{}
 \titleformat{\subsection}[hang]
 {\fontsize{14pt}{14pt}\selectfont\sf}{\thesubsection}{1em}{}
+
+\renewcommand{\cfttoctitlefont}{\hfill\Large\sffamily}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftchapfont}{\sffamily}
+\renewcommand{\cftsecfont}{\sffamily}
+\renewcommand{\cftsubsecfont}{\sffamily}
 
 \numberwithin{equation}{chapter}
 \renewcommand\theequation{\arabic{chapter}.\arabic{equation}}
