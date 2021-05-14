@@ -151,4 +151,27 @@ Q-learning没有从环境空间中学习模型，因此称为无模型（model-f
   &=\sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right],
   \end{aligned}
 \end{equation}
-$\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。迭代求解方法最适合式（2.4），考虑一系列近似值函数$v_{0},v_{1},v_{2}\dots$，任选$v_{0}$进行初始估计
+$\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。迭代求解方法最适合式（2.4），考虑一系列近似值函数$v_{0},v_{1},v_{2}\dots$，任选$v_{0}$进行初始估计。接下来的每个近似估计都会使用$v_{\pi}$贝尔曼方程\cite{dixit1990optimization}进行迭代更新：
+\begin{equation}
+  \begin{aligned}
+  v_{k+1}(s) & \doteq \mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
+  &=\sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{k}\left(s^{\prime}\right)\right]
+  \end{aligned}
+\end{equation}
+序列$\{v_{k}\}$在$k$趋近于$\infty$时是收敛的\cite{kamien2013dynamic}。此算法被称为迭代策略评估\cite{Sutton1998}。
+
+\begin{algorithm}[h]
+  \caption{迭代策略评估，使$V\approx v_{\pi} $}
+  \begin{algorithmic}[1]
+    \require $\pi$ ,待评估的策略；$\theta$，用于调整预测精度的阈值
+    \State 随机初始化$V(s)$，避开终结状态
+    \Loop 
+    \State $\Delta\Leftarrow 0$
+    \Loop 对于每个状态$s$:
+    \State $v \leftarrow V(s)$
+    \State $V(s) \leftarrow \sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V\left(s^{\prime}\right)\right]$
+    \State $\Delta \leftarrow \max (\Delta,|v-V(s)|)$
+    \endloop
+    \endloop 直到 $\Delta \le \theta$
+  \end{algorithmic}
+\end{algorithm}
