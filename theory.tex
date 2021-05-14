@@ -162,7 +162,8 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
 \begin{algorithm}[htb]
   \caption{迭代策略评估，使$V\approx v_{\pi} $}
   \begin{algorithmic}[1]
-    \Require $\pi$ ,待评估的策略；$\theta$，用于调整预测精度的阈值;
+    \Require $\pi$ ,待评估的策略；$\theta$，用于调整预测精度的阈值
+    \Ensure 评估结束的策略
     \State 随机初始化$V(s)$，避开终结状态;
     \Repeat
     \State $\Delta\Leftarrow 0$;
@@ -170,7 +171,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \State $v \leftarrow V(s)$;
     \State $V(s) \leftarrow \sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V\left(s^{\prime}\right)\right]$;
     \State $\Delta \leftarrow \max (\Delta,|v-V(s)|)$;
-    \endloop
+    \Endloop
     \Until{直到 $\Delta \le \theta$}
   \end{algorithmic}
 \end{algorithm}
