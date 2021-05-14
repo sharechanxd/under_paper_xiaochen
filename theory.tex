@@ -132,8 +132,8 @@ Q-learning步骤如下：（1）随机初始化$Q$值$Q(s,a)$；（2）根据当
 $R(s,a)$为在状态$s$采取动作$a$的奖励，$\alpha$为学习率，$\gamma$为衰减系数，$\max Q^{'}(s^{'},a^{'})$为新状态$s^{'}$下可行动作的最高Q值。当$\gamma$数值越大时，agent便更加重视未来获得的长期奖励，$\gamma$数值越小时，agent更加短视只在乎目前可获得的奖励。
 Q-learning没有从环境空间中学习模型，因此称为无模型（model-free）算法。
 
-\subsection{策略迭代（Policy Iteration)}
-从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}，属于动态规划算法\cite{Sutton1998}。
+\subsection{策略迭代（Policy Iteration)\cite{Sutton1998}}
+从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}，属于动态规划算法\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大\cite{Silver1140,Silver2017,Silver2016}。
 \paragraph{策略评估（Policy Evaluation）}
 首先，我们考虑如何为任意策略$\pi$计算状态值函数$v_{\pi}$。设$G_{t}$为在$t$步的期望回报（expected return），$R_{t}$为在$t$步的奖励，$\gamma$同上为衰减率。则
 \begin{equation}
@@ -175,3 +175,59 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \Until{直到 $\Delta \le \theta$}
   \end{algorithmic}
 \end{algorithm}
+
+\paragraph{策略提升（Policy Improvement）}
+计算策略值函数的目的是为了寻找更好的策略。假设我们已经确定了任意决定性策略$\pi$的值函数$v_{\pi}$，但是在某些状态下采取新策略获得的收益可能更大，因此我们需要对切换到新策略是好是坏进行判断。
+我们可以考虑在状态$s$下选择动作$a$并遵守当前策略。这样做的值可以表示为：
+\begin{equation}
+  \begin{aligned}
+  q_{\pi}(s, a) & \doteq \mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=a\right] \\
+  &=\sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
+  \end{aligned}
+\end{equation}
+如果此值大于$v_{\pi}(s)$，说明最后获得的新策略从整体上更优。因此我们设$\pi$与$\pi^{'}$为任意一对决定性策略，当其满足$q_{\pi}\left(s, \pi^{\prime}(s)\right) \geq v_{\pi}(s)$时，策略$\pi^{'}$一点至少与策略$\pi$一样好，
+\begin{equation}
+  \begin{aligned}
+  v_{\pi}(s) & \leq q_{\pi}\left(s, \pi^{\prime}(s)\right) \\
+  &=\mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=\pi^{\prime}(s)\right] \\
+  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
+  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma q_{\pi}\left(S_{t+1}, \pi^{\prime}\left(S_{t+1}\right)\right) \mid S_{t}=s\right] \\
+  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma \mathbb{E}\left[R_{t+2}+\gamma v_{\pi}\left(S_{t+2}\right) \mid S_{t+1}, A_{t+1}=\pi^{\prime}\left(S_{t+1}\right)\right] \mid S_{t}=s\right] \\
+  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} v_{\pi}\left(S_{t+2}\right) \mid S_{t}=s\right] \\
+  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} v_{\pi}\left(S_{t+3}\right) \mid S_{t}=s\right] \\
+  & \vdots \\
+  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \mid S_{t}=s\right] \\
+  &=v_{\pi^{\prime}}(s) .
+  \end{aligned}
+\end{equation}
+上述不等式也意味着$v_{\pi^{\prime}}(s) \geq v_{\pi}(s)$，即更好的策略一定可以获得更大奖励。因此我们可以获得新的策略函数：
+\begin{equation}
+  \begin{aligned}
+  \pi^{\prime}(s) & \doteq \underset{a}{\arg \max } q_{\pi}(s, a) \\
+  &=\underset{a}{\arg \max } \mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=a\right] \\
+  &=\underset{a}{\arg \max } \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
+  \end{aligned}
+\end{equation}
+
+\paragraph{策略迭代（Policy Iteration）}
+当策略$\pi$通过上述步骤得到提升产生了新策略$\pi_{'}$，我们可以计算$v_{\pi^{'}}$并再次利用新的值函数得到更好的策略$\pi^{''}$如下所示：
+\begin{equation}
+  \pi_{0} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{0}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{1} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{1}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{2} \stackrel{\mathrm{Evaluation}}{\longrightarrow} \cdots \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{*} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{*}
+\end{equation}
+策略迭代的整体算法步骤如下。
+\begin{algorithm}[htb]
+  \caption{策略迭代算法，使$\pi \approx \pi_{*} $}
+  \begin{algorithmic}
+    \State 1.随机初始化$V(s)$与$\pi(s)$;
+    \State 2.策略评估（迭代策略评估算法;
+    \State 3.策略提升:
+    \State $stable-policy \leftarrow True$
+    \For{each $s\in\textbf{S}$}
+    \State $当前动作\longleftarrow\pi(s)$
+    \State $\pi(s) \leftarrow \arg \max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V\left(s^{\prime}\right)\right]$
+    \State 如果当前动作不等于$\pi(s)$，那么 $stable-policy \leftarrow False$
+    \EndFor
+    \State 如果$stable-policy = True$，则停止并返回$\pi \approx \pi_{*} $与$V\approx v_{\pi} $；否则返回步骤2
+  \end{algorithmic}
+\end{algorithm}
+
