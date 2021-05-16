@@ -61,9 +61,46 @@
 骑士状态下，不论是Alpha-beta剪枝还是蒙特卡洛树搜索进行模拟速度都相对较快，因此在自我对弈阶段的落子速度也很快，但由于博弈树复杂度较低，启发式搜索算法的效果可能会好于基于蒙特卡洛树搜索的AlphaZero框架，因为其可以在较短时间内较小深度下搜索大部分个博弈树，其局部最优解更靠近全局最优解。
 而超级状态下每回合平均合法移动数目相对较多，搜索代价较大，在同等限制下更加适合深度强化学习AlphaZero训练出的模型。
 
-\section{数据生成}
+\section{基准玩家设计}
+我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家(GreedyPlayer),Alpha-beta剪枝玩家, AlphaZero型玩家。前三个玩家将作为基准玩家（baseline player）。
+\paragraph{随机玩家}
+随机玩家，顾名思义，即为其每步动作都基于当前可行走法进行随机选择。在每一回合开始，随机玩家先输出自己的可选动作列表，并在此列表中随机选择一个作为自己在这一回合的动作。如下图，白色圆点代表白色方可行动作，随机玩家将从这些白色圆点里选择。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rp.PNG}
+    \caption[rp]{%
+        随机玩家在白色圆点中任选%
+      }
+    \label{fig:super}
+\end{figure}
+\paragraph{贪婪玩家}
+贪婪玩家采取的是贪心算法\cite{introAlgo}。这是寻找问题最优解的常见方法，在问题的每个步骤都采取贪心原则，即选取当前状态下最好的选择（局部最优解）。因此我们需要一个评价函数来衡量棋盘状态对于玩家的好坏，经过比较与实验，定义评价函数如下：
+\begin{equation}
+    Score(player) = Count(LegalMoves(player)) - Count(LegalMoves(opponent))
+\end{equation}
+在某一回合，当前选手有若干个合法行动可选，我们需要评估出其在遍历每一个行动后棋盘盘面的好坏。评估盘面好坏使用上述评估函数，玩家在一步之后的合法行动数量减去对手合法行动数量的值越大，说明该步是当前玩家的最优解，将遍历后得到的分数分数进行排序选择最大值对应的行动即可。
+假设当前是黑色方回合，局势如下：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{gp1.PNG}
+    \caption[gp1]{%
+        黑色圆点代表当前黑色超级皇后合法行动%
+      }
+    \label{fig:gp1}
+\end{figure}
+其有五个合法落子位置可选，我们分别计算假设落到各个位置后的分数如下所示：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{gp2.PNG}
+    \caption[gp2]{%
+        分数计算与走法选择%
+      }
+    \label{fig:gp2}
+\end{figure}
+黑色圆点代表仅属于黑色超级皇后的合法行动，白色圆点代表仅属于白色超级皇后的合法行动，红色圆点代表双方共享的合法行动，根据分数计算结果，选择分数为3的走法。
+\paragraph{Alpha-beta剪枝玩家}
 
-\section{学习过程}
+\section{深度强化学习玩家设计}
 
 \subsection{蒙特卡洛树搜索}
 
