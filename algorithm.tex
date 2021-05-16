@@ -99,7 +99,16 @@
 \end{figure}
 黑色圆点代表仅属于黑色超级皇后的合法行动，白色圆点代表仅属于白色超级皇后的合法行动，红色圆点代表双方共享的合法行动，根据分数计算结果，选择分数为3的走法。
 \paragraph{Alpha-beta剪枝玩家}
-在剪枝搜索过程中，我们仍使用在贪婪玩家部分中定义的评价函数更新叶节点的值。考虑到博弈树过深引起的搜索时间代价\cite{sstextbook}，Alpha-beta剪枝玩家的深度设置为4。
+在剪枝搜索过程中，我们仍使用在贪婪玩家部分中定义的评价函数更新叶节点的值。考虑到博弈树过深引起的搜索时间代价\cite{sstextbook}，Alpha-beta剪枝玩家的深度设置为4。初始$\alpha$值设置为-99，$\beta$值设置为99。假设当前是黑色方回合，局势仍然如图\ref{fig:gp1}。搜索与剪枝过程可表现为图\ref{fig:abpde}。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{abp_design.PNG}
+    \caption[abpde]{%
+        超级皇后对战搜索与剪枝%
+      }
+    \label{fig:abpde}
+\end{figure}
+
 \section{深度强化学习玩家设计}
 
 \subsection{蒙特卡洛树搜索}
