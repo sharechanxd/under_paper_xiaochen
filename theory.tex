@@ -132,7 +132,7 @@ Q-learning步骤如下：（1）随机初始化$Q$值$Q(s,a)$；（2）根据当
 $R(s,a)$为在状态$s$采取动作$a$的奖励，$\alpha$为学习率，$\gamma$为衰减系数，$\max Q^{'}(s^{'},a^{'})$为新状态$s^{'}$下可行动作的最高Q值。当$\gamma$数值越大时，agent便更加重视未来获得的长期奖励，$\gamma$数值越小时，agent更加短视只在乎目前可获得的奖励。
 Q-learning没有从环境空间中学习模型，因此称为无模型（model-free）算法。
 
-\subsection{策略迭代（Policy Iteration)\cite{Sutton1998}}
+\subsection{策略迭代（Policy Iteration)}
 从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}，属于动态规划算法\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大\cite{Silver1140,Silver2017,Silver2016}。
 \paragraph{策略评估（Policy Evaluation）}
 首先，我们考虑如何为任意策略$\pi$计算状态值函数$v_{\pi}$。设$G_{t}$为在$t$步的期望回报（expected return），$R_{t}$为在$t$步的奖励，$\gamma$同上为衰减率。则
