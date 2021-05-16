@@ -22,7 +22,7 @@
 依据信息暴露程度，超级皇后对战属于完美信息游戏（Perfect-Information Game）\cite{binmore2007game}。对于完美信息游戏，可以用状态空间复杂度（State-Space Complexity）和博弈树复杂度（Game-Tree Complexity）对其难度进行衡量\cite{allis1994searching,VANDENHERIK2002277}。
 状态空间复杂度是指从初始状态开始，可以实现的所有符合规则的状态的集合总数，在实际情况中一般使用该数量的上界表示，例如在围棋中允许出现全白或全黑的极端情况。
 博弈树复杂度表示所有不同游戏路径数目，常用合理估计的下界表示：$valids^{turn}$。 $valids$表示每回合平均合法移动数目，$turn$表示平均游戏长度。
-类似于国际象棋与围棋，我们可以给出超级皇后对战的状态空间与博弈树复杂度（仅考虑8x8棋盘）：
+类似于国际象棋与围棋，我们可以给出超级皇后对战的状态空间与博弈树复杂度（仅考虑8x8棋盘），如图\ref{fig:complexity}
 \begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{complexity.png}
@@ -64,10 +64,10 @@
 \section{基准玩家设计}
 我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家(GreedyPlayer),Alpha-beta剪枝玩家, AlphaZero型玩家。前三个玩家将作为基准玩家（baseline player）。
 \paragraph{随机玩家}
-随机玩家，顾名思义，即为其每步动作都基于当前可行走法进行随机选择。在每一回合开始，随机玩家先输出自己的可选动作列表，并在此列表中随机选择一个作为自己在这一回合的动作。如下图，白色圆点代表白色方可行动作，随机玩家将从这些白色圆点里选择。
+随机玩家，顾名思义，即为其每步动作都基于当前可行走法进行随机选择。在每一回合开始，随机玩家先输出自己的可选动作列表，并在此列表中随机选择一个作为自己在这一回合的动作。如图\ref{fig:super}，白色圆点代表白色方可行动作，随机玩家将从这些白色圆点里选择。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rp.PNG}
+    \includegraphics[width=0.4\textwidth]{rp.PNG}
     \caption[rp]{%
         随机玩家在白色圆点中任选%
       }
@@ -79,16 +79,16 @@
     Score(player) = Count(LegalMoves(player)) - Count(LegalMoves(opponent))
 \end{equation}
 在某一回合，当前选手有若干个合法行动可选，我们需要评估出其在遍历每一个行动后棋盘盘面的好坏。评估盘面好坏使用上述评估函数，玩家在一步之后的合法行动数量减去对手合法行动数量的值越大，说明该步是当前玩家的最优解，将遍历后得到的分数分数进行排序选择最大值对应的行动即可。
-假设当前是黑色方回合，局势如下：
+假设当前是黑色方回合，局势如图\ref{fig:gp1}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gp1.PNG}
+    \includegraphics[width=0.4\textwidth]{gp1.PNG}
     \caption[gp1]{%
         黑色圆点代表当前黑色超级皇后合法行动%
       }
     \label{fig:gp1}
 \end{figure}
-其有五个合法落子位置可选，我们分别计算假设落到各个位置后的分数如下所示：
+其有五个合法落子位置可选，我们分别计算假设落到各个位置后的分数如图\ref{fig:gp2}：
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{gp2.PNG}
