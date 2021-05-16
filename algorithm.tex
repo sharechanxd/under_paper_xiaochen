@@ -7,7 +7,7 @@
 棋盘每个位置都具有四个状态值候选：$\{white:1, black:-1,empty:0,dead:99\}$，抛开初始位置（左上角与右下角），剩余位置的状态转换如下所示：
 \begin{equation}
     \begin{aligned}
-    empty &\stackrel{\mathrm{move}}{\longrightarrow} black \stackrel{\mathrm{leave}}{\longrightarrow} dead 
+    empty &\stackrel{\mathrm{move}}{\longrightarrow} black \stackrel{\mathrm{leave}}{\longrightarrow} dead \\
      &\stackrel{\mathrm{move}}{\longrightarrow} white \stackrel{\mathrm{leave}}{\longrightarrow} dead 
     \end{aligned}
 \end{equation}
@@ -51,7 +51,8 @@
       }
     \label{fig:super}
 \end{figure}
-
+骑士状态下，不论是Alpha-beta剪枝还是蒙特卡洛树搜索进行模拟速度都相对较快，因此在自我对弈阶段的落子速度也很快，但由于博弈树复杂度较低，启发式搜索算法的效果可能会好于基于蒙特卡洛树搜索的AlphaZero框架，因为其可以在较短时间内较小深度下搜索大部分个博弈树，其局部最优解更靠近全局最优解。
+而超级状态下每回合平均合法移动数目相对较多，搜索代价较大，在同等限制下更加适合深度强化学习AlphaZero训练出的模型。
 
 \section{数据生成}
 
