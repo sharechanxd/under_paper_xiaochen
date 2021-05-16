@@ -21,7 +21,7 @@
 
 依据信息暴露程度，超级皇后对战属于完美信息游戏（Perfect-Information Game）\cite{binmore2007game}。对于完美信息游戏，可以用状态空间复杂度（State-Space Complexity）和博弈树复杂度（Game-Tree Complexity）对其难度进行衡量\cite{allis1994searching,VANDENHERIK2002277}。
 状态空间复杂度是指从初始状态开始，可以实现的所有符合规则的状态的集合总数，在实际情况中一般使用该数量的上界表示，例如在围棋中允许出现全白或全黑的极端情况。
-博弈树复杂度表示所有不同游戏路径数目，常用合理估计的下界表示：$valids^{turn}$。 $valids$表示每回合平均合法移动数目，$turn$表示平均游戏长度。
+博弈树复杂度表示所有不同游戏路径数目，常用合理估计的下界表示：$valids^{turn}$。 $valids$表示每回合平均合法移动数目，$turn$表示平均游戏长度\cite{10.1007/BF00992697}。
 类似于国际象棋与围棋，我们可以给出超级皇后对战的状态空间与博弈树复杂度（仅考虑8x8棋盘），如图\ref{fig:complexity}
 \begin{figure}[htb]
     \centering
@@ -88,7 +88,7 @@
       }
     \label{fig:gp1}
 \end{figure}
-其有五个合法落子位置可选，我们分别计算假设落到各个位置后的分数如图\ref{fig:gp2}：
+其有五个合法落子位置可选，我们分别计算假设黑色方落到各个位置后的分数如图\ref{fig:gp2}：
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{gp2.PNG}
@@ -99,7 +99,7 @@
 \end{figure}
 黑色圆点代表仅属于黑色超级皇后的合法行动，白色圆点代表仅属于白色超级皇后的合法行动，红色圆点代表双方共享的合法行动，根据分数计算结果，选择分数为3的走法。
 \paragraph{Alpha-beta剪枝玩家}
-
+在剪枝搜索过程中，我们仍使用在贪婪玩家部分中定义的评价函数更新叶节点的值。考虑到博弈树过深引起的搜索时间代价\cite{sstextbook}，Alpha-beta剪枝玩家的深度设置为4。
 \section{深度强化学习玩家设计}
 
 \subsection{蒙特卡洛树搜索}
