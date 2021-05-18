@@ -117,13 +117,13 @@
 \subsection{数据生成过程}
 在自我对弈过程中，使用前一轮训练出的网络指导蒙特卡洛树进行对弈。对于每一局的每个回合t下的棋面局势$board_{t}$，蒙特卡洛树搜索模拟过程产生下一步走棋策略（概率分布）$\pi_{t}$并生成数据对$(board_{t},\pi_{t})$。
 在每局结束时，对弈双方得到奖励为v（胜者为1，负者为-1），将此奖励值作为分类标签贴到在这一次对弈生成的数据对中产生$(board_{t},\pi_{t},v_{t})$，其中$v_{t}=\pm v$，正负符号当前棋局下棋方决定。
-在训练时，$board_{t}$为输入网络的样本，棋局特征将从其二维结构中提取
+在训练时，$board_{t}$为输入网络的样本，棋局特征将从其二维结构中提取。$(\pi_{t},v_{t})$为$board_{t}$的标签，网络输出对应为$(p,v)$，拟合标签。
 \subsection{策略网络与值网络}
 在原版的AlphaGo模型\cite{Silver2016}中，使用了两个网络，分别是策略网络（policy network）与值网络（value network），对应策略迭代算法中的策略函数与值函数。策略网络输出下一步动作的概率分布，即给出选择哪种动作的可能性更大；值网络评估当前棋面局势好坏，预测可能的获胜者。
 但是AlphaGo的策略网络在一开始使用监督学习训练专家棋谱，再使用强化学习算法如策略梯度方法（policy gradient\cite{silver2014deterministic}），而其值网络从策略网络的自我对弈过程中学习并预测胜者。如前面所述，我们没有专家棋谱进行监督学习，因此参考AlphaGo Zero与AlphaZero使用单一网络输出概率分布与预测值是不错的选择。
 我们采取以下两种不同结构的神经网络分别训练：
 \paragraph{经典卷积神经网络}
-其结构如图\ref{fig:cnn}所示：
+经典卷积神经网络结构较为简单，层数较少，网络的参数量也较少，但比较适合提取8x8的棋盘特征。其结构如图\ref{fig:cnn}所示：
 （1）2D卷积层（适用图像的空间卷积），该层创建的卷积核对层输入进行卷积以生成输出张量，需要paddiong操作填充输入以使输出具有与原始输入相同的长度，其输出空间的维度为512；
 （2）批量标准化层\cite{batchnorm}，在当前批次数据中标准化前面卷积层的激活项，特征轴设置为3；
 （3）使用整流线性单位函数（Rectified Linear Unit, ReLU）\cite{xu2015empirical}激活一次，减少计算结果；
@@ -131,10 +131,8 @@
 （5）Flatten层将输入展平；
 （6）全连接层，其输出空间维度为1024，在进行标准化后使用ReLU激活并使用Dropout\cite{srivastava2014dropout}防止过拟合；
 （7）全连接层，其输出空间维度为512，在进行标准化后使用ReLU激活并使用Dropout防止过拟合；
-（8）使用Softmax 激活函数的全连接层输出维度为动作空间（action size）的概率值；
-（9）使用双曲正切激活函数（tanh）的全连接层输出维度为1的奖励值（预测胜者）；
-
-
+（8）使用Softmax 激活函数的全连接层输出维度为动作空间（action size）的概率值$p$；
+（9）使用双曲正切激活函数（tanh）的全连接层输出维度为1的奖励值（预测胜者）$v$；
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{classic.png}
@@ -143,7 +141,27 @@
       }
     \label{fig:cnn}
 \end{figure}
-
-
-
+\paragraph{深度残差网络}
+深度残差网络是具有重要地位的经典计算机模型\cite{resnet}。对于我们超级皇后的棋局而言，经典卷积神经网络不够深，即便其能较好地适应8x8的棋盘特征，但是在训练大量对局数据中仍有可能出现性能瓶颈。
+因此我们需要考虑加深网络层数，例如说在经典卷积神经网络中继续增加卷积层。但是更深的网络性能通过实验证明会出现退化问题：深度增加时，损失（loss）减少但准确度下降\cite{resnet,he2016identity}。
+考虑到代价与实际需求，深度残差网络是一个较为合适的选择\cite{resnet}。其核心结构为设计了短路连接（shortcut connection）使若干卷积层的集合能学习到残差带来的新特征，如图\ref{fig:resunit}所示：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{resnetblcok.png}
+    \caption[resunit]{%
+    残差学习单元\cite{resnet}%
+      }
+    \label{fig:resunit}
+\end{figure}
+对于如图的若干卷积层构成的堆积层，输入为$x$时其学习到的特征我们用$H(x)$表示，其残差可以表示为$F(x)=H(x)-x$。要学习到残差$F(x)$，其原始学习特征为$F(x)+x$。残差学习相比原始特征直接学习更容易，也会使得图中残差结构单元在输入特征基础上学习到新的特征，从而拥有更好的性能。
+在训练超级皇后对战时，深度残差网络结构如图\ref{}：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{resnet.png}
+    \caption[res]{%
+    深度残差网络：以ResNet50为基础\cite{resnet}%
+      }
+    \label{fig:res}
+\end{figure}
+深度残差网络可以更好地学习到棋盘特征，并且棋盘越大（如12x12,16x16），其学习效果越好。但是超级皇后对战的局势并没有特别复杂，因此使用深度残差网络也有可能导致模型过拟合或欠拟合。
 \subsection{策略迭代应用}
