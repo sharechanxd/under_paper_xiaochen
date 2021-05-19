@@ -62,7 +62,7 @@
 而超级状态下每回合平均合法移动数目相对较多，搜索代价较大，在同等限制下更加适合深度强化学习AlphaZero训练出的模型。
 
 \section{基准玩家设计}
-我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家(GreedyPlayer),Alpha-beta剪枝玩家, AlphaZero型玩家。前三个玩家将作为基准玩家（baseline player）。
+我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家(Greedy Player),Alpha-beta剪枝玩家, AlphaZero型玩家。前三个玩家将作为基准玩家（baseline player）。
 \paragraph{随机玩家}
 随机玩家，顾名思义，即为其每步动作都基于当前可行走法进行随机选择。在每一回合开始，随机玩家先输出自己的可选动作列表，并在此列表中随机选择一个作为自己在这一回合的动作。如图\ref{fig:super}，白色圆点代表白色方可行动作，随机玩家将从这些白色圆点里选择。
 \begin{figure}[H]
