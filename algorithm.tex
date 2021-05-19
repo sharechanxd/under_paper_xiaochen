@@ -135,7 +135,7 @@
 （9）使用双曲正切激活函数（tanh）的全连接层输出维度为1的奖励值（预测胜者）$v$；
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{classic.png}
+    \includegraphics[width=0.9\textwidth]{classic.png}
     \caption[cnn]{%
     经典卷积神经网络%
       }
@@ -154,7 +154,7 @@
     \label{fig:resunit}
 \end{figure}
 对于如图的若干卷积层构成的堆积层，输入为$x$时其学习到的特征我们用$H(x)$表示，其残差可以表示为$F(x)=H(x)-x$。要学习到残差$F(x)$，其原始学习特征为$F(x)+x$。残差学习相比原始特征直接学习更容易，也会使得图中残差结构单元在输入特征基础上学习到新的特征，从而拥有更好的性能。
-在训练超级皇后对战时，深度残差网络结构如图\ref{fig:res}，输入层的reshape方式以及Flatten层后的结构与经典卷积神经网络一致。
+在训练超级皇后对战时，深度残差网络结构如图\ref{fig:res}，输入层的reshape方式以及Flatten层后的结构与经典卷积神经网络一致，图中$/S$代表stride（步长），$F$代表filter（滤波器）数量。
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{resnet.png}
