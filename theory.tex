@@ -2,14 +2,14 @@
 \label{chap:theory}
 在这一章，我们将会对涉及到的理论，算法原理与相关工作进行介绍。
 \section{博弈树}
-具有竞争或对抗性质的行为称为博弈行为。在这类行为中，参加斗争或竞争的各方各自具有不同的目标或利益。为了达到各自的目标和利益，各方必须考虑对手的各种可能的行动方案，并力图选取对自己最为有利或最为合理的方案。比如日常生活中的下棋，打牌等。博弈论就是研究博弈行为中斗争各方是否存在着最合理的行为方案，以及如何找到这个合理的行为方案的数学理论和方法\cite{gt}。
-而博弈树是博弈理论中表达一个博弈中各种后续可能性的树。完整博弈树（Complete Game Tree）从代表某个博弈情景的起始节点出发，向下延展出若干层的子节点直到博弈结束。下一层的子节点是基于其父节点博弈行为所导致的可能性。博弈树中形成的叶节点代表各种游戏结束的可能情形，例如井字游戏（Tic-Tac-Toe）会有26,830个叶节点\cite{NAU1982257,allis1994searching}。
+具有竞争或对抗性质的行为称为博弈行为。在这类行为中，参加斗争或竞争的各方各自具有不同的目标或利益。为了达到各自的目标和利益，各方必须考虑对手的各种可能的行动方案，并力图选取对自己最为有利或最为合理的方案。比如日常生活中的下棋，打牌等。博弈论就是研究博弈行为中斗争各方是否存在着最合理的行为方案，以及如何找到这个合理的行为方案的数学理论和方法~\cite{gt}。
+而博弈树是博弈理论中表达一个博弈中各种后续可能性的树。完整博弈树（Complete Game Tree）从代表某个博弈情景的起始节点出发，向下延展出若干层的子节点直到博弈结束。下一层的子节点是基于其父节点博弈行为所导致的可能性。博弈树中形成的叶节点代表各种游戏结束的可能情形，例如井字游戏（Tic-Tac-Toe）会有~26,830~个叶节点~\cite{NAU1982257,allis1994searching}。
 
 
-博弈树在人工智能应用领域占有重要地位，在博弈游戏中选择最佳动作的一种方法便是使用某种树搜索算法，结合类似于极小化极大算法的规则来修剪树，从而搜索整个博弈树。例如在井字游戏中计算机可以很快速地找到最佳解并做出决策，但是对于象棋、围棋这一类状态空间复杂的大型博弈游戏，受限于计算机性能遍历完整博弈树不太现实，因此对这类游戏通常会采用部分博弈树（partial game tree）来进行搜索。典型的部分博弈树通常是限制博弈树的层数，并剔除不佳的步法（例如自杀），一般而言搜索的层数越多，能走出较佳步法的机会也越高\cite{coin12162}。
+博弈树在人工智能应用领域占有重要地位，在博弈游戏中选择最佳动作的一种方法便是使用某种树搜索算法，结合类似于极小化极大算法的规则来修剪树，从而搜索整个博弈树。例如在井字游戏中计算机可以很快速地找到最佳解并做出决策，但是对于象棋、围棋这一类状态空间复杂的大型博弈游戏，受限于计算机性能遍历完整博弈树不太现实，因此对这类游戏通常会采用部分博弈树（partial game tree）来进行搜索。典型的部分博弈树通常是限制博弈树的层数，并剔除不佳的步法（例如自杀），一般而言搜索的层数越多，能走出较佳步法的机会也越高~\cite{coin12162}。
 
 \subsection{极小化极大算法}
-极小化极大算法（Minimax）是人工智能领域常见的搜索算法，是一种找出失败的最大可能性中的最小值的算法，常用于棋类等由两方较量的游戏和程序，这类程序由两个游戏者轮流，每次执行一个步骤。该算法是一种零总和算法，即一方要在可选的选项中选择将其优势最大化的选择，而另一方则选择令对手优势最小化的方法\cite{ctt1r2gkx}。
+极小化极大算法（Minimax）是人工智能领域常见的搜索算法，是一种找出失败的最大可能性中的最小值的算法，常用于棋类等由两方较量的游戏和程序，这类程序由两个游戏者轮流，每次执行一个步骤。该算法是一种零总和算法，即一方要在可选的选项中选择将其优势最大化的选择，而另一方则选择令对手优势最小化的方法~\cite{ctt1r2gkx}。
 
 \begin{figure}[htb]
     \centering
@@ -20,7 +20,7 @@
     \label{fig:minimax}
   \end{figure}
 
-如图\ref{fig:minimax}所示，假设圆形代表当前选手，方形代表对手。当前选手需要将自己所得分数最大化，而对手则需要反其道行之。考虑第三层（Min层）对手在最左侧节点的决策，当前选手在第四层有得分为10或正无穷的行动选择，作为对手要做的是最小化这个分数，于是对手根据结果可以反推出应选择得分为10的行动。其余同理。
+如图~\ref{fig:minimax}~所示，假设圆形代表当前选手，方形代表对手。当前选手需要将自己所得分数最大化，而对手则需要反其道行之。考虑第三层（Min层）对手在最左侧节点的决策，当前选手在第四层有得分为10或正无穷的行动选择，作为对手要做的是最小化这个分数，于是对手根据结果可以反推出应选择得分为10的行动。其余同理。
 \subsection{Alpha-beta 剪枝}
 在上一个小节中我们介绍了经典的极小化极大算法，对于一个具有复杂状态空间的游戏（象棋或围棋）来说，Minimax算法需要非常多层才能够完成。如果这个游戏每一步都有$n$个选择，那么在$x$步以后，将会有$n^x$个选择，也就是说具有指数级复杂度。在这种情况下，使用经典的极小化极大算法进行树搜索是不现实的。因此我们就需要采取剪枝来减少运算量，剪掉上述树状图的一些分支，从而减少运算量。
 
@@ -129,7 +129,7 @@ MDP问题的目标是找到使预期的未来奖励最大化的策略$\pi$。如
 顾名思义，model-free算法不依赖从环境空间中学习的模型。Q-learning\cite{vanHasselt2012}就是经典的model-free算法\cite{Sutton1998,tdgam,TechnicalNote}，它通过选择当前状态下具有最高$Q$值的动作，直接在策略空间进行策略搜索并直接估算每个状态下每个动作的最佳Q值（“Q”这个字母在强化学习中表示一个动作的期望奖励），以找到可以从环境空间中获得更好回报的策略。
 Q-learning步骤如下：（1）随机初始化$Q$值$Q(s,a)$；（2）根据当前$Q$值估计（$Q(s,\cdot)$）在当前状态$s$下选择动作$a$；（3）采取动作$a$并观察结果状态$s^{'}$与奖励$r$；（4）使用贝尔曼方程\cite{dixit1990optimization}更新Q值：
 \begin{equation}
-  Q^{New}(s,a) = Q(s,a) + \alpha[R(s,a) + \gamma \max Q^{'}(s^{'},a^{'}) - Q(s,a)]
+  Q^{\text{New}}(s,a) = Q(s,a) + \alpha[R(s,a) + \gamma \max Q^{'}(s^{\prime},a^{'}) - Q(s,a)]
 \end{equation}
 $R(s,a)$为在状态$s$采取动作$a$的奖励，$\alpha$为学习率，$\gamma$为衰减系数，$\max Q^{'}(s^{'},a^{'})$为新状态$s^{'}$下可行动作的最高Q值。当$\gamma$数值越大时，agent便更加重视未来获得的长期奖励，$\gamma$数值越小时，agent更加短视只在乎目前可获得的奖励。
 Q-learning没有从环境空间中学习模型，因此称为无模型（model-free）算法。
@@ -196,7 +196,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma \mathbb{E}\left[R_{t+2}+\gamma v_{\pi}\left(S_{t+2}\right) \mid S_{t+1}, A_{t+1}=\pi^{\prime}\left(S_{t+1}\right)\right] \mid S_{t}=s\right] \\
   &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} v_{\pi}\left(S_{t+2}\right) \mid S_{t}=s\right] \\
   & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} v_{\pi}\left(S_{t+3}\right) \mid S_{t}=s\right] \\
-  & \vdots \\
+  & \leq \cdots \\
   & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \mid S_{t}=s\right] \\
   &=v_{\pi^{\prime}}(s) .
   \end{aligned}
@@ -204,7 +204,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
 上述不等式也意味着$v_{\pi^{\prime}}(s) \geq v_{\pi}(s)$，即更好的策略一定可以获得更大奖励。因此我们可以获得新的策略函数：
 \begin{equation}
   \begin{aligned}
-  \pi^{\prime}(s) & \doteq \underset{a}{\arg \max } q_{\pi}(s, a) \\
+  \pi^{\prime}(s) & \doteq \mathop{\arg \max }_a q_{\pi}(s, a) \\
   &=\underset{a}{\arg \max } \mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=a\right] \\
   &=\underset{a}{\arg \max } \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
   \end{aligned}
@@ -222,9 +222,9 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \State 1.随机初始化$V(s)$与$\pi(s)$;
     \State 2.策略评估（迭代策略评估算法;
     \State 3.策略提升:
-    \State $stable-policy \leftarrow True$
+    \State $\text{stable\_policy} \leftarrow \texttt{True}$
     \For{each $s\in\textbf{S}$}
-    \State $当前动作\longleftarrow\pi(s)$
+    \State $\text{当前动作}\leftarrow\pi(s)$
     \State $\pi(s) \leftarrow \arg \max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V\left(s^{\prime}\right)\right]$
     \State 如果当前动作不等于$\pi(s)$，那么 $stable-policy \leftarrow False$
     \EndFor
