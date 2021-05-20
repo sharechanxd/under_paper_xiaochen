@@ -161,7 +161,7 @@ Q-learning没有从环境空间中学习模型，因此称为无模型（model-f
   \end{aligned}
   \label{eq:dd}
 \end{equation}
-$\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。迭代求解方法最适合式\ref{eq:dd}，考虑一系列近似值函数$v_{0},v_{1},v_{2}\dots$，任选$v_{0}$进行初始估计。接下来的每个近似估计都会使用$v_{\pi}$贝尔曼方程\cite{dixit1990optimization}进行迭代更新：
+$\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。迭代求解方法最适合式~\ref{eq:dd}，考虑一系列近似值函数$v_{0},v_{1},v_{2}\dots$，任选$v_{0}$进行初始估计。接下来的每个近似估计都会使用$v_{\pi}$贝尔曼方程\cite{dixit1990optimization}进行迭代更新：
 \begin{equation}
   \begin{aligned}
   v_{k+1}(s) & \doteq \mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
