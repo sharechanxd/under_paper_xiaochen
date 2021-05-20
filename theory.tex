@@ -238,15 +238,15 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \For{each $s\in\textbf{S}$}
     \State $\text{current action}\leftarrow\pi(s)$
     \State $\pi(s) \leftarrow \arg \max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V\left(s^{\prime}\right)\right]$
-    \IF {$\text{current action} \neq \pi(s)$}
-    \State $\text{StablePolicy} \leftarrow False$
-    \ENDIF
+    \If{$\text{current action} \neq \pi(s)$}
+        \State $\text{StablePolicy} \leftarrow False$
+    \EndIf
     \EndFor
-    \IF {$\text{StablePolicy} = True$}
+    \If{$\text{StablePolicy} = True$}
     \State 停止并返回$\pi \approx \pi_{*} $与$V\approx v_{\pi} $
-    \ELSE 
+    \Else 
     \State 返回步骤2
-    \ENDIF
+    \EndIf
   \end{algorithmic}
 \end{algorithm}
 到目前为止介绍的策略评估与策略提升采用的都是较简单的方法。基于分类的强化学习使用简单的蒙特卡洛搜索来改进策略~\cite{RLC}，每个动作（action）都会进行多次执行（rollout）。 具有最大平均值的动作为正训练样本，而其他所有动作为负训练样本，然后对策略进行训练以进行动作分类并在后续~rollout~中使用。
