@@ -2,16 +2,16 @@
 \addcontentsline{toc}{chapter}{摘要}
 \markboth{摘要}{}
 
-各类游戏的人工智能（AI）研究已经长达数十年，以棋类游戏为主，其中国际象棋的“深蓝”与棋类游戏的AlphaGo影响最为深远。
-在本文中，我们构思出了一个新颖而有趣的游戏——超级皇后（Super Queen），规则描述如下：指定大小的棋盘（$8\times8$，12x12, 16x16）有黑白两个超级皇后；超级皇后的落子规则可指定（皇后走法，骑士走法，混合走法），不可越位，不可攻击对方；每当超级皇后离开当前位置，该位置变为不可落子的死地；
+各类游戏的人工智能（AI）研究已经长达数十年，以棋类游戏为主，其中国际象棋的“深蓝”（Deep Blue）与棋类游戏的“阿尔法狗”（AlphaGo）影响最为深远。
+在本文中，我们构思出了一个新颖而有趣的游戏——超级皇后（Super Queen），规则描述如下：指定大小的棋盘（$8\times8$，$12\times12$，$16\times16$）有黑白两个超级皇后；超级皇后的落子规则可指定（皇后走法，骑士走法，混合走法），不可越位，不可攻击对方；每当超级皇后离开当前位置，该位置变为不可落子的死地；
 胜利条件为封死对方超级皇后的行动。与国际象棋，围棋类似，我们可以使用多种方法设计超级皇后的AI。
 
 
-传统的棋类游戏AI往往基于博弈树，利用极小化极大算法在博弈树中搜索最佳走法，而基于极小化极大算法有诸如~Alpha-beta~剪枝等优化算法。但是对于大型游戏（如国际象棋，围棋等），列出完整的博弈树对计算机算力是一个较大挑战，AI的性能会受此限制下降。受到谷歌公司AlphaGo系列的启发，游戏AI也可以使用结合蒙特卡洛树搜索与深度神经网络的监督学习从专家棋谱中训练并由强化学习自我对弈增强。
-由于新游戏不具有专家数据，因此我们还将基于谷歌公司提出的AlphaZero框架，采取只使用强化学习的算法训练超级皇后的AI。具体来说，我们不使用人类监督数据，仅以棋盘上的黑白棋为输入特征，使用单一神经网络充当策略函数与值函数同时进行棋面局势评估和走棋动作选择，将蒙特卡洛树搜索纳入训练阶段。
+传统的棋类游戏AI往往基于博弈树，利用极小化极大算法在博弈树中搜索最佳走法，而基于极小化极大算法有诸如~alpha-beta~剪枝等优化算法。但是对于大型游戏（如国际象棋，围棋等），列出完整的博弈树对计算机算力是一个较大挑战，AI的性能会受此限制下降。受到谷歌公司AlphaGo系列的启发，游戏AI也可以使用结合蒙特卡洛树搜索与深度神经网络的监督学习从专家棋谱中训练并由强化学习自我对弈增强。
+由于新游戏不具有专家数据，因此我们还将基于谷歌公司提出的~AlphaZero~框架，采取只使用强化学习的算法训练超级皇后的AI。具体来说，我们不使用人类监督数据，仅以棋盘上的黑白棋为输入特征，使用单一神经网络充当策略函数与值函数同时进行棋面局势评估和走棋动作选择，将蒙特卡洛树搜索纳入训练阶段。
 
 
-我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家(Greedy Player),Alpha-beta剪枝玩家, AlphaZero型玩家。从对弈测试结果来看，AlphaZero型玩家胜于其他玩家。在人机对弈测试中，人类选手也基本难以获胜。实验表明，我们所设计的超级皇后人工智能取得了有效的结果。
+我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家(Greedy Player)，~alpha-beta~剪枝玩家, ~AlphaZero~型玩家。从对弈测试结果来看，~AlphaZero~型玩家胜于其他玩家。在人机对弈测试中，人类选手也基本难以获胜。实验表明，我们所设计的超级皇后人工智能取得了有效的结果。
 
 \medskip
 \noindent{\heiti 关键字:} 棋类游戏；人工智能；强化学习；神经网络
@@ -20,14 +20,15 @@
 \addcontentsline{toc}{chapter}{Abstract}
 \markboth{Abstract}{}
 
-The research on artificial intelligence (AI) of various games has lasted for decades, and mainly chess games, among which the "dark blue" of chess and the AlphaGo of chess games have the most profound influence.
-In this article, we have conceived a novel and interesting game-Super Queen. The rules are described as follows: There are two super queens in black and white on a board of a specified size (8x8, 12x12, 16x16); the rules for super queens Can be specified (Queen's move, Knight's move, mixed move), no offside, no attack on the opponent; whenever the super queen leaves the current position, the position becomes a dead place that cannot be dropped; the victory condition is to block the opponent's super queen's action . Similar to chess and go, we can use a variety of methods to design the AI of the super queen.
+The research on artificial intelligence (AI) of various games has lasted for decades, and mainly chess games, among which the Deep Blue of chess and the AlphaGo of chess games have the most profound influence.
+In this article, we have conceived a novel and interesting game-Super Queen. The rules are described as follows: There are two super queens in black and white on a board of a specified size ($8\times8$, $12\times12$, $16\times16$); the rules for super queens Can be specified (Queen's move, Knight's move, mixed move), no offside, no attack on the opponent; whenever the super queen leaves the current position, the position becomes a dead place that cannot be dropped; the victory condition is to block the opponent's super queen's action . Similar to chess and go, we can use a variety of methods to design the AI of the super queen.
 
 
-Traditional chess game AI is often based on game trees, using the minimization algorithm to search for the best move in the game tree, and based on the minimization algorithm, there are optimization algorithms such as Alpha-beta pruning. But for large-scale games (such as chess, go, etc.), listing a complete game tree is a big challenge to the computing power of the computer, and the performance of AI will be reduced by this limitation. Inspired by Google's AlphaGo series, game AI can also use supervised learning combined with Monte Carlo tree search and deep neural network to train from expert chess records and enhance self-play by reinforcement learning.
-Since the new game does not have expert data, we will also use an algorithm that only uses reinforcement learning to train the AI of the super queen based on the AlphaZero framework proposed by Google. Specifically, we do not use human supervision data, only use the Othello chess on the chessboard as the input feature, use a single neural network as the strategy function and value function to simultaneously evaluate the chess position and select the move action, and use the Monte Carlo tree search Include in the training phase.
+Traditional chess game AI is often based on game trees, using the Minimax algorithm to search for the best move in the game tree, and based on the Minimax algorithm, there are more optimized algorithms such as alpha-beta pruning. But for large-scale games (such as chess, go, etc.), searching a complete game tree is a big challenge to the computing capability, and the performance of AI will be reduced by this limitation. 
+Inspired by Google's AlphaGo series, game AI can also use supervised learning combined with Monte Carlo tree search and deep neural network to train from professional chess records and enhance self-play by reinforcement learning.
+Since the new game does not have professional data, we will also use an algorithm that only uses reinforcement learning to train the AI of the super queen based on the AlphaZero framework proposed by Google. Specifically, we do not use human supervision data, but only use the black-white pieces on the chessboard as the input feature and use a single neural network as the policy function and value function to simultaneously evaluate the chess position and select the move action, which will execute the Monte Carlo tree search at the training phase.
 
 
-We have implemented 4 AI players in total: Random Player, Greedy Player, Alpha-beta Pruning Player, AlphaZero Player. Judging from the game test results, AlphaZero-type players are better than other players. In the human-computer game test, it is basically difficult for human players to win. Experiments show that the super queen artificial intelligence designed by us has achieved effective results.
+We have implemented 4 AI players in total: Random Player, Greedy Player, alpha-beta Pruning Player, AlphaZero-type Player. Judging from the game test results, AlphaZero-type players are better than other players. In the human-computer game test, it is basically difficult for human players to win. Experiments show that the super queen artificial intelligence designed by us has achieved effective results.
 
 \noindent\textbf{Keywords.} chess games；artificial intelligence；reinforcement learning；neural network
