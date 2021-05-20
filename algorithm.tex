@@ -22,15 +22,29 @@
 依据信息暴露程度，超级皇后对战属于完美信息游戏（Perfect-Information Game）\cite{binmore2007game}。对于完美信息游戏，可以用状态空间复杂度（State-Space Complexity）和博弈树复杂度（Game-Tree Complexity）对其难度进行衡量\cite{allis1994searching,VANDENHERIK2002277}。
 状态空间复杂度是指从初始状态开始，可以实现的所有符合规则的状态的集合总数，在实际情况中一般使用该数量的上界表示，例如在围棋中允许出现全白或全黑的极端情况。
 博弈树复杂度表示所有不同游戏路径数目，常用合理估计的下界表示：$valids^{turn}$。 $valids$表示每回合平均合法移动数目，$turn$表示平均游戏长度\cite{10.1007/BF00992697}。
-类似于国际象棋与围棋，我们可以给出超级皇后对战的状态空间与博弈树复杂度（仅考虑8x8棋盘），如图\ref{fig:complexity}
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=1\textwidth]{complexity.png}
-    \caption[complexity]{%
-        超级皇后对战复杂度\cite{enwiki:complexity}%
-      }
-    \label{fig:complexity}
-\end{figure}
+类似于国际象棋与围棋，我们可以给出超级皇后对战的状态空间与博弈树复杂度（仅考虑8x8棋盘），如表~\ref{table:complexity}
+% \begin{figure}[htb]
+%     \centering
+%     \includegraphics[width=1\textwidth]{complexity.png}
+%     \caption[complexity]{%
+%         超级皇后对战复杂度\cite{enwiki:complexity}%
+%       }
+%     \label{fig:complexity}
+% \end{figure}
+\begin{table}[htb]
+  \centering
+  \caption[complexity]{超级皇后对战复杂度~\cite{enwiki:complexity}}
+  \begin{tabular}{p{2cm}<{\centering} p{3cm}<{\centering}p{3cm}<{\centering}p{3cm}<{\centering}p{3cm}<{\centering}}
+  \hline
+  对战规则/游戏 & 状态空间复杂度 & 游戏树复杂度 & 平均游戏长度 & 平均合法移动数目 \\ \hline
+  国际象棋 & 10^{47} & 10^{123}&80 &35\\ 
+      围棋 & 10^{172} & 10^{360}&150 &250 \\ 
+      超级皇后：骑士 & 10^{38} & 10^{21} &45 & 3\\ 
+      超级皇后：皇后 & 10^{38} & 10^{52} & 50 & 11\\ 
+      超级皇后：超级 & 10^{38} & 10^{63} & 55 & 14\\ \hline
+  \end{tabular}
+  \label{table:complexity}
+\end{table}
 
 \begin{figure}[H]
     \centering
