@@ -149,7 +149,7 @@
 （7）全连接层，其输出空间维度为512，在进行标准化后使用ReLU函数激活并使用丢弃（Dropout）防止过拟合；
 （8）使用Softmax激活函数\footnote{归一化指数函数，是逻辑函数的一种推广。}的全连接层输出维度为动作空间大小（action size）的概率值$p$；
 （9）使用双曲正切激活函数（tanh）的全连接层输出维度为1的奖励值（预测胜者）$v$；
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=0.9\textwidth]{classic.pdf}
     \caption[cnn]{%
@@ -161,7 +161,7 @@
 深度残差网络是具有重要地位的经典计算机模型~\cite{resnet}。对于我们超级皇后的棋局而言，经典卷积神经网络不够深，即便其能较好地适应$8\times8$的棋盘特征，但是在训练大量对局数据中仍有可能出现性能瓶颈。
 因此我们需要考虑加深网络层数，例如说在经典卷积神经网络中继续增加卷积层。但是更深的网络性能通过实验证明会出现退化问题：深度增加时，损失（loss）减少但准确度下降~\cite{resnet,he2016identity}。
 考虑到代价与实际需求，深度残差网络是一个较为合适的选择~\cite{resnet}。其核心结构为设计了短路连接（shortcut connection）使若干卷积层的集合能学习到残差带来的新特征，如图~\ref{fig:resunit}所示：
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{resnetblcok.png}
     \caption[resunit]{%
@@ -171,7 +171,7 @@
 \end{figure}
 对于如图的若干卷积层构成的堆积层，输入为$x$时其学习到的特征我们用$H(x)$表示，其残差可以表示为$F(x)=H(x)-x$。要学习到残差$F(x)$，其原始学习特征为$F(x)+x$。残差学习相比原始特征直接学习更容易，也会使得图中残差结构单元在输入特征基础上学习到新的特征，从而拥有更好的性能。
 在训练超级皇后对战时，深度残差网络结构如图~\ref{fig:res}，输入层的reshape方式以及Flatten层后的结构与经典卷积神经网络一致，图中$/S$代表步长（stride），$F$代表滤波器（filter）数量。
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{resnet.pdf}
     \caption[res]{%
@@ -211,7 +211,7 @@
 多次进行搜索模拟后最终得到搜索概率$\pi$，可以使用该搜索概率抽样走棋动作并完成此回合落子。至此，我们使用强化学习参考AlphaZero框架对超级皇后对战进行训练的过程如图~\ref{fig:az}所示。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{alphazero.pdf}
+    \includegraphics[width=1.4\textwidth]{alphazero.pdf}
     \caption[az]{%
     以AlphaZero为框架的强化学习玩家~\cite{Silver2017}%
       }
