@@ -161,9 +161,9 @@
 深度残差网络是具有重要地位的经典计算机模型~\cite{resnet}。对于我们超级皇后的棋局而言，经典卷积神经网络不够深，即便其能较好地适应$8\times8$的棋盘特征，但是在训练大量对局数据中仍有可能出现性能瓶颈。
 因此我们需要考虑加深网络层数，例如说在经典卷积神经网络中继续增加卷积层。但是更深的网络性能通过实验证明会出现退化问题：深度增加时，损失（loss）减少但准确度下降~\cite{resnet,he2016identity}。
 考虑到代价与实际需求，深度残差网络是一个较为合适的选择~\cite{resnet}。其核心结构为设计了短路连接（shortcut connection）使若干卷积层的集合能学习到残差带来的新特征，如图~\ref{fig:resunit}所示：
-\begin{figure}[htb]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{resnetblcok.png}
+    \includegraphics[width=1\textwidth]{resnetblcok.pdf}
     \caption[resunit]{%
     残差学习单元~\cite{resnet}%
       }
