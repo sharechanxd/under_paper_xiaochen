@@ -227,7 +227,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
 \end{equation}
 
 \paragraph{策略迭代（Policy Iteration）}
-当策略$\pi$通过上述步骤得到提升并产生了新策略$\pi_{\prime}$，我们可以计算$v_{\pi^{\prime}}$并再次利用新的值函数得到更好的策略$\pi^{\prime\prime}$如式~\ref{eq:dddddd}：
+当策略$\pi$通过上述步骤得到提升并产生了新策略$\pi^{\prime}$，我们可以计算$v_{\pi^{\prime}}$并再次利用新的值函数得到更好的策略$\pi^{\prime\prime}$如式~\ref{eq:dddddd}：
 \begin{equation}
   \pi_{0} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{0}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{1} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{1}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{2} \stackrel{\mathrm{Evaluation}}{\longrightarrow} \cdots \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{*} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{*}
   \label{eq:dddddd}

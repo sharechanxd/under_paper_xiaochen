@@ -14,7 +14,7 @@
 \begin{equation*}
     \text{alpha-beta剪枝玩家} > \text{贪婪玩家} > \text{随机玩家} ,
 \end{equation*}
-具体对局胜率如表~\ref{table:baseresult}所示，不同开局的对战结果合并统计，先手与后手分开统计，包含骑士、皇后与超级皇后三种规则状态，随机玩家简写作RP，贪婪玩家简写作GP，alpha-beta剪枝玩家简写作ABP。
+具体对局胜率如表~\ref{table:baseresult}~所示，不同开局的对战结果合并统计，先手与后手分开统计，包含骑士、皇后与超级皇后三种规则状态，随机玩家简写作RP，贪婪玩家简写作GP，alpha-beta剪枝玩家简写作ABP。
 % \begin{figure}[htb]
 %     \centering
 %     \includegraphics[width=0.8\textwidth]{baseplayer.PNG}
@@ -56,7 +56,7 @@
 \paragraph{神经网络超参数}
 优化器学习率（learning rate）设置为0.001，丢弃率（dropout）设置为0.3，epoch数设置为20，批次容量（batch\_size）设置为128。
 
-在数据生成时，为了使模型泛化能力更强，即在对称开局或先后手不同时表现一致，我们会对棋盘数据进行数据增强操作：对棋盘进行旋转与镜像，如图\ref{fig:datar}。数据会因此被扩充8倍，大大增强数据集的鲁棒性。
+在数据生成时，为了使模型泛化能力更强，即在对称开局或先后手不同时表现一致，我们会对棋盘数据进行数据增强操作：对棋盘进行旋转与镜像，如图~\ref{fig:datar}。数据会因此被扩充8倍，大大增强数据集的鲁棒性。
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{datar.PNG}
@@ -67,12 +67,40 @@
 \end{figure}
 \section{强度测试}
 
-\subsection{随机玩家}
+\subsection{经典卷积神经网络}
+% queen
+% abp vs n1p 22:28
+% n1p vs abp 28:22
+% 160s
+% gp vs n1p 7:43
+% n1p vs gp 42:8
+% 110s
+% rp vs n1p 6:44
+% n1p vs rp 47:3
+% 110s
 
-\subsection{贪婪算法玩家}
+% knight
+% abp vs n1p 16:34
+% n1p vs abp 40:10
+% 50s
+% gp vs n1p 9:41
+% n1p vs gp 49:1
+% 30s
+% rp vs n1p 9:41
+% n1p vs rp 50:0
+% 30s
 
-\subsection{Alpha-beta剪枝玩家}
+% super
+% abp vs n1p 16:34
+% n1p vs abp 40:10
+% 310s
+% gp vs n1p 21:29
+% n1p vs gp 38:12
+% 110s
+% rp vs n1p 6:44
+% n1p vs rp 43:7
+% 110s
+\subsection{深度残差网络}
 
-\subsection{人机对战}
-在人机对战环节
+
 
