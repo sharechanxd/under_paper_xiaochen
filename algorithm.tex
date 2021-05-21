@@ -46,7 +46,7 @@
   \label{table:complexity}
 \end{table}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=0.8\textwidth]{knight.pdf}
     \caption[rules-knight]{%
@@ -55,7 +55,7 @@
     \label{fig:knight}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=0.8\textwidth]{queen.pdf}
     \caption[rules-queen]{%
@@ -64,7 +64,7 @@
     \label{fig:queen}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=0.8\textwidth]{super.pdf}
     \caption[rules-super]{%
@@ -79,7 +79,7 @@
 我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家（Greedy Player），alpha-beta剪枝玩家, AlphaZero型玩家。前三个玩家将作为基准玩家（baseline player）。
 \paragraph{随机玩家}
 随机玩家，顾名思义，即为其每步动作都基于当前可行走法进行随机选择。在每一回合开始，随机玩家先输出自己的可选动作列表，并在此列表中随机选择一个作为自己在这一回合的动作。如图~\ref{fig:super}，白色圆点代表白色方可行动作，随机玩家将从这些白色圆点里选择。
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{rp.pdf}
     \caption[rp]{%
@@ -140,18 +140,18 @@
 我们采取以下两种不同结构的神经网络分别训练：
 \paragraph{经典卷积神经网络}
 经典卷积神经网络结构较为简单，层数较少，网络的参数量也较少，但比较适合提取$8\times8$的棋盘特征。其结构如图~\ref{fig:cnn}所示：
-（1）2D卷积层（适用图像的空间卷积），该层创建的卷积核对层输入进行卷积以生成输出张量，需要paddiong操作填充输入以使输出具有与原始输入相同的长度，其输出空间的维度为512；
+（1）2D卷积层（适用图像的空间卷积），该层创建的卷积核对层输入进行卷积以生成输出张量，需要边缘填充（padding）操作填充输入以使输出具有与原始输入相同的长度，其输出空间的维度为512；
 （2）批量标准化层~\cite{batchnorm}，在当前批次数据中标准化前面卷积层的激活项，特征轴设置为3；
 （3）使用整流线性单位函数（Rectified Linear Unit, ReLU）~\cite{xu2015empirical}激活一次，减少计算结果；
 （4）以上三步再重复3次，在后两次中不需要进行padding操作；
 （5）Flatten层将输入展平；
 （6）全连接层，其输出空间维度为1024，在进行标准化后使用ReLU函数激活并使用丢弃（Dropout）~\cite{srivastava2014dropout}防止过拟合；
 （7）全连接层，其输出空间维度为512，在进行标准化后使用ReLU函数激活并使用丢弃（Dropout）防止过拟合；
-（8）使用Softmax激活函数的全连接层输出维度为动作空间大小（action size）的概率值$p$；
+（8）使用Softmax激活函数\footnote{归一化指数函数，是逻辑函数的一种推广。}的全连接层输出维度为动作空间大小（action size）的概率值$p$；
 （9）使用双曲正切激活函数（tanh）的全连接层输出维度为1的奖励值（预测胜者）$v$；
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{classic.png}
+    \includegraphics[width=0.9\textwidth]{classic.pdf}
     \caption[cnn]{%
     经典卷积神经网络%
       }
@@ -165,7 +165,7 @@
     \centering
     \includegraphics[width=0.5\textwidth]{resnetblcok.png}
     \caption[resunit]{%
-    残差学习单元\cite{resnet}%
+    残差学习单元~\cite{resnet}%
       }
     \label{fig:resunit}
 \end{figure}
@@ -211,7 +211,7 @@
 多次进行搜索模拟后最终得到搜索概率$\pi$，可以使用该搜索概率抽样走棋动作并完成此回合落子。至此，我们使用强化学习参考AlphaZero框架对超级皇后对战进行训练的过程如图~\ref{fig:az}所示。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{alphazero.png}
+    \includegraphics[width=1\textwidth]{alphazero.pdf}
     \caption[az]{%
     以AlphaZero为框架的强化学习玩家~\cite{Silver2017}%
       }
