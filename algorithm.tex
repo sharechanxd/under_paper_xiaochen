@@ -48,7 +48,7 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{knight.pdf}
+    \includegraphics[width=0.8\textwidth]{knight.pdf}
     \caption[rules-knight]{%
         超级皇后对战游戏规则——骑士状态%
       }
@@ -57,7 +57,7 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{queen.pdf}
+    \includegraphics[width=0.8\textwidth]{queen.pdf}
     \caption[rules-queen]{%
         超级皇后对战游戏规则——皇后状态%
       }
@@ -66,7 +66,7 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{super.pdf}
+    \includegraphics[width=0.8\textwidth]{super.pdf}
     \caption[rules-super]{%
         超级皇后对战游戏规则——超级状态%
       }
@@ -81,7 +81,7 @@
 随机玩家，顾名思义，即为其每步动作都基于当前可行走法进行随机选择。在每一回合开始，随机玩家先输出自己的可选动作列表，并在此列表中随机选择一个作为自己在这一回合的动作。如图~\ref{fig:super}，白色圆点代表白色方可行动作，随机玩家将从这些白色圆点里选择。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rp.pdf}
+    \includegraphics[width=1\textwidth]{rp.pdf}
     \caption[rp]{%
         随机玩家在白色圆点中任选%
       }
@@ -94,16 +94,16 @@
 \end{equation}
 在某一回合，当前选手有若干个合法行动可选，我们需要评估出其在遍历每一个行动后棋盘盘面的好坏。评估盘面好坏使用上述评估函数，玩家在一步之后的合法行动数量减去对手合法行动数量的值越大，说明该步是当前玩家的最优解，将遍历后得到的分数分数进行排序选择最大值对应的行动即可。
 假设当前是黑色方回合，局势如图~\ref{fig:gp1}。
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
-    \includegraphics[width=0.8\textwidth]{gp1.pdf}
+    \includegraphics[width=1\textwidth]{gp1.pdf}
     \caption[gp1]{%
         黑色圆点代表当前黑色超级皇后合法行动%
       }
     \label{fig:gp1}
 \end{figure}
 黑色圆点代表其合法行动落点，其有五个合法落子位置可选，我们分别计算假设黑色方落到各个位置后的分数如图~\ref{fig:gp2}：
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{gp2.pdf}
     \caption[gp2]{%
@@ -116,7 +116,7 @@
 在剪枝搜索过程中，我们仍使用在贪婪玩家部分中定义的评价函数更新叶节点的值。考虑
 到博弈树过深引起的搜索时间代价~\cite{sstextbook}，alpha-beta剪枝玩家的深度设置为4。
 初始$\alpha$值设置为~$-99$，$\beta$值设置为~$99$。假设当前是黑色方回合，局势仍然如图~\ref{fig:gp1}。搜索与剪枝过程可表现为图~\ref{fig:abpde}。
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{abp_design.pdf}
     \caption[abpde]{%
