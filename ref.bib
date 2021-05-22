@@ -5,7 +5,7 @@
 @STRING{pub-iop.sandiego = "San Diego, CA, USA"}
 @STRING{pub-springer = "Spring{\-er}-Ver{\-}lag"}
 @STRING{pub-springer.adr = "Berlin, Heidelberg, Germany"}
-
+@STRING{pub-AAAS.adr = "Washington,D.C., USA"}
 
 @ARTICLE{Shao2014a,
   author = {Shao, Meiyue},
@@ -89,19 +89,19 @@
     title = "Game complexity --- {Wikipedia}{,} The Free Encyclopedia",
     year = "2021",
     howpublished = "\url{https://en.wikipedia.org/w/index.php?title=Game_complexity&oldid=1007086654}",
-    note = "[Online; accessed 16-May-2021]"
 }
 @book{murray2015history,
   title={A History of Chess: The Original 1913 Edition},
   author={Murray, H.J.R.},
   isbn={9781632207708},
-  url={https://books.google.com.sg/books?id=dNSBCgAAQBAJ},
   year={2015},
-  publisher={Skyhorse}
+  publisher={Skyhorse Publishing},
+  address={New York, NY},
 }
 
 @article {Silver1140,
-	author = {Silver, David and Hubert, Thomas and Schrittwieser, Julian and Antonoglou, Ioannis and Lai, Matthew and Guez, Arthur and Lanctot, Marc and Sifre, Laurent and Kumaran, Dharshan and Graepel, Thore and Lillicrap, Timothy and Simonyan, Karen and Hassabis, Demis},
+	author = {Silver, David. and Hubert, Thomas. and Schrittwieser, Julian. and Antonoglou, Ioannis. and Lai, Matthew. and Guez, Arthur. and Lanctot, Marc. and Sifre, Laurent. and Kumaran, Dharshan. and Graepel, Thore. and Lillicrap, Timothy. and Simonyan, Karen.
+   and Hassabis, Demis},
 	title = {A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play},
 	volume = {362},
 	number = {6419},
@@ -109,29 +109,28 @@
 	year = {2018},
 	doi = {10.1126/science.aar6404},
 	publisher = {American Association for the Advancement of Science},
+  address = pub-AAAS.adr,
 	abstract = {Computers can beat humans at increasingly complex games, including chess and Go. However, these programs are typically constructed for a particular game, exploiting its properties, such as the symmetries of the board on which it is played. Silver et al. developed a program called AlphaZero, which taught itself to play Go, chess, and shogi (a Japanese version of chess) (see the Editorial, and the Perspective by Campbell). AlphaZero managed to beat state-of-the-art programs specializing in these three games. The ability of AlphaZero to adapt to various game rules is a notable step toward achieving a general game-playing system.Science, this issue p. 1140; see also pp. 1087 and 1118The game of chess is the longest-studied domain in the history of artificial intelligence. The strongest programs are based on a combination of sophisticated search techniques, domain-specific adaptations, and handcrafted evaluation functions that have been refined by human experts over several decades. By contrast, the AlphaGo Zero program recently achieved superhuman performance in the game of Go by reinforcement learning from self-play. In this paper, we generalize this approach into a single AlphaZero algorithm that can achieve superhuman performance in many challenging games. Starting from random play and given no domain knowledge except the game rules, AlphaZero convincingly defeated a world champion program in the games of chess and shogi (Japanese chess), as well as Go.},
 	issn = {0036-8075},
-	URL = {https://science.sciencemag.org/content/362/6419/1140},
-	eprint = {https://science.sciencemag.org/content/362/6419/1140.full.pdf},
 	journal = {Science}
 }
 @Article{Silver2017,
-author={Silver, David
-and Schrittwieser, Julian
-and Simonyan, Karen
-and Antonoglou, Ioannis
-and Huang, Aja
-and Guez, Arthur
-and Hubert, Thomas
-and Baker, Lucas
-and Lai, Matthew
-and Bolton, Adrian
-and Chen, Yutian
-and Lillicrap, Timothy
-and Hui, Fan
-and Sifre, Laurent
-and van den Driessche, George
-and Graepel, Thore
+author={Silver, David.
+and Schrittwieser, Julian.
+and Simonyan, Karen.
+and Antonoglou, Ioannis.
+and Huang, Aja.
+and Guez, Arthur.
+and Hubert, Thomas.
+and Baker, Lucas.
+and Lai, Matthew.
+and Bolton, Adrian.
+and Chen, Yutian.
+and Lillicrap, Timothy.
+and Hui, Fan.
+and Sifre, Laurent.
+and van den Driessche, George.
+and Graepel, Thore.
 and Hassabis, Demis},
 title={Mastering the game of Go without human knowledge},
 journal={Nature},
@@ -144,28 +143,27 @@ pages={354-359},
 abstract={A long-standing goal of artificial intelligence is an algorithm that learns, tabula rasa, superhuman proficiency in challenging domains. Recently, AlphaGo became the first program to defeat a world champion in the game of Go. The tree search in AlphaGo evaluated positions and selected moves using deep neural networks. These neural networks were trained by supervised learning from human expert moves, and by reinforcement learning from self-play. Here we introduce an algorithm based solely on reinforcement learning, without human data, guidance or domain knowledge beyond game rules. AlphaGo becomes its own teacher: a neural network is trained to predict AlphaGo's own move selections and also the winner of AlphaGo's games. This neural network improves the strength of the tree search, resulting in higher quality move selection and stronger self-play in the next iteration. Starting tabula rasa, our new program AlphaGo Zero achieved superhuman performance, winning 100--0 against the previously published, champion-defeating AlphaGo.},
 issn={1476-4687},
 doi={10.1038/nature24270},
-url={https://doi.org/10.1038/nature24270}
 }
 @Article{Silver2016,
-author={Silver, David
-and Huang, Aja
+author={Silver, David.
+and Huang, Aja.
 and Maddison, Chris J.
-and Guez, Arthur
-and Sifre, Laurent
-and van den Driessche, George
-and Schrittwieser, Julian
-and Antonoglou, Ioannis
-and Panneershelvam, Veda
-and Lanctot, Marc
-and Dieleman, Sander
-and Grewe, Dominik
-and Nham, John
-and Kalchbrenner, Nal
-and Sutskever, Ilya
-and Lillicrap, Timothy
-and Leach, Madeleine
-and Kavukcuoglu, Koray
-and Graepel, Thore
+and Guez, Arthur.
+and Sifre, Laurent.
+and van den Driessche, George.
+and Schrittwieser, Julian.
+and Antonoglou, Ioannis.
+and Panneershelvam, Veda.
+and Lanctot, Marc.
+and Dieleman, Sander.
+and Grewe, Dominik.
+and Nham, John.
+and Kalchbrenner, Nal.
+and Sutskever, Ilya.
+and Lillicrap, Timothy.
+and Leach, Madeleine.
+and Kavukcuoglu, Koray.
+and Graepel, Thore.
 and Hassabis, Demis},
 title={Mastering the game of Go with deep neural networks and tree search},
 journal={Nature},
@@ -178,7 +176,6 @@ pages={484-489},
 abstract={The game of Go has long been viewed as the most challenging of classic games for artificial intelligence owing to its enormous search space and the difficulty of evaluating board positions and moves. Here we introduce a new approach to computer Go that uses `value networks' to evaluate board positions and `policy networks' to select moves. These deep neural networks are trained by a novel combination of supervised learning from human expert games, and reinforcement learning from games of self-play. Without any lookahead search, the neural networks play Go at the level of state-of-the-art Monte Carlo tree search programs that simulate thousands of random games of self-play. We also introduce a new search algorithm that combines Monte Carlo simulation with value and policy networks. Using this search algorithm, our program AlphaGo achieved a 99.8{\%} winning rate against other Go programs, and defeated the human European Go champion by 5 games to 0. This is the first time that a computer program has defeated a human professional player in the full-sized game of Go, a feat previously thought to be at least a decade away.},
 issn={1476-4687},
 doi={10.1038/nature16961},
-url={https://doi.org/10.1038/nature16961}
 }
 
 
@@ -188,15 +185,13 @@ url={https://doi.org/10.1038/nature16961}
   author={Russell, S.J. and Norvig, P.},
   isbn={9780136042594},
   lccn={2011288031},
-  series={Prentice Hall Series in Artifi},
-  url={https://books.google.com/books?id=8jZBksh-bUMC},
   year={2010},
-  publisher={Prentice Hall}
+  publisher={Prentice Hall},
+  address={Hoboken, New Jersey, USA},
 }
 
 @book{gt,
  ISBN = {9780691011929},
- URL = {http://www.jstor.org/stable/j.ctv173f1fh},
  abstract = {
 Classics in Game Theory assembles in one sourcebook the
 basic contributions to the field that followed on the publication
@@ -224,7 +219,8 @@ group of students of economics, political science, and biology.
 },
  publisher = {Princeton University Press},
  title = {Classics in Game Theory},
- year = {1997}
+ year = {1997},
+ address = {Princeton, New Jersey, USA},
 }
 @article{NAU1982257,
 title = {An investigation of the causes of pathology in games},
@@ -234,8 +230,7 @@ number = {3},
 pages = {257-278},
 year = {1982},
 issn = {0004-3702},
-doi = {https://doi.org/10.1016/0004-3702(82)90002-9},
-url = {https://www.sciencedirect.com/science/article/pii/0004370282900029},
+doi = {10.1016/0004-3702(82)90002-9},
 author = {Dana S. Nau},
 abstract = {Game trees are a useful model of many kinds of decision-making situations, and have been the subject of considerable investigation by researchers in both artificial intelligence and decision analysis. Until recently it was almost universally believed that searching deeper on a game tree would in general improve the quality of a decision. However, recent theoretical investigations [8–10] by this author have demonstrated the existence of an infinite class of game trees for which searching deeper consistently degrades the quality of a decision. This paper extends the previous work in two ways. First, the existence of pathology is demonstrated in a real game (Pearl's Game) using a real evaluation function. This pathological behavior occurs despite the fact that the evaluation function function increases dramatically in accuracy toward the end of the game. Second, the similarities and differences between this game and a related nonpathological game are used as grounds for speculation on why pathology occurs in some games and not in others.}
 }
@@ -244,32 +239,30 @@ abstract = {Game trees are a useful model of many kinds of decision-making situa
   title={Searching for Solutions in Games and Artificial Intelligence},
   author={Allis, L.V.},
   isbn={9789090074887},
-  url={https://books.google.com.hk/books?id=c7FTAgAACAAJ},
   year={1994},
-  publisher={Ponsen \& Looijen}
+  publisher={Ponsen \& Looijen},
+  address={Wageningen, Netherlands},
 }
 @article{coin12162,
-author = {Zuckerman, Inon and Wilson, Brandon and Nau, Dana S.},
+author = {Zuckerman, Inon. and Wilson, Brandon. and Nau, Dana S.},
 title = {Avoiding game-tree pathology in 2-player adversarial search},
 journal = {Computational Intelligence},
 volume = {34},
 number = {2},
 pages = {542-561},
 keywords = {adversarial search, game playing, game-tree search, 2-player games},
-doi = {https://doi.org/10.1111/coin.12162},
-url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/coin.12162},
-eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/coin.12162},
+doi = {10.1111/coin.12162},
 abstract = {Abstract Adversarial search, or game-tree search, is a technique for analyzing an adversarial game to determine what moves a player should make in order to win a game. Until recently, lookahead pathology (in which deeper game-tree search results in worse play) has been thought to be quite rare. We provide an analysis that shows that every game should have some sections that are locally pathological, assuming that both players can potentially win the game. We also modify the minimax algorithm to recognize local pathologies in arbitrary games and cut off search accordingly (shallower search is more effective than deeper search when local pathologies occur). We show experimentally that our modified search procedure avoids local pathologies and consequently provides improved performance, in terms of decision accuracy, when compared with the minimax algorithm. In addition, we provide an experimental evaluation on the African game of Kalah, which shows the improved performances of our suggested error-minimizing minimax algorithm when there is a large degree of pathology.},
 year = {2018}
 }
 @book{ctt1r2gkx,
  ISBN = {9780691130613},
- URL = {http://www.jstor.org/stable/j.ctt1r2gkx},
  abstract = {This is the classic work upon which modern-day game theory is based. What began more than sixty years ago as a modest proposal that a mathematician and an economist write a short paper together blossomed, in 1944, when Princeton University Press publishedTheory of Games and Economic Behavior. In it, John von Neumann and Oskar Morgenstern conceived a groundbreaking mathematical theory of economic and social organization, based on a theory of games of strategy. Not only would this revolutionize economics, but the entirely new field of scientific inquiry it yielded--game theory--has since been widely used to analyze a host of real-world phenomena from arms races to optimal policy choices of presidential candidates, from vaccination policy to major league baseball salary negotiations. And it is today established throughout both the social sciences and a wide range of other sciences.This sixtieth anniversary edition includes not only the original text but also an introduction by Harold Kuhn, an afterword by Ariel Rubinstein, and reviews and articles on the book that appeared at the time of its original publication in theNew York Times, ttheAmerican Economic Review, and a variety of other publications. Together, these writings provide readers a matchless opportunity to more fully appreciate a work whose influence will yet resound for generations to come.},
- author = {John von Neumann and Oskar Morgenstern and Ariel Rubinstein},
+ author = {John Von Neumann. and Oskar Morgenstern. and Ariel Rubinstein},
  publisher = {Princeton University Press},
  title = {Theory of Games and Economic Behavior (60th Anniversary Commemorative Edition)},
- year = {1944}
+ year = {1944},
+ address = {Princeton, New Jersey, USA},
 }
 @article{KNUTH1975293abp,
 title = {An analysis of alpha-beta pruning},
@@ -279,9 +272,8 @@ number = {4},
 pages = {293-326},
 year = {1975},
 issn = {0004-3702},
-doi = {https://doi.org/10.1016/0004-3702(75)90019-3},
-url = {https://www.sciencedirect.com/science/article/pii/0004370275900193},
-author = {Donald E. Knuth and Ronald W. Moore},
+doi = {10.1016/0004-3702(75)90019-3},
+author = {Donald E. Knuth. and Ronald W. Moore.},
 abstract = {The alpha-beta technique for searching game trees is analyzed, in an attempt to provide some insight into its behavior. The first portion of this paper is an expository presentation of the method together with a proof of its correctness and a historical discussion. The alpha-beta procedure is shown to be optimal in a certain sense, and bounds are obtained for its running time with various kinds of random data.}
 }
 
@@ -297,13 +289,11 @@ abstract = {The alpha-beta technique for searching game trees is analyzed, in an
   keywords={Monte-Carlo Tree Search; heuristic search; Computer Go},
   doi={10.1142/S1793005708001094},
   abstract={Monte-Carlo Tree Search (MCTS) is a new best-first search guided by the results of Monte-Carlo simulations. In this article, we introduce twoprogressive strategiesfor MCTS, called progressive bias and progressive unpruning. They enable the use of relatively time-expensive heuristic knowledge without speed reduction. Progressive bias directs the search according to heuristic knowledge. Progressive unpruning first reduces the branching factor, and then increases it gradually again. Experiments assess that the two progressive strategies significantly improve the level of our Go programMango. Moreover, we see that the combination of both strategies performs even better on larger board sizes.},
-  url={https://ideas.repec.org/a/wsi/nmncxx/v04y2008i03ns1793005708001094.html}
+
 }
+
 @InProceedings{10.1007/978-3-540-75538-8_7,
 author="Coulom, R{\'e}mi",
-editor="van den Herik, H. Jaap
-and Ciancarini, Paolo
-and Donkers, H. H. L. M. (Jeroen)",
 title="Efficient Selectivity and Backup Operators in Monte-Carlo Tree Search",
 booktitle="Computers and Games",
 year="2007",
@@ -311,14 +301,13 @@ publisher="Springer Berlin Heidelberg",
 address="Berlin, Heidelberg",
 pages="72--83",
 abstract="A Monte-Carlo evaluation consists in estimating a position by averaging the outcome of several random continuations. The method can serve as an evaluation function at the leaves of a min-max tree. This paper presents a new framework to combine tree search with Monte-Carlo evaluation, that does not separate between a min-max phase and a Monte-Carlo phase. Instead of backing-up the min-max value close to the root, and the average value at some depth, a more general backup operator is defined that progressively changes from averaging to min-max as the number of simulations grows. This approach provides a fine-grained control of the tree growth, at the level of individual simulations, and allows efficient selectivity. The resulting algorithm was implemented in a 9{\texttimes}9 Go-playing program, Crazy Stone, that won the 10th KGS computer-Go tournament.",
-isbn="978-3-540-75538-8"
+isbn="978-3-540-75538-8",
+doi={10.1007/978-3-540-75538-8_7},
 }
+
 @InProceedings{10.1007/11871842_29,
 author="Kocsis, Levente
 and Szepesv{\'a}ri, Csaba",
-editor="F{\"u}rnkranz, Johannes
-and Scheffer, Tobias
-and Spiliopoulou, Myra",
 title="Bandit Based Monte-Carlo Planning",
 booktitle="Machine Learning: ECML 2006",
 year="2006",
@@ -326,7 +315,8 @@ publisher="Springer Berlin Heidelberg",
 address="Berlin, Heidelberg",
 pages="282--293",
 abstract="For large state-space Markovian Decision Problems Monte-Carlo planning is one of the few viable approaches to find near-optimal solutions. In this paper we introduce a new algorithm, UCT, that applies bandit ideas to guide Monte-Carlo planning. In finite-horizon or discounted MDPs the algorithm is shown to be consistent and finite sample bounds are derived on the estimation error due to sampling. Experimental results show that in several domains, UCT is significantly more efficient than its alternatives.",
-isbn="978-3-540-46056-5"
+isbn="978-3-540-46056-5",
+doi={10.1007/11871842_29},
 }
 @article{SCHMIDHUBER201585,
 title = {Deep learning in neural networks: An overview},
@@ -335,30 +325,31 @@ volume = {61},
 pages = {85-117},
 year = {2015},
 issn = {0893-6080},
-doi = {https://doi.org/10.1016/j.neunet.2014.09.003},
-url = {https://www.sciencedirect.com/science/article/pii/S0893608014002135},
+doi = {10.1016/j.neunet.2014.09.003},
 author = {Jürgen Schmidhuber},
 keywords = {Deep learning, Supervised learning, Unsupervised learning, Reinforcement learning, Evolutionary computation},
 abstract = {In recent years, deep artificial neural networks (including recurrent ones) have won numerous contests in pattern recognition and machine learning. This historical survey compactly summarizes relevant work, much of it from the previous millennium. Shallow and Deep Learners are distinguished by the depth of their credit assignment paths, which are chains of possibly learnable, causal links between actions and effects. I review deep supervised learning (also recapitulating the history of backpropagation), unsupervised learning, reinforcement learning & evolutionary computation, and indirect search for short programs encoding deep and large networks.}
 }
 @incollection{NIPS2012_4824,
 title = {ImageNet Classification with Deep Convolutional Neural Networks},
-author = {Alex Krizhevsky and Sutskever, Ilya and Geoffrey E. Hinton},
+author = {Alex Krizhevsky. and Sutskever, Ilya. and Geoffrey E. Hinton},
 booktitle = {Advances in Neural Information Processing Systems 25},
 editor = {F. Pereira and C.J.C. Burges and L. Bottou and K.Q. Weinberger},
 pages = {1097--1105},
 year = {2012},
 publisher = {Curran Associates, Inc.},
-url = {http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf}
+address = {Red Hook, New York, USA},
+doi = {10.1145/3065386},
+
 }
 @book{venkatesan2017convolutional,
   title={Convolutional Neural Networks in Visual Computing: A Concise Guide},
   author={Venkatesan, R. and Li, B.},
   isbn={9781351650328},
-  series={Data-Enabled Engineering},
-  url={https://books.google.com.hk/books?id=bAM7DwAAQBAJ},
   year={2017},
-  publisher={CRC Press}
+  publisher={CRC Press},
+  address = {Boca Raton, Florida, USA},
+
 }
 @article{VALUEVA2020232,
 title = {Application of the residue number system to reduce hardware costs of the convolutional neural network implementation},
@@ -367,9 +358,8 @@ volume = {177},
 pages = {232-243},
 year = {2020},
 issn = {0378-4754},
-doi = {https://doi.org/10.1016/j.matcom.2020.04.031},
-url = {https://www.sciencedirect.com/science/article/pii/S0378475420301580},
-author = {M.V. Valueva and N.N. Nagornov and P.A. Lyakhov and G.V. Valuev and N.I. Chervyakov},
+doi = {10.1016/j.matcom.2020.04.031},
+author = {M.V. Valueva. and N.N. Nagornov. and P.A. Lyakhov. and G.V. Valuev. and N.I. Chervyakov},
 keywords = {Image processing, Convolutional neural networks, Residue number system, Quantization noise, Field-programmable gate array (FPGA).},
 abstract = {Convolutional neural networks are a promising tool for solving the problem of pattern recognition. Most well-known convolutional neural networks implementations require a significant amount of memory to store weights in the process of learning and working. We propose a convolutional neural network architecture in which the neural network is divided into hardware and software parts to increase performance and reduce the cost of implementation resources. We also propose to use the residue number system (RNS) in the hardware part to implement the convolutional layer of the neural network. Software simulations using Matlab 2018b showed that convolutional neural network with a minimum number of layers can be quickly and successfully trained. The hardware implementation of the convolution layer shows that the use of RNS allows to reduce the hardware costs on 7.86%–37.78% compared to the two’s complement implementation. The use of the proposed heterogeneous implementation reduces the average time of image recognition by 41.17%.}
 }
@@ -377,20 +367,20 @@ abstract = {Convolutional neural networks are a promising tool for solving the p
 @book{Sutton1998,
   added-at = {2019-07-13T10:11:53.000+0200},
   author = {Sutton, Richard S. and Barto, Andrew G.},
-  biburl = {https://www.bibsonomy.org/bibtex/2f46601cf8b13d39d1378af0d79438b12/lanteunis},
   edition = {Second},
   interhash = {ac6b144aaec1819919a2fba9f705c852},
   intrahash = {f46601cf8b13d39d1378af0d79438b12},
   keywords = {},
+  isbn= {9780262257053},
   publisher = {The MIT Press},
+  address = {Cambridge, Massachusetts, USA},
   timestamp = {2019-07-13T10:11:53.000+0200},
   title = {Reinforcement Learning: An Introduction},
-  url = {http://incompleteideas.net/book/the-book-2nd.html},
   year = {2018 }
 }
 
 @INPROCEEDINGS{resnet,  
-author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},  
+author={He, Kaiming. and Zhang, Xiangyu. and Ren, Shaoqing. and Sun, Jian},  
 booktitle={2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},   
 title={Deep Residual Learning for Image Recognition},   
 year={2016},  
@@ -402,25 +392,30 @@ doi={10.1109/CVPR.2016.90}
 
 @inproceedings{he2016identity,
   title={Identity mappings in deep residual networks},
-  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  author={He, Kaiming. and Zhang, Xiangyu. and Ren, Shaoqing. and Sun, Jian},
   booktitle={European conference on computer vision},
   pages={630--645},
   year={2016},
-  organization={Springer}
+  publisher = pub-springer,
+  address = pub-springer:adr,
+  doi = {10.1007/978-3-319-46493-0_38},
+  isbn = {978-3-319-46493-0},
 }
-@ARTICLE{Bel,
-    author = "Richard Bellman",
-     title = "A Markovian Decision Process",
-   journal = "Indiana Univ. Math. J.",
-  fjournal = "Indiana University Mathematics Journal",
-    volume = 6,
-      year = 1957,
-     issue = 4,
-     pages = "679--684",
-      issn = "0022-2518",
-     coden = "IUMJAB",
-   mrclass = "",
+
+@article{Bel,
+ ISSN = {00959057, 19435274},
+ doi = {10.2307/24900506},
+ URL = {http://www.jstor.org/stable/24900506},
+ author = {RICHARD BELLMAN},
+ journal = {Journal of Mathematics and Mechanics},
+ number = {5},
+ pages = {679--684},
+ publisher = {Indiana University Mathematics Department},
+ title = {A Markovian Decision Process},
+ volume = {6},
+ year = {1957}
 }
+
 @article{rlbase,
 author = {Kaelbling, Leslie Pack and Littman, Michael L. and Moore, Andrew W.},
 title = {Reinforcement Learning: A Survey},
@@ -431,8 +426,9 @@ address = {El Segundo, CA, USA},
 volume = {4},
 number = {1},
 issn = {1076-9757},
+doi = {10.1613/jair.301},
 abstract = {This paper surveys the field of reinforcement learning from a computer-science perspective. It is written to be accessible to researchers familiar with machine learning. Both the historical basis of the field and a broad selection of current work are summarized. Reinforcement learning is the problem faced by an agent that learns behavior through trial-and-error interactions with a dynamic environment. The work described here has a resemblance to work in psychology, but differs considerably in the details and in the use of the word "reinforcement." The paper discusses central issues of reinforcement learning, including trading off exploration and exploitation, establishing the foundations of the field via Markov decision theory, learning from delayed reinforcement, constructing empirical models to accelerate learning, making use of generalization and hierarchy, and coping with hidden state. It concludes with a survey of some implemented systems and an assessment of the practical utility of current methods for reinforcement learning.},
-journal = {J. Artif. Int. Res.},
+journal = {Journal of Artificial Intelligence Research},
 month = may,
 pages = {237–285},
 numpages = {49}
@@ -448,7 +444,6 @@ address = {New York, NY, USA},
 volume = {38},
 number = {3},
 issn = {0001-0782},
-url = {https://doi.org/10.1145/203330.203343},
 doi = {10.1145/203330.203343},
 abstract = {Ever since the days of Shannon's proposal for a chess-playing algorithm [12] and Samuel's checkers-learning program [10] the domain of complex board games such as Go, chess, checkers, Othello, and backgammon has been widely regarded as an ideal testing ground for exploring a variety of concepts and approaches in artificial intelligence and machine learning. Such board games offer the challenge of tremendous complexity and sophistication required to play at expert level. At the same time, the problem inputs and performance measures are clear-cut and well defined, and the game environment is readily automated in that it is easy to simulate the board, the rules of legal play, and the rules regarding when the game is over and determining the outcome.},
 journal = {Commun. ACM},
@@ -459,7 +454,7 @@ numpages = {11}
 
 @article{TechnicalNote,
 author = {Watkins, Christopher J. C. H. and Dayan, Peter},
-title = {<i>Technical Note</i>: \cal Q -Learning},
+title = {Technical Note: \cal Q -Learning},
 year = {1992},
 issue_date = {May 1992},
 publisher = {Kluwer Academic Publishers},
@@ -467,7 +462,6 @@ address = {USA},
 volume = {8},
 number = {3–4},
 issn = {0885-6125},
-url = {https://doi.org/10.1007/BF00992698},
 doi = {10.1007/BF00992698},
 abstract = { cal Q -learning (Watkins, 1989) is a simple way for agents to learn how to act optimally in controlled Markovian domains. It amounts to an incremental method for dynamic programming which imposes limited computational demands. It works by successively improving its evaluations of the quality of particular actions at particular states.This paper presents and proves in detail a convergence theorem for cal Q -learning based on that outlined in Watkins (1989). We show that cal Q -learning converges to the optimum action-values with probability 1 so long as all actions are repeatedly sampled in all states and the action-values are represented discretely. We also sketch extensions to the cases of non-discounted, but absorbing, Markov environments, and where many cal Q values can be changed each iteration, rather than just one.},
 journal = {Mach. Learn.},
@@ -489,7 +483,6 @@ pages="207--251",
 abstract="Many traditional reinforcement-learning algorithms have been designed for problems with small finite state and action spaces. Learning in such discrete problems can been difficult, due to noise and delayed reinforcements. However, many real-world problems have continuous state or action spaces, which can make learning a good decision policy even more involved. In this chapter we discuss how to automatically find good decision policies in continuous domains. Because analytically computing a good policy from a continuous model can be infeasible, in this chapter we mainly focus on methods that explicitly update a representation of a value function, a policy or both. We discuss considerations in choosing an appropriate representation for these functions and discuss gradient-based and gradient-free ways to update the parameters. We show how to apply these methods to reinforcement-learning problems and discuss many specific algorithms. Amongst others, we cover gradient-based temporal-difference learning, evolutionary strategies, policy-gradient algorithms and (natural) actor-critic methods. We discuss the advantages of different approaches and compare the performance of a state-of-the-art actor-critic method and a state-of-the-art evolutionary strategy empirically.",
 isbn="978-3-642-27645-3",
 doi="10.1007/978-3-642-27645-3_7",
-url="https://doi.org/10.1007/978-3-642-27645-3_7"
 }
 
 @book{dixit1990optimization,
@@ -497,18 +490,17 @@ url="https://doi.org/10.1007/978-3-642-27645-3_7"
   author={Dixit, A.K. and Dixit, J.J.F.S.P.A.K.},
   isbn={9780198772101},
   lccn={87007211},
-  url={https://books.google.com.sg/books?id=dHrsHz0VocUC},
   year={1990},
-  publisher={Oxford University Press}
+  publisher={Oxford University Press},
+  address = {Oxford, England, UK},
 }
 @book{kamien2013dynamic,
   title={Dynamic Optimization, Second Edition: The Calculus of Variations and Optimal Control in Economics and Management},
   author={Kamien, M.I. and Schwartz, N.L.},
   isbn={9780486310282},
-  series={Dover Books on Mathematics},
-  url={https://books.google.com.sg/books?id=liLCAgAAQBAJ},
   year={2013},
-  publisher={Dover Publications}
+  publisher={Dover Publications},
+  address={Mineola, New York, USA}
 }
 
 @inproceedings{RLC,
@@ -529,10 +521,9 @@ series = {ICML'03}
   author={Binmore, K.},
   isbn={9780199218462},
   lccn={2007046448},
-  series={Very Short Introductions},
-  url={https://books.google.com.sg/books?id=hRB34xDNc2AC},
   year={2007},
-  publisher={OUP Oxford}
+  publisher={OUP Oxford},
+  address = {Oxford, England, UK},
 }
 @article{VANDENHERIK2002277,
 title = {Games solved: Now and in the future},
@@ -542,11 +533,8 @@ number = {1},
 pages = {277-311},
 year = {2002},
 issn = {0004-3702},
-doi = {https://doi.org/10.1016/S0004-3702(01)00152-7},
-url = {https://www.sciencedirect.com/science/article/pii/S0004370201001527},
-author = {H.Jaap {van den Herik} and Jos W.H.M. Uiterwijk and Jack {van Rijswijck}},
-keywords = {Solving games, Search methods, Game characteristics, Brute-force methods, Knowledge-based methods, Initiative},
-abstract = {In this article we present an overview on the state of the art in games solved in the domain of two-person zero-sum games with perfect information. The results are summarized and some predictions for the near future are given. The aim of the article is to determine which game characteristics are predominant when the solution of a game is the main target. First, it is concluded that decision complexity is more important than state-space complexity as a determining factor. Second, we conclude that there is a trade-off between knowledge-based methods and brute-force methods. It is shown that knowledge-based methods are more appropriate for solving games with a low decision complexity, while brute-force methods are more appropriate for solving games with a low state-space complexity. Third, we found that there is a clear correlation between the first-player's initiative and the necessary effort to solve a game. In particular, threat-space-based search methods are sometimes able to exploit the initiative to prove a win. Finally, the most important results of the research involved, the development of new intelligent search methods, are described.}
+doi = {10.1016/S0004-3702(01)00152-7},
+author = {H.Jaap {van den Herik}. and Jos W.H.M. Uiterwijk. and Jack {van Rijswijck}},
 }
 
 @book{introAlgo,
@@ -555,6 +543,7 @@ title = {Introduction to Algorithms, Third Edition},
 year = {2009},
 isbn = {0262033844},
 publisher = {The MIT Press},
+address = {Cambridge, Massachusetts, USA},
 edition = {3rd},
 abstract = {If you had to buy just one text on algorithms, Introduction to Algorithms is a magnificent choice. The book begins by considering the mathematical foundations of the analysis of algorithms and maintains this mathematical rigor throughout the work. The tools developed in these opening sections are then applied to sorting, data structures, graphs, and a variety of selected algorithms including computational geometry, string algorithms, parallel models of computation, fast Fourier transforms (FFTs), and more. This book's strength lies in its encyclopedic range, clear exposition, and powerful analysis. Pseudo-code explanation of the algorithms coupled with proof of their accuracy makes this book is a great resource on the basic tools used to analyze the performance of algorithms.}
 }
@@ -564,7 +553,7 @@ title = {The Art of Computer Programming, Volume 3: (2nd Ed.) Sorting and Search
 year = {1998},
 isbn = {0201896850},
 publisher = {Addison Wesley Longman Publishing Co., Inc.},
-address = {USA}
+address = {USA},
 }
 @article{10.1007/BF00992697,
 author = {Tesauro, Gerald},
@@ -576,20 +565,20 @@ address = {USA},
 volume = {8},
 number = {3–4},
 issn = {0885-6125},
-url = {https://doi.org/10.1007/BF00992697},
 doi = {10.1007/BF00992697},
 abstract = {This paper examines whether temporal difference methods for training connectionist networks, such as Sutton's TD(λ) algorithm, can be successfully applied to complex real-world problems. A number of important practical issues are identified and discussed from a general theoretical perspective. These practical issues are then examined in the context of a case study in which TD(λ) is applied to learning the game of backgammon from the outcome of self-play. This is apparently the first application of this algorithm to a complex non-trivial task. It is found that, with zero knowledge built in, the network is able to learn from scratch to play the entire game at a fairly strong intermediate level of performance, which is clearly better than conventional commercial programs, and which in fact surpasses comparable networks trained on a massive human expert data set. This indicates that TD learning may work better in practice than one would expect based on current theory, and it suggests that further analysis of TD methods, as well as applications in other complex domains, may be worth investigating.},
-journal = {Mach. Learn.},
-month = may,
+journal = {Machine Learning},
+month = {may},
 pages = {257–277},
 numpages = {21},
 keywords = {games, backgammon, connectionist methods, neural networks, Temporal difference learning, feature discovery}
 }
 @online{moerland2021modelbased,
       title={Model-based Reinforcement Learning: A Survey}, 
-      author={Thomas M. Moerland and Joost Broekens and Catholijn M. Jonker},
+      author={Thomas M. Moerland. and Joost Broekens. and Catholijn M. Jonker},
       year={2021},
       eprint={2006.16712},
+      doi = {10.1631/FITEE.1900533},
       archivePrefix={arXiv},
       primaryClass={cs.LG}
 }
@@ -599,12 +588,11 @@ keywords = {games, backgammon, connectionist methods, neural networks, Temporal 
   title={A comparison of direct and model-based reinforcement learning}, 
   year={1997},
   volume={4},
-  number={},
   pages={3557-3564 vol.4},
   doi={10.1109/ROBOT.1997.606886}
 }
 @article{10.1162/089976602753712972,
-    author = {Doya, Kenji and Samejima, Kazuyuki and Katagiri, Ken-ichi and Kawato, Mitsuo},
+    author = {Doya, Kenji. and Samejima, Kazuyuki. and Katagiri, Ken-ichi. and Kawato, Mitsuo},
     title = "{Multiple Model-Based Reinforcement Learning}",
     journal = {Neural Computation},
     volume = {14},
@@ -615,42 +603,50 @@ keywords = {games, backgammon, connectionist methods, neural networks, Temporal 
     abstract = "{We propose a modular reinforcement learning architecture for nonlinear, nonstationary control tasks, which we call multiple model-based reinforcement learning (MMRL). The basic idea is to decompose a complex task into multiple domains in space and time based on the predictability of the environmental dynamics. The system is composed of multiple modules, each of which consists of a state prediction model and a reinforcement learning controller. The “responsibility signal,” which is given by the softmax function of the prediction errors, is used to weight the outputs of multiple modules, as well as to gate the learning of the prediction models and the reinforcement learning controllers. We formulate MMRL for both discrete-time, finite-state case and continuous-time, continuous-state case. The performance of MMRL was demonstrated for discrete case in a nonstationary hunting task in a grid world and for continuous case in a nonlinear, nonstationary control task of swinging up a pendulum with variable physical parameters.}",
     issn = {0899-7667},
     doi = {10.1162/089976602753712972},
-    url = {https://doi.org/10.1162/089976602753712972},
-    eprint = {https://direct.mit.edu/neco/article-pdf/14/6/1347/815237/089976602753712972.pdf},
 }
 @book{hastie2009elements,
   title={The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition},
   author={Hastie, T. and Tibshirani, R. and Friedman, J.},
   isbn={9780387848587},
   lccn={2008941148},
-  series={Springer Series in Statistics},
-  url={https://books.google.com.sg/books?id=tVIjmNS3Ob8C},
   year={2009},
-  publisher={Springer New York}
+  publisher={Springer New York},
+  address={New York, USA}
 }
 @article{lecun2015deep,
   title={Deep learning},
-  author={LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey},
+  author={LeCun, Yann. and Bengio, Yoshua. and Hinton, Geoffrey},
   journal={nature},
   volume={521},
   number={7553},
-  pages={436--444},
+  pages={436-444},
   year={2015},
-  publisher={Nature Publishing Group}
+  doi = {10.1038/nature14539},
+
 }
-@article{silver2009reinforcement,
-  title={Reinforcement learning and simulation-based search in computer Go},
-  author={Silver, David},
-  year={2009}
+
+@phdthesis{silver2009reinforcement,
+author = {Silver, David},
+title = {Reinforcement Learning and Simulation-Based Search in Computer Go},
+year = {2009},
+isbn = {9780494540831},
+doi = {10.7939/R39D8T},
+publisher = {University of Alberta},
+address = {CAN},
 }
 @inproceedings{silver2014deterministic,
   title={Deterministic policy gradient algorithms},
-  author={Silver, David and Lever, Guy and Heess, Nicolas and Degris, Thomas and Wierstra, Daan and Riedmiller, Martin},
-  booktitle={International conference on machine learning},
-  pages={387--395},
-  year={2014},
-  organization={PMLR}
+  author={Silver, David. and Lever, Guy.
+   and Heess, Nicolas. and Degris, Thomas. and Wierstra, Daan. and Riedmiller, Martin},
+  booktitle = {Proceedings of the 31st International Conference on International Conference on Machine Learning - Volume 32},
+pages = {387–395},
+year = {2014},
+location = {Beijing, China},
+series = {ICML'14},
+publisher = {JMLR.org},
+doi = {10.5555/3044805.3044850},
 }
+
 @inproceedings{batchnorm,
 author = {Ioffe, Sergey and Szegedy, Christian},
 title = {Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift},
@@ -661,23 +657,25 @@ booktitle = {Proceedings of the 32nd International Conference on International C
 pages = {448–456},
 numpages = {9},
 location = {Lille, France},
-series = {ICML'15}
+series = {ICML'15},
+doi = {10.5555/3045118.3045167},
 }
 @article{xu2015empirical,
   title={Empirical evaluation of rectified activations in convolutional network},
-  author={Xu, Bing and Wang, Naiyan and Chen, Tianqi and Li, Mu},
+  author={Xu, Bing. and Wang, Naiyan. and Chen, Tianqi. and Li, Mu},
   journal={arXiv preprint arXiv:1505.00853},
   year={2015}
 }
 @article{srivastava2014dropout,
   title={Dropout: a simple way to prevent neural networks from overfitting},
-  author={Srivastava, Nitish and Hinton, Geoffrey and Krizhevsky, Alex and Sutskever, Ilya and Salakhutdinov, Ruslan},
-  journal={The journal of machine learning research},
+  author={Srivastava, Nitish. and Hinton, Geoffrey. and Krizhevsky, Alex. and Sutskever, Ilya. and Salakhutdinov, Ruslan},
+  journal={The Journal of Machine Learning Research},
   volume={15},
   number={1},
-  pages={1929--1958},
+  pages={1929-1958},
   year={2014},
-  publisher={JMLR. org}
+  publisher={JMLR.org},
+  doi = {10.5555/2627435.2670313},
 }
 @article{rosin2011multi,
   title={Multi-armed bandits with episode context},
@@ -685,25 +683,37 @@ series = {ICML'15}
   journal={Annals of Mathematics and Artificial Intelligence},
   volume={61},
   number={3},
-  pages={203--230},
+  pages={203-230},
   year={2011},
-  publisher={Springer}
+  publisher={Springer},
+  address = pub-springer:adr,
+  doi = {10.1007/s10472-011-9258-6},
 }
 @inproceedings{segal2010scalability,
   title={On the scalability of parallel UCT},
   author={Segal, Richard B},
   booktitle={International Conference on Computers and Games},
-  pages={36--47},
+  pages={36-47},
   year={2010},
-  organization={Springer}
+  publisher={Springer},
+  address = pub-springer:adr,
+  doi = {10.1007/978-3-642-17928-0_4},
+
 }
 
-@article{glickman1999rating,
-  title={Rating the chess rating system},
-  author={Glickman, Mark E and Jones, Albyn C},
-  journal={CHANCE-BERLIN THEN NEW YORK-},
-  volume={12},
-  pages={21--28},
-  year={1999},
-  publisher={SPRINGER INTERNATIONAL}
+@InProceedings{glickman1999rating,
+author="Coulom, R{\'e}mi",
+editor="van den Herik, H. Jaap.
+and Xu, Xinhe.
+and Ma, Zongmin.
+and Winands, Mark H. M.",
+title="Whole-History Rating: A Bayesian Rating System for Players of Time-Varying Strength",
+booktitle="Computers and Games",
+year="2008",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="113-124",
+abstract="Whole-History Rating (WHR) is a new method to estimate the time-varying strengths of players involved in paired comparisons. Like many variations of the Elo rating system, the whole-history approach is based on the dynamic Bradley-Terry model. But, instead of using incremental approximations, WHR directly computes the exact maximum a posteriori over the whole rating history of all players. This additional accuracy comes at a higher computational cost than traditional methods, but computation is still fast enough to be easily applied in real time to large-scale game servers (a new game is added in less than 0.001 second). Experiments demonstrate that, in comparison to Elo, Glicko, TrueSkill, and decayed-history algorithms, WHR produces better predictions.",
+isbn="978-3-540-87608-3",
+doi = {10.1007/978-3-540-87608-3_11},
 }
