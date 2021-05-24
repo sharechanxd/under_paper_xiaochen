@@ -2,7 +2,7 @@
 \label{chap:algorithm}
 
 \section{棋盘规则}
-超级皇后的棋盘继承国际象棋的规格，并且可以根据喜好扩大盘面（$8\times8$，$12\times12$，$16\times16$等等）。在我们设计的API中，游戏开始时棋盘的大小可以任意自定义。受限于设备，AlphaZero框架的AI玩家只训练了$8\times8$棋盘（经典棋盘）。因此在本文中我们主要关心$8\times8$棋盘的结果。
+超级皇后的棋盘继承国际象棋的规格，并且可以根据喜好扩大盘面（$8\times8$，$12\times12$，$16\times16$等等）。在我们设计的API中，游戏开始时棋盘的大小可以任意自定义。受限于设备，AlphaZero框架的强化学习玩家只训练了$8\times8$棋盘（经典棋盘）。因此在本文中我们主要关心$8\times8$棋盘的结果。
 超级皇后对战的规则也可以在我们设置的api中指定，如引言中所述，超级皇后走法规则可选三个规则：
 
 （1）超级状态（super），拥有皇后和骑士的权限，可按此两种棋子落子规则任意移动；
@@ -11,17 +11,17 @@
 
 （3）骑士状态，可走“日”字，即先向左（或右）走1格，再向上（或下）走2格；或先向左（或右）走2格，再向上（或下）走1格。
 
-棋盘每个位置都具有四个状态值候选：$\{white:1, black:-1,empty:0,dead:99\}$，抛开初始位置（左上角与右下角），剩余位置的状态转换如下所示：
+棋盘每个位置都具有四个状态值候选：$\{\text{white}:1, \text{black}:-1, \text{empty}:0, \text{dead}:99\}$，抛开初始位置（左上角与右下角），剩余位置的状态转换如下所示：
 \begin{equation}
     \begin{aligned}
-    empty &\stackrel{\mathrm{move}}{\longrightarrow} black \stackrel{\mathrm{leave}}{\longrightarrow} dead \\
-    empty &\stackrel{\mathrm{move}}{\longrightarrow} white \stackrel{\mathrm{leave}}{\longrightarrow} dead 
+    \text{empty} &\stackrel{\mathrm{move}}{\longrightarrow} \text{black} \stackrel{\mathrm{leave}}{\longrightarrow} \text{dead} \\
+    \text{empty} &\stackrel{\mathrm{move}}{\longrightarrow} \text{white} \stackrel{\mathrm{leave}}{\longrightarrow} \text{dead} 
     \end{aligned}
 \end{equation}
 
 依据信息暴露程度，超级皇后对战属于完美信息游戏（Perfect-Information Game）~\cite{binmore2007game}。对于完美信息游戏，可以用状态空间复杂度（State-Space Complexity）和博弈树复杂度（Game-Tree Complexity）对其难度进行衡量~\cite{allis1994searching,VANDENHERIK2002277}。
 状态空间复杂度是指从初始状态开始，可以实现的所有符合规则的状态的集合总数，在实际情况中一般使用该数量的上界表示，例如在围棋中允许出现全白或全黑的极端情况。
-博弈树复杂度表示所有不同游戏路径数目，常用合理估计的下界表示：$valids^{turn}$。 $valids$表示每回合平均合法移动数目，$turn$表示平均游戏长度~\cite{10.1007/BF00992697}。
+博弈树复杂度表示所有不同游戏路径数目，常用合理估计的下界表示：$\text{valids}^{\text{turn}}$。 $\text{valids}$表示每回合平均合法移动数目，$\text{turn}$表示平均游戏长度~\cite{10.1007/BF00992697}。
 类似于国际象棋与围棋，我们可以给出超级皇后对战的状态空间与博弈树复杂度（仅考虑$8\times8$棋盘），如表~\ref{table:complexity}。
 % \begin{figure}[htb]
 %     \centering
@@ -72,8 +72,8 @@
       }
     \label{fig:super}
 \end{figure}
-骑士状态下，不论是~alpha-beta~剪枝还是蒙特卡洛树搜索进行模拟速度都相对较快，因此在自我对弈阶段的落子速度也很快，但由于博弈树复杂度较低，启发式搜索算法的效果可能会好于基于蒙特卡洛树搜索的~AlphaZero~框架，因为其可以在较短时间内较小深度下搜索大部分个博弈树，其局部最优解更靠近全局最优解。
-而超级状态下每回合平均合法移动数目相对较多，搜索代价较大，在同等时间限制下更加适合深度强化学习~AlphaZero~训练出的模型。
+骑士状态下，不论是~alpha-beta~剪枝还是蒙特卡洛树搜索进行模拟的速度都相对较快，因此在自我对弈阶段的落子速度也很快，但由于博弈树复杂度较低，启发式搜索算法的效果可能会好于基于蒙特卡洛树搜索的~AlphaZero~框架，因为其可以在较短时间内较小深度下搜索大部分个博弈树，其局部最优解更靠近全局最优解。但是同时，其棋面也更为简单，卷积神经网络较容易收敛，对胜负的判断可能更加准确，因此暂时难以判断孰强孰弱。
+而超级状态下每回合平均合法移动数目相对较多，搜索代价较大，理论上在同等时间限制下更加适合深度强化学习~AlphaZero~训练出的模型。
 
 \section{基准玩家设计}
 我们总共实现了4个AI玩家：随机玩家（Random Player），贪婪玩家（Greedy Player），alpha-beta剪枝玩家, AlphaZero型玩家。前三个玩家将作为基准玩家（baseline player）。
@@ -133,7 +133,7 @@
 \subsection{数据生成过程}
 在自我对弈过程中，使用前一轮训练出的网络指导蒙特卡洛树进行对弈。对于每一局的每个回合$t$下的棋面局势$board_{t}$，蒙特卡洛树搜索模拟过程产生下一步走棋策略（概率分布）$\pi_{t}$并生成数据对$(board_{t},\pi_{t})$。
 在每局结束时，对弈双方得到奖励为$v$（胜者为1，负者为~-1），将此奖励值作为分类标签贴到在这一次对弈生成的数据对中产生$(board_{t},\pi_{t},v_{t})$，其中$v_{t}=\pm v$，正负符号当前棋局下棋方决定。
-在训练时，$board_{t}$为输入网络的样本，棋局特征将从其二维结构中提取。$(\pi_{t},v_{t})$为$board_{t}$的标签，网络输出对应为$(p,v)$，拟合标签。
+在训练时，$board_{t}$为输入网络的样本，棋局特征将从其二维结构中提取。$(\pi_{t},v_{t})$为$board_{t}$的标签，网络输出对应为$(p,v)$，以此来拟合标签。
 \subsection{策略网络与值网络}
 在原版的~AlphaGo~模型~\cite{Silver2016}中，使用了两个网络，分别是策略网络（policy network）与值网络（value network），对应策略迭代算法中的策略函数与值函数。策略网络输出下一步动作的概率分布，即给出选择哪种动作的可能性更大；值网络评估当前棋面局势好坏，预测可能的获胜者。
 但是~AlphaGo~的策略网络在一开始使用监督学习训练专家棋谱，再使用强化学习算法如策略梯度方法（policy gradient~\cite{silver2014deterministic}），而其值网络从策略网络的自我对弈过程中学习并预测胜者。如前面所述，我们没有专家棋谱进行监督学习，因此参考~AlphaGo Zero~与~AlphaZero~使用单一网络输出概率分布与预测值是不错的选择。
@@ -158,7 +158,7 @@
     \label{fig:cnn}
 \end{figure}
 \paragraph{深度残差网络}
-深度残差网络是具有重要地位的经典计算机模型~\cite{resnet}。对于我们超级皇后的棋局而言，经典卷积神经网络不够深，即便其能较好地适应$8\times8$的棋盘特征，但是在训练大量对局数据中仍有可能出现性能瓶颈。
+深度残差网络是具有重要地位的经典计算机模型~\cite{resnet}。对于超级皇后规则下的棋局而言，经典卷积神经网络不够深，即便其能较好地适应$8\times8$的棋盘特征，但是在训练大量对局数据中仍有可能出现性能瓶颈。
 因此我们需要考虑加深网络层数，例如说在经典卷积神经网络中继续增加卷积层。但是更深的网络性能通过实验证明会出现退化问题：深度增加时，损失（loss）减少但准确度下降~\cite{resnet,he2016identity}。
 考虑到代价与实际需求，深度残差网络是一个较为合适的选择~\cite{resnet}。其核心结构为设计了短路连接（shortcut connection）使若干卷积层的集合能学习到残差带来的新特征，如图~\ref{fig:resunit}所示：
 \begin{figure}[H]
@@ -179,9 +179,9 @@
       }
     \label{fig:res}
 \end{figure}
-深度残差网络可以更好地学习到棋盘特征，并且棋盘越大（如$12\times12$，$16\times16$），其学习效果越好。但是超级皇后对战的局势并没有特别复杂，因此使用深度残差网络也有可能导致模型过拟合或欠拟合。
+深度残差网络可以更好地学习到棋盘特征，并且棋盘越大（如$12\times12$，$16\times16$），其学习效果越好。但是超级皇后对战的局势并没有如围棋一样特别复杂，因此使用深度残差网络也有可能导致模型过拟合或欠拟合。
 
-针对以上神经网络，损失函数我们仿照~\cite{Silver2017}中的结构，该结构结合了均方误差（mean-square error, MSE）与类别交叉熵，能够较好地最小化$v$与标签$v_{t}$的误差，最大化$p$与$\pi_{t}$的相似度。为了防止过拟合，我们在网络中添加dropout层与l2正则化。
+针对以上神经网络，损失函数我们仿照~\cite{Silver2017}中的结构，该结构结合了均方误差（mean-square error, MSE）与类别交叉熵（categorical cross entropy, CCE），能够较好地最小化$v$与标签$v_{t}$的误差，最大化$p$与$\pi_{t}$的相似度。为了防止过拟合，我们在网络中添加dropout层与l2正则化。
 \begin{equation}
     \text{loss} = (v_{t}-v)^{2} - \pi^{T}\log(p)
 \end{equation}
@@ -194,11 +194,12 @@
 
 在进行搜索模拟时，从代表当前棋盘局面的搜索树根节点$s$开始，每个节点$o$会被赋予访问次数$N(o,s,a)$，奖励值$Q(o,s,a)$与先验概率$P(o,s,a)$，$a$代表走棋动作，过程如下：
 
-(1) 选择（Selection）：从根节点$s$开始，通过选择使置信上界最大的动作$a_{o} = argmax(UCT(o,s,a)) = argmax(Q(o,s,a) + U(o,s,a))$进行搜索直到叶子节点，其中
+(1) 选择（Selection）：从根节点$s$开始，通过选择使置信上界最大的动作$a_{o} =  \mathop{\argmax}(UCT(o,s,a)) =  \mathop{\argmax}(Q(o,s,a) + U(o,s,a))$进行搜索直到叶子节点，其中
 \begin{equation}
     U(o,s,a) = cP(o,s,a)\frac{\sqrt{N(\prime,s,a)}}{1+N(o,s,a)}
 \end{equation}
 常数$c$平衡高胜率与低访问次数的关系，决定探索力度~\cite{rosin2011multi}。
+
 (2) 扩展（Expansion）：叶子节点访问次数达到一个阈值时，创建新的子节点$s^{\prime}$进行选择。使用神经网络产生的先验概率$P(s^{\prime},\prime)$和评估值$v(s^{\prime})$进行选择。
 
 (3) 反向传播（Backpropagation）：更新叶子节点路径上所有边与节点的访问次数与奖励值如下，并回到步骤1~\cite{segal2010scalability}。

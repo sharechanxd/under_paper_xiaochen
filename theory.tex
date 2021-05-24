@@ -126,10 +126,10 @@ $c$为一个常数，用来平衡高胜率（加号前面）与低访问次数�
 那为何要在棋类游戏中引入卷积神经网络呢？在上一节中，我们提到过模拟的步骤可以直接使用神经网络进行评估，也就是说需要模拟才能获得的节点选择概率可以基于棋面数据直接生成。神经网络非常适合基于大量数据产生概率分布，并且由于棋盘状态往往是二维结构，类似于图像，因此卷积神经网络便自然而然地被引入了~\cite{Silver1140,Silver2017,Silver2016}。
 
 \section{强化学习}
-目前AI领域的成就主要为监督学习（supervised learning）的结果~\cite{hastie2009elements,NIPS2012_4824,lecun2015deep,resnet}。
-监督学习需要人类专家数据，但是专家数据往往昂贵或不可靠甚至不可得到。即便数据是可靠的，训练出的模型系统通常也会有性能瓶颈。而强化学习很有可能成为突破瓶颈的方案，强化学习系统可以进行自我迭代，原则上可以抛弃人类思维，超越人类的能力并且发掘出人类的认知盲点。例如在计算机游戏Atari，围棋等领域，强化学习已经超越了人类水平~\cite{Silver2016}。
+目前AI领域的成就主要为监督学习（supervised learning）的结果~\cite{NIPS2012_4824,resnet,hastie2009elements,lecun2015deep}。
+监督学习需要人类专家数据，但是专家数据往往昂贵或不可靠甚至不可得到。即便数据是可靠的，训练出的模型系统通常也会有性能瓶颈。而强化学习（Reinforcement Learning）很有可能成为突破瓶颈的方案：强化学习系统可以进行自我迭代，原则上可以抛弃人类思维，超越人类的能力并且发掘出人类的认知盲点。例如在计算机游戏~Atari，围棋等领域，强化学习已经超越了人类水平~\cite{Silver2016}。强化学习也是一个历史悠久的超大话题，此处仅介绍部分重要概念。
 \subsection{马尔可夫决策过程与策略探索}
-强化学习（Reinforcement Learning）也是一个历史悠久的超大话题，此处仅介绍部分重要概念。强化学习是除了监督学习和非监督学习之外的第三种基本机器学习方法，其强调如何基于环境而行动，以取得最大化的预期利益~\cite{Sutton1998}。强化学习最典型的决策框架为马尔可夫决策过程（Markov Decision Processes，MDP）~\cite{Bel}。
+强化学习是除了监督学习和非监督学习之外的第三种基本机器学习方法，其强调学习如何基于环境而行动，以取得最大化的预期利益~\cite{Sutton1998}。强化学习最典型的决策框架为马尔可夫决策过程（Markov Decision Processes，MDP）~\cite{Bel}。
 通常情况下MDP由四元组$(S,A,R,T)$定义：$S$为环境状态空间集合，$A$为智能体（agent）可选动作集合，$R(s,a)$函数返回在状态$s$中采取动作$a$所获得的报酬，$T(s^{\prime}|s,a)$为转移概率函数，指明了如果智能体在状态$s$中采取动作$a$，环境将转换为状态$s^{\prime}$的概率。
 MDP问题的目标是找到使预期的未来奖励最大化的策略$\pi$。如果我们知道MDP的所有四元组元素是什么，我们就可以在实际执行操作之前直接计算出解决方案（奖励最大化策略）。MDP的一些经典规划算法包括值迭代，策略迭代等等~\cite{Sutton1998}。但是强化学习与规划问题不同，智能体并不能知道MDP问题中的所有信息，无法直接算出解决方案。
 具体而言，智能体不知道环境空间将如何响应其行动而发生变化（转移概率函数$T$未知），也不知道其行动会获得什么即时的报酬（奖励函数R）。相比于提前规划计算，智能体需要尝试在环境空间中采取行动，观察结果，并以某种方式从中找到一个好的策略。一般而言，有两种类型的算法可以帮助我们找到一个好策略~\cite{rlbase}。
@@ -147,7 +147,7 @@ $R(s,a)$为在状态$s$采取动作$a$的奖励，$\alpha$为学习率，$\gamma
 Q-learning没有从环境空间中学习模型，因此称为无模型（model-free）算法。
 
 \subsection{策略迭代}
-从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}（Policy Iteration），属于动态规划算法~\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大~\cite{Silver1140,Silver2017,Silver2016}。
+从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），继续评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}（Policy Iteration），属于动态规划算法~\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大~\cite{Silver1140,Silver2017,Silver2016}。
 \paragraph{策略评估（Policy Evaluation）}
 首先，我们考虑如何为任意策略$\pi$计算状态值函数$v_{\pi}$。设$G_{t}$为在$t$步的期望回报（expected return），$R_{t}$为在$t$步的奖励，$\gamma$同上为衰减率。则
 \begin{equation*}
@@ -244,10 +244,10 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \State $\text{current action}\leftarrow\pi(s)$
     \State $\pi(s) \leftarrow \arg \max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V\left(s^{\prime}\right)\right]$
     \If{$\text{current action} \neq \pi(s)$}
-        \State $\text{StablePolicy} \leftarrow False$
+        \State $\text{StablePolicy} \leftarrow \texttt{False}$
     \EndIf
     \EndFor
-    \If{$\text{StablePolicy} = True$}
+    \If{$\text{StablePolicy} = \texttt{True}$}
     \State 停止并返回$\pi \approx \pi_{*} $与$V\approx v_{\pi} $
     \Else 
     \State 返回步骤2
