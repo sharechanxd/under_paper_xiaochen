@@ -149,8 +149,8 @@ $R(s,a)$为在状态$s$采取动作$a$的奖励，$\alpha$为学习率，$\gamma
 Q-learning没有从环境空间中学习模型，因此称为无模型（model-free）算法。
 
 \subsection{策略迭代}
-从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），继续评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}（Policy Iteration），属于动态规划算法~\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大~\cite{Silver1140,Silver2017,Silver2016}。
-\paragraph{策略评估（Policy Evaluation）}
+从一个初始化的策略出发，先进行策略评估（policy evaluation），然后改进策略（policy improvement），继续评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}（policy iteration），属于动态规划算法~\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大~\cite{Silver1140,Silver2017,Silver2016}。
+\paragraph{策略评估（policy evaluation）}
 首先，我们考虑如何为任意策略$\pi$计算状态值函数$v_{\pi}$。设$G_{t}$为在$t$步的期望回报（expected return），$R_{t}$为在$t$步的奖励，$\gamma$同上为衰减率。则我们可以将期望回报表示为式~\eqref{eq:Gt}：
   \begin{align}
   G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \nonumber\\
@@ -188,7 +188,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   \end{algorithmic}
   \label{ag:1}
 \end{algorithm}
-\paragraph{策略提升（Policy Improvement）}
+\paragraph{策略提升（policy improvement）}
 计算策略值函数的目的是为了寻找更好的策略。假设我们已经确定了任意决定性策略$\pi$的值函数$v_{\pi}$，但是在某些状态下采取新策略获得的收益可能更大，因此我们需要对切换到新策略是好是坏进行判断。
 我们可以考虑在状态$s$下选择动作$a$并遵守当前策略。这样做的值可以表示为：
   \begin{align*}
@@ -221,7 +221,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   \label{eq:ddddd}
 \end{equation}
 
-\paragraph{策略迭代（Policy Iteration）}
+\paragraph{策略迭代（policy iteration）}
 当策略$\pi$通过上述步骤得到提升并产生了新策略$\pi^{\prime}$，我们可以计算$v_{\pi^{\prime}}$并再次利用新的值函数得到更好的策略$\pi^{\prime\prime}$如式~\eqref{eq:dddddd}：
 \begin{equation}
   \pi_{0} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{0}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{1} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{1}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{2} \stackrel{\mathrm{Evaluation}}{\longrightarrow} \cdots \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{*} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{*},
