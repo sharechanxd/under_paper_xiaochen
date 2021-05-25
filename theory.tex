@@ -4,7 +4,7 @@
 \section{博弈树}
 具有竞争或对抗性质的行为称为博弈行为。在这类行为中，参加斗争或竞争的各方各自具有不同的目标或利益。为了达到各自的目标和利益，各方必须考虑对手的各种可能的行动方案，并力图选取对自己最为有利或最为合理的方案。
 比如日常生活中的下棋，打牌等。博弈论就是研究博弈行为中斗争各方是否存在着最合理的行为方案，以及如何找到这个合理的行为方案的数学理论和方法~\cite{gt}。
-而博弈树是博弈理论中表达一个博弈中各种后续可能性的树。完整博弈树（Complete Game Tree）从代表某个博弈情景的起始节点出发，向下延展出若干层的子节点直到博弈结束。
+而博弈树是博弈理论中表达一个博弈中各种后续可能性的树。完整博弈树（complete game tree）从代表某个博弈情景的起始节点出发，向下延展出若干层的子节点直到博弈结束。
 下一层的子节点是基于其父节点博弈行为所导致的可能性。博弈树中形成的叶节点代表各种游戏结束的可能情形，例如井字游戏（Tic-Tac-Toe）会有~26830~个叶节点~\cite{NAU1982257,allis1994searching}。
 
 
@@ -28,11 +28,12 @@
 如图~\ref{fig:minimax}~所示，假设圆形代表当前选手，方形代表对手。当前选手需要将自己所得分数最大化，而对手则需要反其道行之。
 考虑第三层（Min层）对手在最左侧节点的决策，当前选手在第四层有得分为10或正无穷的行动选择，作为对手要做的是最小化这个分数，于是对手根据结果可以反推出应选择得分为10的行动。其余同理。
 \subsection{alpha-beta 剪枝}
-在上一个小节中我们介绍了经典的极小化极大算法，对于一个具有复杂状态空间的游戏（象棋或围棋）来说，Minimax算法需要非常多层才能够完成。
+在上一个小节中我们介绍了经典的极小化极大算法，对于一个具有复杂状态空间的游戏（象棋或围棋）来说，Minimax~算法需要非常多层才能够完成。
 如果这个游戏每一步都有$n$个选择，那么在$x$步以后，将会有$n^x$个选择，也就是说~Minimax~算法在此时具有指数级复杂度。在这种情况下，使用经典的极小化极大算法进行树搜索是不现实的。
 因此我们就需要采取剪枝来减少运算量，剪掉上述树状图的一些分支，从而减少运算量。
 
-alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为可行解的最小上界（Min层通向根节点的路径上最好的选择），$\alpha$值为可行策略（解）的最大下界（Max层通向root的路径上最好的选择）。其在生成博弈树的同时计算评估各节点的$\alpha$值与$\beta$值, 并且根据评估出的值范围, 及时停止扩展那些已无必要再扩展的子节点，以提高运算速度。该算法和极小化极大算法所得结论相同，但剪去了不影响最终决定的分枝~\cite{russell2010artificial}。
+最经典的剪枝算法为~alpha-beta~剪枝，其经常用于裁剪搜索树中不需要搜索的节点。其中$\beta$值为可行解的最小上界（Min层通向根节点的路径上最好的选择），$\alpha$值为可行策略（解）的最大下界（Max层通向root的路径上最好的选择）。
+其在生成博弈树的同时计算评估各节点的$\alpha$值与$\beta$值, 并且根据评估出的值范围, 及时停止扩展那些已无必要再扩展的子节点，以提高运算速度。该算法和极小化极大算法所得结论相同，但剪去了不影响最终决定的分枝~\cite{russell2010artificial}。
 剪枝过程遵循$\alpha \le N \le \beta$，N为当前节点评估值。即：（1）当一个 Min 节点的 $\beta$值小于等于任何一个父节点的$\alpha$值时 ，剪掉该节点的所有子节点;（2）当一个 Max 节点的 $\alpha$值大于等于任何一个父节点的$\beta$值时 ，剪掉该节点的所有子节点。
 我们用以下Minimax树（图~\ref{fig:abp}）作为例子，方块为Max节点，圆形为Min节点~\cite{russell2010artificial}。
 \begin{figure}[htb]
@@ -63,21 +64,22 @@ alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为
     \centering
     \includegraphics[width=1\textwidth]{abp2.pdf}
     \caption[abp2]{%
-    alpha-beta剪枝~\cite{russell2010artificial}%
+    alpha-beta剪枝过程演示，按顺序步骤从（1）到（6）~\cite{russell2010artificial}%
       }
     \label{fig:abp2}
   \end{figure}
 \newpage
-alpha-beta剪枝是在极小化极大算法上的改进，通过减少搜索树的分支，从而提升搜索深度。
-若节点搜索顺序达到最优化或近似最优化（将最佳选择排在各节点首位），则同样时间内搜索深度可达极小化极大算法的两倍多~\cite{KNUTH1975293abp}。但是对于较复杂的棋类游戏，若对每一步棋有落子时间限制，alpha-beta剪枝的搜索深度依然受到较大限制，在实际应用中往往采取3-4层，也有可能导致只能获得局部最优解。
+在极小化极大算法上，alpha-beta~剪枝做出了改进，通过减少搜索树的分支，从而提升搜索深度。
+若节点搜索顺序达到最优化或近似最优化（将最佳选择排在各节点首位），则同样时间内搜索深度可达极小化极大算法的两倍多~\cite{KNUTH1975293abp}。但是对于较复杂的棋类游戏，若对每一步棋有落子时间限制，alpha-beta~剪枝的搜索深度依然受到较大限制，在实际应用中往往采取3--4层，也有可能导致只能获得局部最优解。
 除此之外，对手玩家一定会选择使我方结果最差的思路的先验假设，在真实情况下并不正确，因为无法确定对方的博弈策略是否和自己一致。如果对方做的策略不是最优，那么我方所作出策略是最优的假设也将不成立。
 
 \subsection{蒙特卡洛树搜索}
-蒙特卡洛树搜索（Monte Carlo tree search，简称MCTS）是一种启发式搜索算法，其在游戏树搜索的应用十分广泛~\cite{10.1007/978-3-540-75538-8_7}。顾名思义，其设计思路是基于概率的：蒙特卡洛树搜索会多次模拟博弈过程，并尝试根据模拟结果预测最优的移动方案。这也与人类下棋时的思维模式符合：根据“棋感”在脑海里大致筛选出了几种最可能的走法，然后再想走了这几种走法之后对手最可能的走法，然后再想自己接下来最可能的走法。
+蒙特卡洛树搜索（Monte Carlo tree search，简写为~MCTS）是一种启发式搜索算法，其在游戏树搜索的应用十分广泛~\cite{10.1007/978-3-540-75538-8_7}。顾名思义，其设计思路是基于概率的：蒙特卡洛树搜索会多次模拟博弈过程，并尝试根据模拟结果预测最优的移动方案。
+这也与人类下棋时的思维模式符合：根据“棋感”在脑海里大致筛选出了几种最可能的走法，然后再想走了这几种走法之后对手最可能的走法，然后再想自己接下来最可能的走法。
 
 蒙特卡洛树搜索的每个循环包括四个步骤~\cite{RePEc:wsi:nmncxx:v:04:y:2008:i:03:n:s1793005708001094}，如图~\ref{fig:mcts}：
 
-(1) 选择（Selection）：从根节点开始，选择连续的子节点向下至叶子节点。选择子节点的方式一般采取上限置信区间算法（UCT）~\cite{10.1007/11871842_29};
+(1) 选择（Selection）：从根节点开始，选择连续的子节点向下至叶子节点。选择子节点的方式一般采取上限置信区间算法（Upper Confidence Bound，简写为~UCT）~\cite{10.1007/11871842_29};
 
 (2) 扩展（Expansion）：创建一个或多个子节点并选取其中一个节点直到游戏结束;
 
@@ -112,13 +114,13 @@ alpha-beta剪枝是在极小化极大算法上的改进，通过减少搜索树�
 反向传播模拟结果的目的是更新反向传播路径上所有节点 $v$ 的总模拟奖励 $Q(v)$ 以及总访问次数 $N(v)$。在实践中，$Q(v)$是该节点胜利的次数，$N(v)$是该节点模拟的次数。胜利次数多的节点是较好的可利用候选节点，从这类节点继续扩展可能可以维持胜率。而模拟次数少意味着该节点访问次数少，此类节点也可能因为尚未得到很好的探索而具有扩展价值。
 利用这两个节点属性构建树的置信上限（UCT）~\cite{10.1007/11871842_29}在被访问节点中选择下一个要遍历的节点：
 \begin{equation*}
-    UCT(v_{i},v) = \frac{Q(v_{i})}{N(v_{i})} + c\sqrt{\frac{\log(N(v))}{N(v_{i})}}
+    \textbf{UCT}(v_{i},v) = \frac{Q(v_{i})}{N(v_{i})} + c\sqrt{\frac{\log(N(v))}{N(v_{i})}},
 \end{equation*}
-$c$为一个常数，用来平衡高胜率（加号前面）与低访问次数（加号后面），$v_{i}$为$v$的子节点。UCT值最大的节点就是蒙特卡洛树搜索遍历过程中选择的节点：其每次从根节点出发，每次选择己方 UCT 值最优的一个节点，向下搜索，直到找到一个未完全展开的节点，根据定义，未完全展开的节点一定有未访问的子节点，随机选择某个子节点进行扩展。扩展会为刚刚选择的节点加上一个统计信息为$(Q(v)=0,N(v)=0)$的节点，然后进入下一步模拟。
-在我们后续使用~AlphaZero~架构构建超级皇后AI时，模拟的步骤可以直接使用神经网络进行评估~\cite{Silver1140,Silver2017,Silver2016}。
+上式中$c$为一个常数，用来平衡高胜率（加号前面）与低访问次数（加号后面），$v_{i}$为$v$的子节点。UCT值最大的节点就是蒙特卡洛树搜索遍历过程中选择的节点：其每次从根节点出发，每次选择己方 UCT 值最优的一个节点，向下搜索，直到找到一个未完全展开的节点，根据定义，未完全展开的节点一定有未访问的子节点，随机选择某个子节点进行扩展。扩展会为刚刚选择的节点加上一个统计信息为$(Q(v)=0,N(v)=0)$的节点，然后进入下一步模拟。
+在我们后续使用~AlphaZero~架构构建超级皇后~AI~时，模拟的步骤可以直接使用神经网络进行评估~\cite{Silver1140,Silver2017,Silver2016}。
 
 \section{卷积神经网络模型}
-卷积神经网络（Convolutional Neural Network，CNN）是一个超级大的话题，我们不打算在此进行过多阐述，仅进行少部分与棋类游戏AI相关的概念介绍，为后面方法设计部分打下理论基础。
+卷积神经网络（Convolutional Neural Network，简写为CNN）是一个超级大的话题，我们不打算在此进行过多阐述，仅进行少部分与棋类游戏AI相关的概念介绍，为后面方法设计部分打下理论基础。
 
 卷积神经网络，是一种前馈神经网络~\cite{SCHMIDHUBER201585}，对于大型图像处理有较为出色的表现~\cite{NIPS2012_4824}。卷积神经网络由多个卷积层（convolutional layers）和全连通层（fully connected layers）组成，同时也包括关联权重（weights）和池化层（pooling layers）~\cite{venkatesan2017convolutional}。
 这一结构使得卷积神经网络能够利用输入数据的二维结构，卷积神经网络也因此在图像任务上能够给出更好的结果~\cite{VALUEVA2020232}。其经典模型诸如深度残差网络（ResNet）~\cite{resnet}等在诸多图像任务中发挥着重要作用。
@@ -127,9 +129,9 @@ $c$为一个常数，用来平衡高胜率（加号前面）与低访问次数�
 
 \section{强化学习}
 目前AI领域的成就主要为监督学习（supervised learning）的结果~\cite{NIPS2012_4824,resnet,hastie2009elements,lecun2015deep}。
-监督学习需要人类专家数据，但是专家数据往往昂贵或不可靠甚至不可得到。即便数据是可靠的，训练出的模型系统通常也会有性能瓶颈。而强化学习（Reinforcement Learning）很有可能成为突破瓶颈的方案：强化学习系统可以进行自我迭代，原则上可以抛弃人类思维，超越人类的能力并且发掘出人类的认知盲点。例如在计算机游戏~Atari，围棋等领域，强化学习已经超越了人类水平~\cite{Silver2016}。强化学习也是一个历史悠久的超大话题，此处仅介绍部分重要概念。
+监督学习需要人类专家数据，但是专家数据往往昂贵或不可靠甚至不可得到。即便数据是可靠的，训练出的模型系统通常也会有性能瓶颈。而强化学习（reinforcement learning）很有可能成为突破瓶颈的方案：强化学习系统可以进行自我迭代，原则上可以抛弃人类思维，超越人类的能力并且发掘出人类的认知盲点。例如在计算机游戏~Atari，围棋等领域，强化学习已经超越了人类水平~\cite{Silver2016}。强化学习也是一个历史悠久的超大话题，此处仅介绍部分重要概念。
 \subsection{马尔可夫决策过程与策略探索}
-强化学习是除了监督学习和非监督学习之外的第三种基本机器学习方法，其强调学习如何基于环境而行动，以取得最大化的预期利益~\cite{Sutton1998}。强化学习最典型的决策框架为马尔可夫决策过程（Markov Decision Processes，MDP）~\cite{Bel}。
+强化学习是除了监督学习和非监督学习之外的第三种基本机器学习方法，其强调学习如何基于环境而行动，以取得最大化的预期利益~\cite{Sutton1998}。强化学习最典型的决策框架为马尔可夫决策过程（Markov decision processes，简写为MDP）~\cite{Bel}。
 通常情况下MDP由四元组$(S,A,R,T)$定义：$S$为环境状态空间集合，$A$为智能体（agent）可选动作集合，$R(s,a)$函数返回在状态$s$中采取动作$a$所获得的报酬，$T(s^{\prime}|s,a)$为转移概率函数，指明了如果智能体在状态$s$中采取动作$a$，环境将转换为状态$s^{\prime}$的概率。
 MDP问题的目标是找到使预期的未来奖励最大化的策略$\pi$。如果我们知道MDP的所有四元组元素是什么，我们就可以在实际执行操作之前直接计算出解决方案（奖励最大化策略）。MDP的一些经典规划算法包括值迭代，策略迭代等等~\cite{Sutton1998}。但是强化学习与规划问题不同，智能体并不能知道MDP问题中的所有信息，无法直接算出解决方案。
 具体而言，智能体不知道环境空间将如何响应其行动而发生变化（转移概率函数$T$未知），也不知道其行动会获得什么即时的报酬（奖励函数R）。相比于提前规划计算，智能体需要尝试在环境空间中采取行动，观察结果，并以某种方式从中找到一个好的策略。一般而言，有两种类型的算法可以帮助我们找到一个好策略~\cite{rlbase}。
@@ -149,18 +151,18 @@ Q-learning没有从环境空间中学习模型，因此称为无模型（model-f
 \subsection{策略迭代}
 从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），继续评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}（Policy Iteration），属于动态规划算法~\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大~\cite{Silver1140,Silver2017,Silver2016}。
 \paragraph{策略评估（Policy Evaluation）}
-首先，我们考虑如何为任意策略$\pi$计算状态值函数$v_{\pi}$。设$G_{t}$为在$t$步的期望回报（expected return），$R_{t}$为在$t$步的奖励，$\gamma$同上为衰减率。则
+首先，我们考虑如何为任意策略$\pi$计算状态值函数$v_{\pi}$。设$G_{t}$为在$t$步的期望回报（expected return），$R_{t}$为在$t$步的奖励，$\gamma$同上为衰减率。则我们可以将期望回报表示为式~\eqref{eq:Gt}：
   \begin{align}
   G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \nonumber\\
   &=R_{t+1}+\gamma\left(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots\right) \nonumber\\
-  &=R_{t+1}+\gamma G_{t+1},\\
+  &=R_{t+1}+\gamma G_{t+1},\label{eq:Gt}\\
   v_{\pi}(s) & \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s\right] \nonumber\\
   &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} \mid S_{t}=s\right] \nonumber\\
   &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \nonumber\\
   &=\sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right],
   \label{eq:dd}
   \end{align}
-$\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。迭代求解方法最适合式~\ref{eq:dd}，考虑一系列近似值函数$v_{0},v_{1},v_{2}\dots$，任选$v_{0}$进行初始估计。接下来的每个近似估计都会使用$v_{\pi}$贝尔曼方程\cite{dixit1990optimization}进行迭代更新：
+$\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。迭代求解方法最适合式~\eqref{eq:dd}，考虑一系列近似值函数$v_{0},v_{1},v_{2}\dots$，任选$v_{0}$进行初始估计。接下来的每个近似估计都会使用$v_{\pi}$贝尔曼方程\cite{dixit1990optimization}进行迭代更新：
 \begin{equation}
   \begin{aligned}
   v_{k+1}(s) & \doteq \mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{k}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
@@ -168,7 +170,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   \end{aligned}
   \label{eq:ddd}
 \end{equation}
-在式~\ref{eq:ddd}中，序列$\{v_{k}\}$在$k$趋近于$\infty$时是收敛的~\cite{kamien2013dynamic}。此算法被称为迭代策略评估~\cite{Sutton1998}。
+在式~\ref{eq:ddd}中，序列$\{v_{k}\}$在$k$趋近于$\infty$时是收敛的~\cite{kamien2013dynamic}。此算法被称为迭代策略评估~\cite{Sutton1998}，如~\ref{ag:1}所示。
 \begin{algorithm}[!t]
   \caption{迭代策略评估，使$V\approx v_{\pi} $}
   \begin{algorithmic}[1]
@@ -176,7 +178,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \Ensure 评估结束的策略
     \State 随机初始化$V(s)$，避开终结状态;
     \Repeat
-    \State $\Delta\Leftarrow 0$;
+    \State $\Delta\leftarrow 0$;
     \Loop 对于每个状态$s$:
     \State $v \leftarrow V(s)$;
     \State $V(s) \leftarrow \sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma V\left(s^{\prime}\right)\right]$;
@@ -184,6 +186,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \EndLoop
     \Until{ $\Delta \le \theta$}
   \end{algorithmic}
+  \label{ag:1}
 \end{algorithm}
 \paragraph{策略提升（Policy Improvement）}
 计算策略值函数的目的是为了寻找更好的策略。假设我们已经确定了任意决定性策略$\pi$的值函数$v_{\pi}$，但是在某些状态下采取新策略获得的收益可能更大，因此我们需要对切换到新策略是好是坏进行判断。
@@ -195,20 +198,20 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
 如果此值大于$v_{\pi}(s)$，说明最后获得的新策略从整体上更优。因此我们设$\pi$与$\pi^{\prime}$为任意一对决定性策略，当其满足$q_{\pi}\left(s, \pi^{\prime}(s)\right) \geq v_{\pi}(s)$时，策略$\pi^{\prime}$一点至少与策略$\pi$一样好：
 %\begin{equation}
   \begin{align}
-  v_{\pi}(s) & \leq q_{\pi}\left(s, \pi^{\prime}(s)\right) \\
-  &=\mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=\pi^{\prime}(s)\right] \\
-  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
-  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma q_{\pi}\left(S_{t+1}, \pi^{\prime}\left(S_{t+1}\right)\right) \mid S_{t}=s\right] \\
-  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma \mathbb{E}\left[R_{t+2}+\gamma v_{\pi}\left(S_{t+2}\right) \mid S_{t+1}, A_{t+1}=\pi^{\prime}\left(S_{t+1}\right)\right] \mid S_{t}=s\right] \\
-  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} v_{\pi}\left(S_{t+2}\right) \mid S_{t}=s\right] \\
-  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} v_{\pi}\left(S_{t+3}\right) \mid S_{t}=s\right] \\
-  & \leq \cdots \\
-  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \mid S_{t}=s\right] \\
+  v_{\pi}(s) & \leq q_{\pi}\left(s, \pi^{\prime}(s)\right) \nonumber\\
+  &=\mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=\pi^{\prime}(s)\right] \nonumber\\
+  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \nonumber\\
+  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma q_{\pi}\left(S_{t+1}, \pi^{\prime}\left(S_{t+1}\right)\right) \mid S_{t}=s\right] \nonumber\\
+  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma \mathbb{E}\left[R_{t+2}+\gamma v_{\pi}\left(S_{t+2}\right) \mid S_{t+1}, A_{t+1}=\pi^{\prime}\left(S_{t+1}\right)\right] \mid S_{t}=s\right] \nonumber\\
+  &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} v_{\pi}\left(S_{t+2}\right) \mid S_{t}=s\right] \nonumber\\
+  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} v_{\pi}\left(S_{t+3}\right) \mid S_{t}=s\right] \nonumber\\
+  & \leq \cdots \nonumber\\
+  & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \mid S_{t}=s\right] \nonumber\\
   &=v_{\pi^{\prime}}(s) .
   \label{eq:dddd}
   \end{align}
 %\end{equation}
-式~\ref{eq:dddd}也意味着$v_{\pi^{\prime}}(s) \geq v_{\pi}(s)$，即更好的策略一定可以获得更大奖励。因此我们可以获得新的策略函数如式~\ref{eq:ddddd}：
+式~\eqref{eq:dddd}~也即意味着$v_{\pi^{\prime}}(s) \geq v_{\pi}(s)$，即更好的策略一定可以获得更大奖励。因此我们可以获得新的策略函数如式~\eqref{eq:ddddd}~：
 \begin{equation}
   \begin{aligned}
   \pi^{\prime}(s) & \doteq \argmax_a q_{\pi}(s, a) \\
@@ -224,7 +227,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   \pi_{0} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{0}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{1} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{\pi_{1}} \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{2} \stackrel{\mathrm{Evaluation}}{\longrightarrow} \cdots \stackrel{\mathrm{Improvement}}{\longrightarrow} \pi_{*} \stackrel{\mathrm{Evaluation}}{\longrightarrow} v_{*}
   \label{eq:dddddd}
 \end{equation}
-策略迭代的整体算法步骤如下。
+策略迭代的整体算法步骤如~\ref{ag:2}~所示。
 \begin{algorithm}[!t]
   \caption{策略迭代算法，使$\pi \approx \pi_{*} $}
   \begin{algorithmic}
@@ -245,6 +248,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
     \State 返回步骤2
     \EndIf
   \end{algorithmic}
+  \label{ag:2}
 \end{algorithm}
-到目前为止介绍的策略评估与策略提升采用的都是较简单的方法。基于分类的强化学习使用简单的蒙特卡洛搜索来改进策略~\cite{RLC}，每个动作（action）都会进行多次执行（rollout）。 具有最大平均值的动作为正训练样本，而其他所有动作为负训练样本，然后对策略进行训练以进行动作分类并在后续~rollout~中使用。
-对于AlphaGo系列框架而言，其自我对弈算法可以被类似地理解为一种近似策略迭代机制，其中蒙特卡洛树搜索被用于策略改进和策略评估。策略提升以神经网络作为策略开始，以当前网络的输出作为策略的推荐选择进行一次蒙特卡洛树搜索，再将搜索结果与新的自我对弈结果反馈给神经网络。反馈步骤通过训练神经网络参数以分别匹配搜索概率和自我对弈结果来实现。
+到目前为止介绍的策略评估与策略提升采用的都是较简单的方法。基于分类的强化学习使用简单的蒙特卡洛搜索来改进策略~\cite{RLC}，每个动作（action）都会进行多次模拟执行（rollout）。 具有最大平均值的动作为正训练样本，而其他所有动作为负训练样本，然后对策略进行训练以进行动作分类并在后续模拟执行中使用。
+对于~AlphaGo~系列框架而言，其自我对弈算法可以被类似地理解为一种近似策略迭代机制，其中蒙特卡洛树搜索被用于策略改进和策略评估。策略提升以神经网络作为策略开始，以当前网络的输出作为策略的推荐选择进行一次蒙特卡洛树搜索，再将搜索结果与新的自我对弈结果反馈给神经网络。反馈步骤通过训练神经网络参数以分别匹配搜索概率和自我对弈结果来实现。
