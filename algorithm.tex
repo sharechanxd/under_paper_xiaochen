@@ -19,7 +19,7 @@
     \end{aligned}
 \end{equation}
 
-依据信息暴露程度，超级皇后对战属于完美信息游戏（Perfect-Information Game）~\cite{binmore2007game}。对于完美信息游戏，可以用状态空间复杂度（State-Space Complexity）和博弈树复杂度（Game-Tree Complexity）对其难度进行衡量~\cite{allis1994searching,VANDENHERIK2002277}。
+依据信息暴露程度，超级皇后对战属于完美信息游戏（perfect-information game）~\cite{binmore2007game}。对于完美信息游戏，可以用状态空间复杂度（State-Space Complexity）和博弈树复杂度（Game-Tree Complexity）对其难度进行衡量~\cite{allis1994searching,VANDENHERIK2002277}。
 状态空间复杂度是指从初始状态开始，可以实现的所有符合规则的状态的集合总数，在实际情况中一般使用该数量的上界表示，例如在围棋中允许出现全白或全黑的极端情况。
 博弈树复杂度表示所有不同游戏路径数目，常用合理估计的下界表示：$\text{valids}^{\text{turn}}$。 $\text{valids}$表示每回合平均合法移动数目，$\text{turn}$表示平均游戏长度~\cite{10.1007/BF00992697}。
 类似于国际象棋与围棋，我们可以给出超级皇后对战的状态空间与博弈树复杂度（仅考虑$8\times8$棋盘），如表~\ref{table:complexity}。
@@ -173,7 +173,7 @@
 在训练超级皇后对战时，深度残差网络结构如图~\ref{fig:res}，输入层的reshape方式以及Flatten层后的结构与经典卷积神经网络一致，图中$/S$代表步长（stride），$F$代表滤波器（filter）数量。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{resnet.pdf}
+    \includegraphics[width=\textwidth]{resnet.pdf}
     \caption[res]{%
     深度残差网络：以ResNet50为基础~\cite{resnet}%
       }
@@ -181,16 +181,20 @@
 \end{figure}
 深度残差网络可以更好地学习到棋盘特征，并且棋盘越大（如$12\times12$，$16\times16$），其学习效果越好。但是超级皇后对战的局势并没有如围棋一样特别复杂，因此使用深度残差网络也有可能导致模型过拟合或欠拟合。
 
-针对以上神经网络，损失函数我们仿照~\cite{Silver2017}中的结构，该结构结合了均方误差（mean-square error, MSE）与类别交叉熵（categorical cross entropy, CCE），能够较好地最小化$v$与标签$v_{t}$的误差，最大化$p$与$\pi_{t}$的相似度。为了防止过拟合，我们在网络中添加dropout层与l2正则化。
+针对以上神经网络，损失函数我们仿照~\cite{Silver2017}~中的结构，该结构结合了均方
+误差（mean-square error, MSE）与类别交叉熵（categorical cross entropy, CCE），
+能够较好地最小化~$v$~与标签~$v_{t}$~的误差，最大化$p$与$\pi_{t}$的相似度。为了防止
+过拟合，我们在网络中添加~dropout~层与~$\ell^2$~正则化。
 \begin{equation}
-    \text{loss} = (v_{t}-v)^{2} - \pi^{T}\log(p)
+    \text{loss} = (v_{t}-v)^{2} - \pi\trans\log(p)
 \end{equation}
+
 \subsection{策略迭代应用}
-上述两个神经网络使用策略迭代算法在超级皇后的自我对弈中进行训练，我们用$f$表示神经网络。对于每个棋面状态，使用前一轮训练得到的函数（也就是神经网络$f$）对蒙特卡洛树搜索进行指导。
+上述两个神经网络使用策略迭代算法在超级皇后的自我对弈中进行训练，我们用~$f$~表示神经网络。对于每个棋面状态，使用前一轮训练得到的函数（也就是神经网络$f$）对蒙特卡洛树搜索进行指导。
 蒙特卡洛树搜索（MCTS）可以被看作是策略迭代算法中的策略提升（Policy Improvement）：MCTS会输出每一步动作的概率分布$\pi$，该概率分布被称为搜索概率~\cite{silver2009reinforcement}。搜索概率比神经网络输出的概率分布$p$更好，可以选出更好的走棋动作。
 而在超级皇后自我对弈过程中，使用基于神经网络输出，经过蒙特卡洛树搜索提升的策略函数$\pi$进行动作选择并最终决出胜负生成新的训练样本，可以被看作是策略迭代算法中的策略评估（Policy Evaluation）：评估当前局势并预测获胜概率。
 在蒙特卡洛树搜索结束后，使用新对弈样本更新神经网络参数，使其输出$(p,v)=f(board)$更加靠近MCTS得到的搜索概率与获胜方的策略。
-更新后的神经网络与更新前的神经网络各自指导MCTS进行若干局对弈，若更新后的神经网络胜率超过$60\%$，则其将在下一轮训练中使用新的神经网络进行自我对弈并继续指导MCTS，继续增强走棋能力。否则继续使用更新前的神经网络。
+更新后的神经网络与更新前的神经网络各自指导~MCTS~进行若干局对弈，若更新后的神经网络胜率超过$60\%$，则其将在下一轮训练中使用新的神经网络进行自我对弈并继续指导MCTS，继续增强走棋能力。否则继续使用更新前的神经网络。
 
 在进行搜索模拟时，从代表当前棋盘局面的搜索树根节点$s$开始，每个节点$o$会被赋予访问次数$N(o,s,a)$，奖励值$Q(o,s,a)$与先验概率$P(o,s,a)$，$a$代表走棋动作，过程如下：
 
@@ -210,9 +214,9 @@
     \end{aligned}
 \end{equation}
 多次进行搜索模拟后最终得到搜索概率$\pi$，可以使用该搜索概率抽样走棋动作并完成此回合落子。至此，我们使用强化学习参考AlphaZero框架对超级皇后对战进行训练的过程如图~\ref{fig:az}所示。
-\begin{figure}[H]
+\begin{figure}[!tb]
     \centering
-    \includegraphics[width=1\textwidth]{alphazero.pdf}
+    \includegraphics[width=0.8\textwidth]{alphazero.pdf}
     \caption[az]{%
     以AlphaZero为框架的强化学习玩家~\cite{Silver2017}%
       }

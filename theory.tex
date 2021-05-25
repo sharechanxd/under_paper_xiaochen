@@ -44,7 +44,7 @@ alpha-beta剪枝用于裁剪搜索树中不需要搜索的节点。$\beta$值为
     \label{fig:abp}
   \end{figure}
 
-其剪枝过程如图\ref{fig:abp2}所示。从左节点开始，
+其剪枝过程如图~\ref{fig:abp2}~所示。从左节点开始，
 
 （1）当到达深度为4层处的第一个子节点时，在该状态上进行评估并获得值为3。将此节点值传递回上面的父Min节点。由于这是一个Min节点，因此该节点的Minimax值必须小于或等于3。换句话说，我们将该Min节点$\beta$值更改为3；
 
@@ -150,22 +150,16 @@ Q-learning没有从环境空间中学习模型，因此称为无模型（model-f
 从一个初始化的策略出发，先进行策略评估（Policy Evaluation），然后改进策略（Policy Improvement），继续评估改进的策略，再进一步改进策略。经过不断迭代更新直到策略收敛，这种算法被称为\textbf{策略迭代}（Policy Iteration），属于动态规划算法~\cite{Sutton1998}。在棋类游戏AI强化学习中，此种思路经常被借鉴并发扬光大~\cite{Silver1140,Silver2017,Silver2016}。
 \paragraph{策略评估（Policy Evaluation）}
 首先，我们考虑如何为任意策略$\pi$计算状态值函数$v_{\pi}$。设$G_{t}$为在$t$步的期望回报（expected return），$R_{t}$为在$t$步的奖励，$\gamma$同上为衰减率。则
-\begin{equation*}
-  \begin{aligned}
-  G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \\
-  &=R_{t+1}+\gamma\left(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots\right) \\
-  &=R_{t+1}+\gamma G_{t+1},
-  \end{aligned}
-\end{equation*}
-\begin{equation}
-  \begin{aligned}
-  v_{\pi}(s) & \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s\right] \\
-  &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} \mid S_{t}=s\right] \\
-  &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
+  \begin{align}
+  G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \nonumber\\
+  &=R_{t+1}+\gamma\left(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots\right) \nonumber\\
+  &=R_{t+1}+\gamma G_{t+1},\\
+  v_{\pi}(s) & \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s\right] \nonumber\\
+  &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} \mid S_{t}=s\right] \nonumber\\
+  &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \nonumber\\
   &=\sum_{a} \pi(a \mid s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right],
-  \end{aligned}
   \label{eq:dd}
-\end{equation}
+  \end{align}
 $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。迭代求解方法最适合式~\ref{eq:dd}，考虑一系列近似值函数$v_{0},v_{1},v_{2}\dots$，任选$v_{0}$进行初始估计。接下来的每个近似估计都会使用$v_{\pi}$贝尔曼方程\cite{dixit1990optimization}进行迭代更新：
 \begin{equation}
   \begin{aligned}
@@ -175,7 +169,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   \label{eq:ddd}
 \end{equation}
 在式~\ref{eq:ddd}中，序列$\{v_{k}\}$在$k$趋近于$\infty$时是收敛的~\cite{kamien2013dynamic}。此算法被称为迭代策略评估~\cite{Sutton1998}。
-\begin{algorithm}[H]
+\begin{algorithm}[!t]
   \caption{迭代策略评估，使$V\approx v_{\pi} $}
   \begin{algorithmic}[1]
     \Require $\pi$ ,待评估的策略；$\theta$，用于调整预测精度的阈值
@@ -194,15 +188,13 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
 \paragraph{策略提升（Policy Improvement）}
 计算策略值函数的目的是为了寻找更好的策略。假设我们已经确定了任意决定性策略$\pi$的值函数$v_{\pi}$，但是在某些状态下采取新策略获得的收益可能更大，因此我们需要对切换到新策略是好是坏进行判断。
 我们可以考虑在状态$s$下选择动作$a$并遵守当前策略。这样做的值可以表示为：
-\begin{equation*}
-  \begin{aligned}
+  \begin{align*}
   q_{\pi}(s, a) & \doteq \mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=a\right] \\
   &=\sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right],
-  \end{aligned}
-\end{equation*}
+  \end{align*}
 如果此值大于$v_{\pi}(s)$，说明最后获得的新策略从整体上更优。因此我们设$\pi$与$\pi^{\prime}$为任意一对决定性策略，当其满足$q_{\pi}\left(s, \pi^{\prime}(s)\right) \geq v_{\pi}(s)$时，策略$\pi^{\prime}$一点至少与策略$\pi$一样好：
-\begin{equation}
-  \begin{aligned}
+%\begin{equation}
+  \begin{align}
   v_{\pi}(s) & \leq q_{\pi}\left(s, \pi^{\prime}(s)\right) \\
   &=\mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=\pi^{\prime}(s)\right] \\
   &=\mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s\right] \\
@@ -213,15 +205,15 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   & \leq \cdots \\
   & \leq \mathbb{E}_{\pi^{\prime}}\left[R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \mid S_{t}=s\right] \\
   &=v_{\pi^{\prime}}(s) .
-  \end{aligned}
   \label{eq:dddd}
-\end{equation}
+  \end{align}
+%\end{equation}
 式~\ref{eq:dddd}也意味着$v_{\pi^{\prime}}(s) \geq v_{\pi}(s)$，即更好的策略一定可以获得更大奖励。因此我们可以获得新的策略函数如式~\ref{eq:ddddd}：
 \begin{equation}
   \begin{aligned}
-  \pi^{\prime}(s) & \doteq \mathop{\arg \max }_a q_{\pi}(s, a) \\
-  &=\underset{a}{\arg \max } \mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=a\right] \\
-  &=\underset{a}{\arg \max } \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
+  \pi^{\prime}(s) & \doteq \argmax_a q_{\pi}(s, a) \\
+  &=\argmax_a \mathbb{E}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) \mid S_{t}=s, A_{t}=a\right] \\
+  &=\argmax_a \sum_{s^{\prime}, r} p\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
   \end{aligned}
   \label{eq:ddddd}
 \end{equation}
@@ -233,7 +225,7 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
   \label{eq:dddddd}
 \end{equation}
 策略迭代的整体算法步骤如下。
-\begin{algorithm}[H]
+\begin{algorithm}[!t]
   \caption{策略迭代算法，使$\pi \approx \pi_{*} $}
   \begin{algorithmic}
     \State 1.随机初始化$V(s)$与$\pi(s)$;

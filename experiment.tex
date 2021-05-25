@@ -2,7 +2,7 @@
 \label{chap:experiment}
 在实验部分，我们通过让游戏AI对战固定场次来判断其强度。也就是说，若某个玩家的胜率越高，则其强度越强。由于缺乏职业玩家与普通玩家的大量数据，我们无法使用Elo rating对AI玩家的强度进行打分~\cite{glickman1999rating}。
 在目前的硬件条件下，我们支持对角开局，如图~\ref{fig:sstate}~中所示。白色方总是先攻，对战双方每50局互换先手，每100局更换开局棋盘，一共对战400局。
-\begin{figure}[H]
+\begin{figure}[!b]
     \centering
     \includegraphics[width=1\textwidth]{sstate.pdf}
     \caption[sstate]{%
@@ -11,9 +11,9 @@
     \label{fig:sstate}
 \end{figure}
 对于随机玩家，贪婪玩家与~alpha-beta~剪枝玩家这三个基准玩家而言，在任意规则下，其强度排序为
-\begin{equation*}
+\[
     \text{alpha-beta剪枝玩家} > \text{贪婪玩家} > \text{随机玩家} ,
-\end{equation*}
+\]
 具体对局胜率如表~\ref{table:baseresult}~所示，不同开局的对战结果合并统计，先手与后手分开统计，包含骑士、皇后与超级皇后三种规则状态，随机玩家简写作RP，贪婪玩家简写作GP，~alpha-beta~剪枝玩家简写作ABP。
 % \begin{figure}[htb]
 %     \centering
@@ -23,12 +23,12 @@
 %       }
 %     \label{fig:baseresult}
 % \end{figure}
-\begin{table}[htb]
+\begin{table}[!t]
     \centering
     \caption[baseresult]{基准玩家胜率数据}
     \begin{tabular}{p{2cm}<{\centering} p{4cm}<{\centering} p{4cm}<{\centering} p{4cm}<{\centering}}
     \hline
-    骑士/开局 & ABP vs GP, 每局用时~<1s & ABP vs RP,每局用时~<1s & GP vs RP,每局用时~<<1s \\ \hline
+    骑士/开局 & ABP vs GP, 每局用时~$<1$~秒 & ABP vs RP,每局用时~<1s & GP vs RP,每局用时~$\ll1$s \\ \hline
     先手 & $77\%$ & $97\%$ & $81\%$\\ 
     后手 & $64\%$ & $87\%$ & $75\%$\\ \hline
     皇后/开局 & ABP vs GP, 每局用时$\approx$70s & ABP vs RP,每局用时$\approx$70s & GP vs RP,每局用时~<1s \\ \hline
@@ -41,14 +41,14 @@
     \label{table:baseresult}
   \end{table}
 从基准玩家测试结果中，我们发现贪婪玩家与~alpha-beta~剪枝玩家不能完全碾压随机玩家，随机玩家总能赢少部分局。可能的原因是在有限时间内~alpha-beta~剪枝层数不够深，陷入了局部最优解，封死了自己在后续的优势。当然也可能是因为在游戏中后期棋盘状态复杂度降低，随机玩家可以走出关键棋从而制胜。并且先手玩家会取得一定优势，先手胜率往往大于后手胜率，可能的原因包括先手玩家的合法移动数目往往更多而占据主动权。
-整体上来看，~alpha-beta~剪枝玩家对随机玩家胜率在$90\%$，对贪婪玩家胜率在$75\%$，贪婪玩家对随机玩家胜率在$74\%$。
+整体上来看，alpha-beta~剪枝玩家对随机玩家胜率在~$90\%$，对贪婪玩家胜率在$75\%$，贪婪玩家对随机玩家胜率在$74\%$。
 \section{强化学习训练}
 我们分别训练了骑士，皇后，超级皇后三种规则下的基于经典卷积模型并使用MCTS的强化学习AI。考虑到棋盘复杂度与设备算力限制，我们仅训练超级皇后规则的基于深度残差网络并使用MCTS的强化学习AI。
 在训练过程中，我们设置超参数如下：
 \paragraph{棋局对弈生成次数}
 在每一轮新的迭代中，在自我对弈过程中使用前一轮训练出的网络指导蒙特卡洛树进行对弈生成更为稳健的对弈棋盘数据并对整个棋面局势数据集进行汰旧换新。我们将其设置为40，也就是说其将进行40次自我对弈，每次对弈开局为图\ref{fig:sstate}的任意一种开局；
 \paragraph{MCTS模拟步数}
-使用神经网络输出的概率分布与获胜预测值指导进行MCTS过程中的搜索模拟次数，即其完成选择-扩展-反向传播的次数。我们将其设置为50-100。
+使用神经网络输出的概率分布与获胜预测值指导进行MCTS过程中的搜索模拟次数，即其完成选择--扩展--反向传播的次数。我们将其设置为50--100。
 \paragraph{置信上界常数}
 在选择动作（selection）中的常数$c$，用以平衡高胜率与低访问次数的关系，决定探索力度。我们将其设置为1。
 \paragraph{对战次数}
