@@ -3,13 +3,14 @@
 
 \section{游戏背景与规则}
 国际象棋影响深远受众广泛，在经历了漫长的传播与演变后形成了今日的规则。
-\textit{A History of Chess} 详细记载了其演变过程与各种游戏规则的变种与分支~\cite{murray2015history}。在中世纪之后的很长一段时间内，皇后棋子（或者被称为~Amazon~）可以像现代皇后或骑士一样移动，如图~\ref{fig:superQueen}，黑色圆点代表可落子位置。只不过由于其太过强力难以制衡，相对平衡的现代皇后在国际象棋规则中作为正统胜出。
+哈罗德·穆雷所著的\textit{A History of Chess} 详细记载了其演变过程与各种游戏规则的变种与分支~\cite{murray2015history}。
+在中世纪之后的很长一段时间内，皇后棋子（或者被称为~Amazon~）可以像现代皇后或骑士一样移动，如图~\ref{fig:superQueen}，黑色圆点代表可落子位置。只不过由于其太过强力难以制衡，相对平衡的现代皇后在国际象棋规则中作为正统胜出。
 指导老师与笔者受其启发，构思出一款国际象棋衍生游戏—超级皇后对战。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.7\textwidth]{amazon.pdf}
   \caption[superQueen]{%
-    超级皇后走法，可以像皇后与骑士一样移动~\cite{wikiAmazon}。}
+    超级皇后走法，其可以像皇后与骑士一样移动~\cite{wikiAmazon}。}
   \label{fig:superQueen}
 \end{figure}
 规则描述如下：指定大小的棋盘（$8\times8$，$12\times12$等）有黑白两个超级皇后；超级皇后的落子规则可指定，包括皇后走法、骑士走法与混合走法（即超级皇后走法），不可越位，不可攻击对方；每当超级皇后离开当前位置，该位置变为不可落子的死地，如图~\ref{fig:superQueenRules}；胜利条件为封死对方超级皇后的行动。相比于围棋和国际象棋，此游戏的棋面局势与所涉及到的状态空间并不复杂。
