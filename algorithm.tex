@@ -121,7 +121,7 @@
 初始$\alpha$值设置为~$-99$，$\beta$值设置为~$99$。假设当前是黑色方回合，局势仍然如图~\ref{fig:gp1}。搜索与剪枝过程可表现为图~\ref{fig:abpde}。
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=1\textwidth]{abp_design1.pdf}
+    \includegraphics[width=0.7\textwidth]{abp_design1.pdf}
     \caption[abpde]{%
         超级皇后对战搜索与剪枝实例，剪掉不需要计算的分支以提高搜索速度%
       }
@@ -166,7 +166,7 @@
 考虑到代价与实际需求，深度残差网络是一个较为合适的选择~\cite{resnet}。其核心结构为设计了短路连接（shortcut connection）使若干卷积层的集合能学习到残差带来的新特征，如图~\ref{fig:resunit}~所示：
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{resnetblcok.pdf}
+    \includegraphics[width=0.9\textwidth]{resnetblcok.pdf}
     \caption[resunit]{%
     残差学习单元~\cite{resnet}%
       }
@@ -176,7 +176,7 @@
 在训练超级皇后对战时，深度残差网络结构如图~\ref{fig:res}，输入层的整形（reshape）方式以及Flatten层后的结构与经典卷积神经网络一致，图中$/S$代表步长（stride），$F$代表滤波器（filter）数量。
 \begin{figure}[!t]
     \centering
-    \includegraphics[width=\textwidth]{resnet1.pdf}
+    \includegraphics[width=0.6\textwidth]{resnet1.pdf}
     \caption[res]{%
     深度残差网络：以ResNet50为基础~\cite{resnet}%
       }
