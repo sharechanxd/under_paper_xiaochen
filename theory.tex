@@ -15,34 +15,34 @@
 极小化极大算法（Minimax）是人工智能领域常见的搜索算法，是一种最小化对手最大收益的算法，常用于棋类等游戏。
 该算法是一种零和算法，即一方要在合法的选项中选择最大化其收益的选择，而另一方则选择令对手优势最小化的方法~\cite{ctt1r2gkx}。
 
-% \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=1\textwidth]{Minimax.pdf}
-%     \caption[minimax]{%
-%       极小化极大算法搜索树例子~\cite{wikiMinimax}%
-%       }
-%     \label{fig:minimax}
-%   \end{figure}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\textwidth]{Minimax.pdf}
+    \caption[minimax]{%
+      极小化极大算法搜索树例子~\cite{wikiMinimax}%
+      }
+    \label{fig:minimax}
+  \end{figure}
 
 如图~\ref{fig:minimax}~所示，假设圆形代表当前选手，方形代表对手。当前选手需要将自己所得分数最大化，而对手则需要反其道行之。
 考虑第三层（Min层）对手在最左侧节点的决策，当前选手在第四层有得分为10或正无穷的行动选择，对手想要做出一个最小化我方收益的选择，即选择得分为10的行动。其余同理。
 \subsection{alpha-beta 剪枝}
 在上一个小节中我们介绍了经典的极小化极大算法，对于一个具有复杂状态空间的游戏（象棋或围棋）来说，极小化极大算法需要非常多层才能够完成，
 其在遍历搜索树时具有指数级复杂度。在这种情况下，使用经典的极小化极大算法进行树搜索是不现实的。
-因此我们就需要采取剪枝来减少运算量，剪掉上述树状图的一些分支，从而减少运算量。
+因此我们就需要采取某种方式减少运算量，而剪掉一些不需要搜索的分支是一种直接的思路。
 
 最经典的剪枝算法为~alpha-beta~剪枝，剪枝的含义为剪掉不需要搜索的节点。其中$\beta$值为可行解的最小上界（Min层通向根节点的路径上最好的选择），$\alpha$值为可行策略（解）的最大下界（Max层通向root的路径上最好的选择）。
-其在生成博弈树的同时计算评估各节点的$\alpha$值与$\beta$值, 并且根据其值范围, 停止搜索无用节点，以提高运算速度。该算法和极小化极大算法所得结论相同，但剪去了不影响最终决定的分枝~\cite{russell2010artificial}。
+其在生成博弈树的同时计算评估各节点的$\alpha$值与$\beta$值, 并且根据其值范围, 停止搜索无用节点，以提高运算速度。该算法与极小化极大算法在同一局游戏中会得出相同的结果，因为剪去了不影响决定的节点与路线分支使得搜索速度更快~\cite{russell2010artificial}。
 剪枝过程遵循$\alpha \le N \le \beta$，N为当前节点评估值。即：（1）当一个 Min 节点的 $\beta$值小于等于任何一个父节点的$\alpha$值时 ，剪掉该节点的所有子节点;（2）当一个 Max 节点的 $\alpha$值大于等于任何一个父节点的$\beta$值时 ，剪掉该节点的所有子节点~\cite{russell2010artificial}。
 我们用以下Minimax树（图~\ref{fig:abp}）作为例子，方块为Max节点，圆形为Min节点~\cite{russell2010artificial}。
-% \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{abp1.pdf}
-%     \caption[abp]{%
-%     alpha-beta剪枝初始状态~\cite{russell2010artificial}%
-%       }
-%     \label{fig:abp}
-%   \end{figure}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\textwidth]{abp1.pdf}
+    \caption[abp]{%
+    alpha-beta剪枝初始状态~\cite{russell2010artificial}%
+      }
+    \label{fig:abp}
+  \end{figure}
 
 其剪枝过程如图~\ref{fig:abp2}~所示。从左节点开始，
 
@@ -59,43 +59,43 @@
 （6）父节点的值将$\le 1$，将其$\beta$值改为1；我们发现在此节点上找到解决方案路径的唯一方法是找到一个值大于5且小于1的子节点，然而该情况不可能出现。我们停止评估其他子节点，因为不论何值都不会让父Max节点选择比5更差的结果，然后我们返回$\beta$值（也就是1）作为该节点的值。
 回到父Max节点，其$\alpha$值已经是5，比1更具限制性，因此不要更改它。我们已经看到了此Max节点的所有子节点，因此可以将其值设置为最终的$\alpha$值即为5。
 
-% \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=1\textwidth]{abp2.pdf}
-%     \caption[abp2]{%
-%     alpha-beta剪枝过程演示，按顺序步骤从（1）到（6）~\cite{russell2010artificial}%
-%       }
-%     \label{fig:abp2}
-%   \end{figure}
-% \newpage
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\textwidth]{abp2.pdf}
+    \caption[abp2]{%
+    alpha-beta剪枝过程演示，按顺序步骤从（1）到（6）~\cite{russell2010artificial}%
+      }
+    \label{fig:abp2}
+  \end{figure}
+\newpage
 在极小化极大算法上，alpha-beta~剪枝做出了改进，通过减少搜索树的分支，提高搜索效率。
 若节点搜索顺序达到最优化或近似最优化（将最佳选择排在各节点首位），则同样时间内搜索深度可达极小化极大算法的两倍多~\cite{KNUTH1975293abp}。但是对于较复杂的棋类游戏，若对每一步棋有落子时间限制，alpha-beta~剪枝的搜索深度依然受到较大限制，在实际应用中往往采取3--4层，也有可能导致只能获得局部最优解。
 除此之外，对手玩家一定会选择使我方结果最差的思路的先验假设，在真实情况下并不正确，因为无法确定对方的博弈策略是否和自己一致。如果对方做的策略不是最优，那么我方所作出策略是最优的假设也将不成立。
 
 \subsection{蒙特卡洛树搜索}
-蒙特卡洛树搜索（Monte Carlo tree search，简写为~MCTS）是一种启发式搜索算法，其在游戏树搜索的应用十分广泛~\cite{10.1007/978-3-540-75538-8_7}。顾名思义，其设计思路是基于概率的：多次模拟游戏过程，并尝试根据模拟结果的胜负率预测最好的动作选择。
+蒙特卡洛树搜索（Monte Carlo tree search，简写为~MCTS）是一种启发式搜索算法，广泛应用于博弈树搜索~\cite{10.1007/978-3-540-75538-8_7}。顾名思义，其设计思路是基于概率的：多次模拟游戏过程，并尝试根据模拟结果的胜负率预测最好的动作选择。
 这也与人类下棋时的思维模式符合：根据感觉在大脑里思考出了若干种最有可能的落子选择，然后再思考假设落子后对手最可能的对应措施，如此反复进行选出最佳结果。
 
 蒙特卡洛树搜索的每个循环包括四个步骤~\cite{RePEc:wsi:nmncxx:v:04:y:2008:i:03:n:s1793005708001094}，如图~\ref{fig:mcts}：
 
-(1) 选择（Selection）：从根节点开始，不停选择子节点直到遇到叶子节点。选择子节点的方式一般采取上限置信区间算法（Upper Confidence Bound，简写为~UCT）~\cite{10.1007/11871842_29};
+(1) 选择（Selection）：从根节点开始，采取某些算法对各节点打分如上限置信区间（Upper Confidence Bound，简写为~UCT）~\cite{10.1007/11871842_29}，不停选择子节点直到遇到叶子节点;
 
 (2) 扩展（Expansion）：新增可能的子节点并选取一个作为下一轮中的根节点;
 
 (3) 模拟（Simulation）：从选定的节点开始，随机选择动作进行游戏;
 
-(4) 回溯（Backpropagation）：使用模拟步骤的结果，更新所有路径上的节点属性值。
+(4) 回溯（Backpropagation）：使用模拟步骤的结果，更新已探索路线上节点的属性值。
 
 谷歌公司的AlphaGo/Zero体系中都使用了~MCTS~的架构并对其策略进行了改进与优化。
 
-% \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{mctswiki.pdf}
-%     \caption[mcts]{%
-%     蒙特卡洛树搜索的步骤,每一个节点的内容代表胜利次数/游戏次数~\cite{RePEc:wsi:nmncxx:v:04:y:2008:i:03:n:s1793005708001094}%
-%       }
-%     \label{fig:mcts}
-% \end{figure}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\textwidth]{mctswiki.pdf}
+    \caption[mcts]{%
+    蒙特卡洛树搜索的步骤,圆圈内的数字代表胜利数量/游戏数量~\cite{RePEc:wsi:nmncxx:v:04:y:2008:i:03:n:s1793005708001094}%
+      }
+    \label{fig:mcts}
+\end{figure}
 
 \subsubsection{选择子节点的方式}
 在蒙特卡洛树搜索中，可以将节点分为3类：
@@ -109,7 +109,7 @@
     完全展开的节点：子节点已遍历。
 \end{itemize}
 
-搜索开始时，所有子节点都处于未被探索访问的状态，选中其中一个开始模拟。当模拟结束后，其结果会回溯至当前博弈树的根节点。进行模拟的节点被标注为已探索。
+搜索开始时，所有子节点都处于未被探索的状态，任意选择其中一个开始蒙特卡洛树搜索的模拟过程。当模拟结束后，其结果会回溯至当前博弈树的根节点。进行模拟的节点被标注为已探索。
 回溯模拟结果的目的是更新相关路径上所有节点 $v$ 的奖励 $Q(v)$ 以及探索次数 $N(v)$。在实践中，$Q(v)$是该节点胜利的次数，$N(v)$是该节点模拟的次数。胜利次数多的节点是较好的可利用候选节点，从这类节点继续扩展可能可以维持胜率。
 而模拟次数少意味着该节点在蒙特卡洛树搜索过程中探索次数少，具有尚未被发现的价值。
 利用这两个节点属性构建树的置信上限（UCT）~\cite{10.1007/11871842_29}在被访问节点中选择下一个要遍历的节点：
