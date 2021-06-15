@@ -28,13 +28,13 @@
     \caption[baseresult]{基准玩家胜率数据}
     \begin{tabular}{p{2cm}<{\centering} p{4cm}<{\centering} p{4cm}<{\centering} p{4cm}<{\centering}}
     \hline
-    骑士/开局 & ABP vs GP, 每局用时~$<1$~秒 & ABP vs RP,每局用时~<1s & GP vs RP,每局用时~$\ll1$s \\ \hline
+    骑士/开局 & ABP vs GP, 每局用时~$<1$~秒 & ABP vs RP,每局用时~$<1$~秒 & GP vs RP,每局用时~$\ll1$~秒 \\ \hline
     先手 & $77\%$ & $97\%$ & $81\%$\\ 
     后手 & $64\%$ & $87\%$ & $75\%$\\ \hline
-    皇后/开局 & ABP vs GP, 每局用时$\approx$70s & ABP vs RP,每局用时$\approx$70s & GP vs RP,每局用时~<1s \\ \hline
+    皇后/开局 & ABP vs GP, 每局用时$\approx$~70~秒 & ABP vs RP,每局用时$\approx$~70~秒 & GP vs RP,每局用时~$<1$~秒 \\ \hline
     先手 & $79\%$ & $93\%$ & $72\%$\\ 
     后手 & $78\%$ & $85\%$ & $70\%$\\ \hline
-    超级/开局 & ABP vs GP, 每局用时$\approx$230s & ABP vs RP,每局用时$\approx$230s & GP vs RP,每局用时~<1s \\ \hline
+    超级/开局 & ABP vs GP, 每局用时$\approx$~230~秒 & ABP vs RP,每局用时$\approx$~230~秒 & GP vs RP,每局用时~$<1$~秒 \\ \hline
     先手 & $78\%$ & $94\%$ & $73\%$\\ 
     后手 & $73\%$ & $86\%$ & $71\%$\\ \hline
     \end{tabular}
@@ -64,7 +64,7 @@
       }
     \label{fig:datar}
 \end{figure}
-对于经典卷积模型，训练参数相对较少，训练时间花费相对较少，在使用~2080Ti~单卡进行训练时，在皇后与超级皇后规则下100轮强化学习迭代花费时间为4-5天，在骑士规则下100轮强化学习迭代花费时间为3天左右；
+对于经典卷积模型，训练参数相对较少，训练时间花费相对较少，在使用~2080Ti~单卡进行训练时，在皇后与超级皇后规则下100轮强化学习迭代花费时间为4--5天，在骑士规则下100轮强化学习迭代花费时间为3天左右；
 而对于深度残差网络而言，其网络深度与训练参数量较大，所花费时间较多，在超级皇后规则下100轮强化学习花费时间为8天左右。在实验中我们发现，在训练过程中MCTS模拟步数设置越大，则训练结果也更好，所需要的训练时间也越长。
 
 \section{强度测试}
@@ -76,13 +76,13 @@
     \caption[airesult]{强化学习玩家胜率数据}
     \begin{tabular}{p{2cm}<{\centering} p{4cm}<{\centering} p{4cm}<{\centering} p{4cm}<{\centering}}
     \hline
-    骑士/开局 & RLP1 vs ABP, 每局用时$\approx$50s & RLP1 vs GP,每局用时$\approx$30s & RLP1 vs RP,每局用时$\approx$30s \\ \hline
+    骑士/开局 & RLP1 vs ABP, 每局用时$\approx$~50~秒 & RLP1 vs GP,每局用时$\approx$~30~秒 & RLP1 vs RP,每局用时$\approx$~30~秒 \\ \hline
     先手 & $83\%$ & $98\%$ & $99\%$\\ 
     后手 & $71\%$ & $85\%$ & $87\%$\\ \hline
-    皇后/开局 & RLP1 vs ABP, 每局用时$\approx$160s & RLP1 vs GP,每局用时$\approx$110s & RLP1 vs RP,每局用时$\approx$110s \\ \hline
+    皇后/开局 & RLP1 vs ABP, 每局用时$\approx$~160~秒 & RLP1 vs GP,每局用时$\approx$~110~秒 & RLP1 vs RP,每局用时$\approx$~110~秒 \\ \hline
     先手 & $64\%$ & $87\%$ & $94\%$\\ 
     后手 & $63\%$ & $85\%$ & $88\%$\\ \hline
-    超级/开局 & RLP1 vs ABP, 每局用时$\approx$310s & RLP1 vs GP,每局用时$\approx$120s & RLP1 vs RP,每局用时$\approx$120s \\ \hline
+    超级/开局 & RLP1 vs ABP, 每局用时$\approx$~310~秒 & RLP1 vs GP,每局用时$\approx$~120~秒 & RLP1 vs RP,每局用时$\approx$~120~秒 \\ \hline
     先手 & $59\%$ & $78\%$ & $89\%$\\ 
     后手 & $53\%$ & $74\%$ & $86\%$\\ \hline
     \end{tabular}
@@ -97,7 +97,7 @@
     \caption[airesult2]{强化学习玩家胜率数据}
     \begin{tabular}{p{2cm}<{\centering} p{3cm}<{\centering} p{3cm}<{\centering} p{3cm}<{\centering} p{3cm}<{\centering}}
     \hline
-    超级/开局 & RLP2 vs RLP1, 每局用时$\approx$250s & RLP2 vs ABP, 每局用时$\approx$350s & RLP2 vs GP,每局用时$\approx$170s & RLP2 vs RP,每局用时$\approx$170s \\ \hline
+    超级/开局 & RLP2 vs RLP1, 每局用时$\approx$~250~秒 & RLP2 vs ABP, 每局用时$\approx$~350~秒 & RLP2 vs GP,每局用时$\approx$~170~秒 & RLP2 vs RP,每局用时$\approx$~170~秒 \\ \hline
     先手 & $67\%$ & $81\%$ & $87\%$ & $99\%$\\ 
     后手 & $64\%$ & $76\%$ & $88\%$ & $95\%$\\ \hline
     \end{tabular}

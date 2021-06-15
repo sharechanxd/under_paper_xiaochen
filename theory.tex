@@ -234,10 +234,10 @@ $\pi(a|s)$是在策略为$\pi$时，在状态$s$下采取动作$a$的概率。�
 策略迭代的整体算法步骤如算法~\ref{ag:2}~所示。
 \begin{algorithm}[!t]
   \caption{策略迭代算法，使$\pi \approx \pi_{*} $}
-  \begin{algorithmic}
-    \State 1.随机初始化$V(s)$与$\pi(s)$;
-    \State 2.策略评估（迭代策略评估算法）;
-    \State 3.策略提升:
+  \begin{algorithmic}[1]
+    \State 随机初始化$V(s)$与$\pi(s)$;
+    \State 策略评估（迭代策略评估算法）;
+    \State 策略提升:
     \State $\text{StablePolicy} \leftarrow \texttt{True}$
     \For{each $s\in\textbf{S}$}
     \State $\text{current action}\leftarrow\pi(s)$

@@ -92,7 +92,7 @@
 \paragraph{贪婪玩家}
 贪婪玩家采取的是贪心算法~\cite{introAlgo}。贪心算法在对弈的每一步都选取当前棋盘状态下对于玩家而言最优的动作。因此我们需要一个评价函数来衡量当前棋盘状态对于玩家的好坏，经过比较与实验，定义评价函数（Score）如下：
 \begin{equation}
-    \textbf{Score}(\text{player}) = \textbf{LegalMovesCount(\text{player})} - \textbf{LegalMovesCount(\text{opponent})},
+    \textbf{Score}(\text{player}) = \textbf{LegalMovesCount}(\text{player}) - \textbf{LegalMovesCount}(\text{opponent}),
     \label{eq:score}
 \end{equation}
 ~LegalMovesCount~为合法行动计数函数。在某一回合，当前选手有若干个合法行动可选，我们需要评估出其在遍历每一个行动后棋盘盘面的好坏。评估盘面好坏使用评估函数~\eqref{eq:score}，玩家在一步之后的合法行动数量减去对手合法行动数量的值越大，说明该步是当前玩家的最优解，将遍历后得到的分数分数进行排序选择最大值对应的行动即可。
@@ -188,7 +188,7 @@
 针对以上神经网络，损失函数我们仿照~\cite{Silver2017}~中的结构如式~\eqref{eq:loss}，该结构结合了均方
 误差（mean-square error, MSE）与类别交叉熵（categorical cross entropy, CCE），
 能够较好地最小化~$v$~与标签~$v_{t}$~的误差，最大化$p$与$\pi_{t}$的相似度。为了防止
-过拟合，我们在网络中添加~dropout~层与~$\ell^2$~正则化。
+过拟合，我们在网络中添加~dropout~层与~$\ell^2$~正则化，
 \begin{equation}
     \text{loss} = (v_{t}-v)^{2} - \pi\trans\log(p)
     \label{eq:loss}
@@ -215,7 +215,7 @@
 \begin{equation*}
     \begin{aligned}
     Q(s,a) &= \frac{\sum_{s^{\prime}|s,a\rightarrow s^{\prime}}v(s^{\prime})}{1+N(s,a)} \\
-    N(s,a) &+= 1 
+    N(s,a) &= N(s,a) + 1 
     \end{aligned}
 \end{equation*}
 多次进行搜索模拟后最终得到搜索概率$\pi$，可以使用该搜索概率抽样走棋动作并完成此回合落子。至此，我们使用强化学习参考~AlphaZero~框架对超级皇后对战进行训练的过程如图~\ref{fig:az}所示。
